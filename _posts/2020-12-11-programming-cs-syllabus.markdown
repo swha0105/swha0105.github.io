@@ -1,0 +1,47 @@
+---
+layout: post
+title:  "[Intro CS] Syllabus"
+subtitle:   "Introduction to Computer Science and Programming"
+categories: programming
+tags: cs
+comments: true
+---
+# Syllabus & Motivations
+
+Class: Introduction into computer science
+Created: Dec 11, 2020 5:08 PM
+Materials: https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/syllabus/
+Reviewed: No
+Type: Lecture
+
+## Motivation
+
+이 Lecture는 MIT opencourseware에서 공개하는 강의이고 컴퓨터 공학과 알고리즘의 아주 기본을 가르치는 코스인듯 하다.
+
+현재 코딩테스트도 꾸역꾸역(?) 풀 레벨이고 프로그래머스에서 레벨 2테스트를 풀수 있는 단계이지만 프로그래밍을 기초를 다시 배우고 싶어서 듣기 시작했다.
+
+이 코스를 들으며 프로그래밍의 기본을 배우는 이유는 몇가지가 있는데, 
+
+1. **커리큘럼의 부재**
+- CS의 커리큘럼을 따르지 않아 지식,사고방식의 한계가 최근에 느껴졌다. 
+2. **코드에 근본이 없다.**
+- 내가 물리학을 연구하면서 코딩할때 코드의 목적은 어떻게든 돌리는 것이였다. 이렇게 코딩하는 습관이 생기니 코드를 설계하고 Time complexity나 가독성 같은걸 고려하지 않고 근본없이 코딩을 한다.. 
+3. **지식의 숙성**
+- 이건 개인적인 생각인데 모든 지식은 숙성의 시간이 필요하다고 생각한다. 예를 들어, 학부와 대학원때 배운 물리학이 현재 나의 직관이나 사고에 영항을 크게 미치는게 느껴지는데 CS분야는 그러지 않아 지금부터라도 지식 숙성을 위한 기초공사를 하려고 한다.  
+
+스스로 생각하는 본인의 정체성은 물리/수학을 기반으로 하는 데이터 엔지니어라고 생각하지만 이 분야의 전문가가 되러면 CS의 커리큘럼을 탄탄히 쌓아야 된다는 걸 느꼈다. 
+
+교과서는 John V. Guttag의 introduction-computation-programming-using-python-2nd이다.
+
+나는 운좋게 모교 도서관에서 Ebook을 받을수 있었지만 온라인으로 pdf를 구할 수 있을지는 모르겠다
+
+내가 정리한 글에서 그림이나 표에 출처가 없다면 당연히 위의 책에서 발췌한 것이다. 
+
+실라버스에 따르면 이 코스는 프로그래밍을 처음접하거나 거의 안해본 학생을 대상으로 한다고 한다.
+따라서 렉쳐 대부분은 아는것이라 생각하지만 자만하지 않고 천천히 다시 들을 계획이다.
+
+강의계획표는 아래와 같다
+
+ 
+
+![Syllabus%20&%20Motivations%20643a3641b9d845ce9cd0b31b8f956f24/Untitled.png](Syllabus%20&%20Motivations%20643a3641b9d845ce9cd0b31b8f956f24/Untitled.png)
