@@ -10,8 +10,6 @@ comments: true
 
 [Materials](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec1.pdf)
  
-Reviewed: No
-Type: Lecture
 
 ## Topics
 
@@ -72,7 +70,7 @@ Move left / Move right / Read / Write / Scan / Do nothing
 
 언어의 기본적인 역할은 정보를 전달하는데 있다. 우리가 쓰는 언어는 사람들간의 소통, 컴퓨터 언어는 사람과 컴퓨터와의 소통하는데 그 목적이 있다. 하지만 컴퓨터는 융통성이 없기 때문에 ~~멍청이~~ 사람의 언어와는 다르게 까다로운면이 존재한다. 아래 표는 사람의 언어와 컴퓨터 언어의 차이점을 비교한 표이다. 
 
-[ ](https://www.notion.so/40f6e255d79447d0b79b01d806938242)
+![Time table](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/image/time_table.png)
 
 ---
 
