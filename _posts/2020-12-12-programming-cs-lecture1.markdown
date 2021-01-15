@@ -53,7 +53,6 @@ comments: true
     - 언제 끝날지 알려주는 수단의 존재**
     가 있을때 이러한 knowledge series를 **Algorithm**이라 부른다  
 
-</br>
 
 ## Basic primitives
 
