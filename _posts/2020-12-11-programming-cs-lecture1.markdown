@@ -8,7 +8,7 @@ comments: true
 ---
 
 
-[Materials](/home/swha/clean_theme/assets/intro_cs/material/Lec1.pdf)
+[Materials](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec1.pdf)
  
 Reviewed: No
 Type: Lecture
