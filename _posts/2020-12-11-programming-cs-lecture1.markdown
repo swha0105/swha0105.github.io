@@ -8,7 +8,7 @@ comments: true
 ---
 
 
-[Materials](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec1.pdf)
+[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec1.pdf)
  
 
 ## Topics
@@ -25,7 +25,8 @@ comments: true
 3. **Different classes of algorithms, searching and sorting  / complexity of algorithms**
 ⇒ 어느 코드가 더 좋은지 평가 하는 법. 
 
-위와 같이 구성되고 이 강의는 당연히 1번에 해당된다.
+위와 같이 구성되고 이 강의는 당연히 1번에 해당된다.  
+
 
 ---
 
@@ -50,7 +51,9 @@ comments: true
     - **간단한 몇가지 단계로 구성되어 있으며,
     - 각 단계들이 실행될 시기를 지정하는 Flow of control의 유무
     - 언제 끝날지 알려주는 수단의 존재**
-    가 있을때 이러한 knowledge series를 **Algorithm**이라 부른다
+    가 있을때 이러한 knowledge series를 **Algorithm**이라 부른다  
+
+</br>
 
 ## Basic primitives
 
@@ -70,9 +73,14 @@ Move left / Move right / Read / Write / Scan / Do nothing
 
 언어의 기본적인 역할은 정보를 전달하는데 있다. 우리가 쓰는 언어는 사람들간의 소통, 컴퓨터 언어는 사람과 컴퓨터와의 소통하는데 그 목적이 있다. 하지만 컴퓨터는 융통성이 없기 때문에 ~~멍청이~~ 사람의 언어와는 다르게 까다로운면이 존재한다. 아래 표는 사람의 언어와 컴퓨터 언어의 차이점을 비교한 표이다. 
 
-![Time table](https://swha0105.github.io/assets/intro_cs/image/time_table.png)
+| |Human languages|Computer language|
+|------|---|---|
+|Primitive Constructs |단어들|Numbers, Strings, Simple operators|
+|Syntax|cat dog boy (명사, 명사, 명사)  ⇒ Not syntactically valid|"Hi"5 (operand,operand) ⇒ Not Syntactically valid|
+|Static Semantics|I are hungry (명사 동사 명사) ⇒ Syntactically valid, but static semantic error | 	3+"hi" (operand, operator, operand) ⇒ Syntactically valid, but static semantic error
+Semantics|같은 문장이라도 다양한 뜻 존재.| 오직 한가지 뜻이 존재. |  
 
----
+---  
 
 ## Languages type
 

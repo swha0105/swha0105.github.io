@@ -1,0 +1,16 @@
+﻿Name,Human languages,Computer languages
+"
+Primitive Constructs 
+","단어들 
+","Numbers, Strings, Simple operators"
+Syntax,"cat dog boy (명사, 명사, 명사)
+⇒ Not syntactically valid","""Hi""5 (operand,operand) 
+⇒ Not Syntactically valid"
+Static Semantics,"I are hungry (명사 동사 명사)
+⇒ Syntactically valid, but static semantic error 
+⇒ 단수 명사뒤에 단수 동사가 와야함
+(weird and wrong meaning)","3+""hi"" (operand, operator, operand)
+⇒ Syntactically valid, but static semantic error
+⇒ Number와 string은 더해질 수 없음.
+"
+Semantics,같은 문장이라도 다양한 뜻 존재.,"오직 한가지 뜻이 존재. "

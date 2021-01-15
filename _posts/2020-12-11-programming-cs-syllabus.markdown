@@ -43,5 +43,4 @@ Type: Lecture
 강의계획표는 아래와 같다
 
  
-
-![Syllabus%20&%20Motivations%20643a3641b9d845ce9cd0b31b8f956f24/Untitled.png](Syllabus%20&%20Motivations%20643a3641b9d845ce9cd0b31b8f956f24/Untitled.png)
+![Time table](https://swha0105.github.io/assets/intro_cs/image/time_table.png)
