@@ -13,12 +13,12 @@ url:                 https://swha0105.github.io
 baseurl:             ""
 
 # A very short description of your page
-tagline:             "All roads lead to data."
+tagline:             "Study -> Translation -> Records"
 
 # A short description of the page, used in the sidebar and as fallback for the meta description tag.
 # Markdown enabled, but don't use more than one paragraph (enforced by `>`)
 description:         >
-  Data science enthusiast and addict :)
+  Data scientist & Programmer based on Physics background
 
 # This should be the same author as first entry in `_data/authors.yml`
 author:
@@ -48,10 +48,10 @@ google_fonts:        Lato
 
 # Setting a disqus shortname will enable the comment section on pages with `comments: true` in the front matter
 disqus: True
-disqus_shortname:    theorydb
+disqus_shortname:    swha
 
 # This text will appear in the footer of every page. Markdown enabled.
-copyright:           '&copy; 2019.04. by theorydb'
+copyright:           '&copy; 2021.01. by swha'
 
 # Format of the permalinks
 permalink:           pretty

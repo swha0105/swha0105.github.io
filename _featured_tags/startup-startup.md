@@ -1,8 +1,8 @@
 ---
 layout: tag-blog
-title: Startup
-slug: startup
-category: startup
+title: About Blog
+slug: About Blog
+category: About_blog
 menu: false
 order: 1
 ---
