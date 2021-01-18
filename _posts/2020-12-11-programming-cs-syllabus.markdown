@@ -6,16 +6,6 @@ categories: programming
 tags: cs
 comments: true
 ---
-# Syllabus & Motivations
-
-Class: Introduction into computer science
-Created: Dec 11, 2020 5:08 PM
-Materials: https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/syllabus/
-Reviewed: No
-Type: Lecture
-
-## Motivation
-
 이 Lecture는 MIT opencourseware에서 공개하는 강의이고 컴퓨터 공학과 알고리즘의 아주 기본을 가르치는 코스인듯 하다.
 
 현재 코딩테스트도 꾸역꾸역(?) 풀 레벨이고 프로그래머스에서 레벨 2테스트를 풀수 있는 단계이지만 프로그래밍을 기초를 다시 배우고 싶어서 듣기 시작했다.

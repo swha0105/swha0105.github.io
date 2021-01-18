@@ -7,11 +7,7 @@ tags: cs
 comments: true
 ---
 
-
-[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec1.pdf)
- 
-
-## Topics
+# Topics
 
 이 렉쳐의 전반적인 Topic들을 소개한다.
 
@@ -27,8 +23,9 @@ comments: true
 
 위와 같이 구성되고 이 강의는 당연히 1번에 해당된다.  
 
-
----
+  
+---  
+    
 
 # Computer basics
 
@@ -83,18 +80,18 @@ Semantics|같은 문장이라도 다양한 뜻 존재.| 오직 한가지 뜻이 
 
 ## Languages type
 
-- Low level vs High level: 프로그램의 지시사항들의 머신에 가까운지, 유저에 가까운지 
-⇒ C,C++은 변수에 접근하기위헤 메모리 주소값을 이용하지만 파이썬은 그러지 않는다. (해도 되지만)
+- Low level vs High level: 프로그램의 지시사항들의 머신에 가까운지, 유저에 가까운지  
+
+    C,C++은 변수에 접근하기위헤 메모리 주소값을 이용하지만 파이썬은 그러지 않는다. (해도 되지만)
 - General vs targeted to application domain: 프로그램 언어가 다양한 곳에서 사용 될 수 있는지?
 
-    ⇒ C,C++은 거의 모든곳에서 사용 될 수 있지만 내가 대학원생때 사용한 Fortran은 계산밖에 못한다
+    C,C++은 거의 모든곳에서 사용 될 수 있지만 내가 대학원생때 사용한 Fortran은 계산밖에 못한다
 
 - Interpreted vs Compiled
 
-    ⇒ Source code를 컴퓨터가 알아 들을수 있게 Compile을 하는 언어 (C,Fortran), Interpreter를 통해 결과를 실시간으로 피드백 해주는 언어 (Python,MATLAB) 
-
-    - 📋 TMI: Compiler언어 vs Interpreted 언어
-
+    Source code를 컴퓨터가 알아 들을수 있게 Compile을 하는 언어 (C,Fortran), Interpreter를 통해 결과를 실시간으로 피드백 해주는 언어 (Python,MATLAB) 
+    <details>
+    <summary>TMI: Compiler언어 vs Interpreted 언어</summary>
         두 언어의 차이는 `컴파일 시점` 이다. 런타임 전에 컴파일을 하면 compiler 언어, 그렇지 않으면 interpreted언어 
 
         **Compiler 예시** 
@@ -112,6 +109,7 @@ Semantics|같은 문장이라도 다양한 뜻 존재.| 오직 한가지 뜻이 
         - 운영체제마다 별도의 라이브러리가 필요 없지만 Python을 설치할때 OS를 선택하는 이유는 바이트코드에서 기계어로 넘어갈때 어떤 기계어로 바꿀지 결정하기 위해서.
 
         출처: [링크](https://wayhome25.github.io/cs/2017/04/13/cs-14/)
+    </details>  
 
 ## What is program
 
@@ -121,4 +119,10 @@ Semantics|같은 문장이라도 다양한 뜻 존재.| 오직 한가지 뜻이 
 
 Scalar: 나눌 수 없는 Object들 (Integer, real number, Boolean)
 
-non-scalar: Object안에 접근할 수 있는 내부구조가 존재하여 Object들을 저장 (List, dictionary..)
+non-scalar: Object안에 접근할 수 있는 내부구조가 존재하여 Object들을 저장 (List, dictionary..)  
+
+
+
+### Reference
+[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec1.pdf)  
+https://wayhome25.github.io/cs/2017/04/13/cs-14/

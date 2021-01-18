@@ -1,3 +1,12 @@
+---
+layout: post
+title:  "[Intro CS] Guess-and-Check, Approximation, Bisection"
+subtitle:   "Introduction to Computer Science and Programming"
+categories: programming
+tags: cs
+comments: true
+---
+
 # 3. Guess-and-Check, Approximation, Bisection
 
 Class: Introduction into computer science
