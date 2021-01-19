@@ -5,22 +5,17 @@ subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
 comments: true
+use_math: true
 ---
-
 # 3. Guess-and-Check, Approximation, Bisection
-
-Class: Introduction into computer science
-Created: Dec 15, 2020 10:50 AM
-Materials: 3%20Guess-and-Check,%20Approximation,%20Bisection%207f9ba4236623444194f6e54f87d2cadc/MIT6_0001F16_Lec3.pdf
-Reviewed: No
-Type: Lecture
-
 # Contents
 
 - ~~string manipulation~~ (2단원에 같이 정리함)
 - guess and check algorithms (exhaustive enumeration)
 - approximate solutions
 - bisection method
+
+***
 
 # Exhaustive enumeration (Guess and Check)
 
@@ -41,20 +36,20 @@ Type: Lecture
     	print('Cube root of', x,'is', ans) #remember comma makes space! not concat 
     ```
 
-- 답이 될 수 있는 집합내의 모든 원소 검색. 
+- 답이 될 수 있는 집합내의 모든 원소 검색.   
 ⇒ 위의 예제에서는 0 ≤  ans < abs(x) 에 속하는 모든 정수
-- 다음과 같은 성질을 만족하는 Decrementing function 를 구성해야한다.
+- 다음과 같은 성질을 만족하는 `Decrementing function` 를 구성해야한다.
     1. 일련의 프로그램 변수를 정수로 변환해야한다.
     2. Loop가 시작될때 function의 값은 음수이면 안된다. ( ≥ 0)
     3. Loop가 끝날때 function의 값은 양수이면 안된다.  (≤ 0)
     4. 매번의 iteration마다 function의 값은 감소해야한다. 
 
-     ⇒ 위의 예제에서는 abs(x) - ans **3 
+     ⇒ 위의 예제에서는 **abs(x) - ans^3**
 
 - Exhaustive enumeration은 N에 선형적으로 수렴한다.
 
 # Approximation solutions
-
+$aa$
 Q: 위의 exhaustive enumeration으로 $\sqrt{2}$ 를 구해보자.
 
 당연히 답이 안나올것이다. exhaustive enumeration의 제한 조건 중 하나가 ans는 답이 될 수 있는 집합내의 모든 원소인데 $\sqrt{2}$ 는 무리수 이기 때문에 정수집합에 속하지 않기 때문이다. 
@@ -205,3 +200,7 @@ else:
 물론 많은 계산에서 4개의 유효숫자를 사용하지는 않는다. 그래도 유효숫자의 개수를 무한대로 높이지 않는이상 정확히 1이 될순 없다. 
 
 따라서 이렇게 **Float끼리 비교할때는 항상 유념하고** round 함수를 쓰자. ~~샷건 치지말고~~
+
+
+### Reference
+[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec2.pdf) 

@@ -9,6 +9,11 @@
 <meta property="og:title" content="{{ page.title }}">
 <meta property="og:type" content="article">
 
+<!-- include math -->
+{% if page.use_math %}
+  {% include mathjax_support.html %}
+{% endif %}
+
 
 {% for tag_slug in page.tags %}
   {% unless tag.header-img %}
@@ -137,3 +142,5 @@
   <link rel="stylesheet" href="{{ icons_url | absolute_url }}">
 </noscript>
 <!--<![endif]-->
+
+
