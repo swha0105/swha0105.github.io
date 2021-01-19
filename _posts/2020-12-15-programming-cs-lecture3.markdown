@@ -55,7 +55,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
 
 # Approximation solutions
 
-Q: 위의 exhaustive enumeration으로 $\sqrt{2}$ 를 구해보자.
+Q: 위의 exhaustive enumeration으로 $$\sqrt{2}$$ 를 구해보자.
 
 당연히 답이 안나올것이다. exhaustive enumeration의 제한 조건 중 하나가 ans는 답이 될 수 있는 집합내의 모든 원소인데 $\sqrt{2}$ 는 무리수 이기 때문에 정수집합에 속하지 않기 때문이다. 
 
