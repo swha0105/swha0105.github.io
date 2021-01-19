@@ -5,8 +5,13 @@ subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
 comments: true
-mathjax: true
+#mathjax: true
 ---
+
+<script type="text/javascript" 
+src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+</script>
+
 # 3. Guess-and-Check, Approximation, Bisection
 # Contents
 

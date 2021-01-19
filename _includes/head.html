@@ -9,9 +9,6 @@
 <meta property="og:title" content="{{ page.title }}">
 <meta property="og:type" content="article">
 
-<!-- include math -->
-
-
 {% for tag_slug in page.tags %}
   {% unless tag.header-img %}
     {% assign tag = site.featured_tags | where: "slug", tag_slug | first %}
