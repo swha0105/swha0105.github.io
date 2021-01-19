@@ -1,7 +1,7 @@
 ---
 layout: tag-blog
 title: Spark
-slug: tech
+slug: spark
 category: tech
 menu: false
 order: 1

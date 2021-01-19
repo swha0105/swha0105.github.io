@@ -1,6 +1,6 @@
 ---
 layout: list
-title: Tech Stack
+title: Tech
 slug: tech
 menu: true
 submenu: true
