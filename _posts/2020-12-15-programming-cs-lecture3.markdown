@@ -56,7 +56,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
 
 - Exhaustive enumeration은 N에 선형적으로 수렴한다.
 
-</br>
+<br/>
 
 ***
 
@@ -73,7 +73,7 @@ Q: 위의 exhaustive enumeration으로 $$\sqrt{2}$$ 를 구해보자.
 
 
 
-</br>
+<br/>
 
 Example code 3.2: 세제곱근 (cube root) 찾기
 
@@ -108,7 +108,7 @@ else:
 자연대/공대생이라면 학부 1학년때 배우는 미적분학에서 Epsilon-delta증명을 배웠을것이다. 그 증명의 개념을 활용해 이 예제에서 epsilon을 극한을 이용해 무한소로 보내면 ans가 5에 일치 하다는걸 알 수 있다. 이 Approximation solution도 똑같은 개념이지만 컴퓨터에서 극한을 이용해 무한소로 보내면 무한루프가 돌것이기 때문에 어느정도 Tolerance 범위 안에서 찾게 한다.
 </details>
 
-</br>
+<br/>
 
 <details>
 <summary>TMI: 현대 응용수학과 근사법 </summary>
@@ -118,8 +118,8 @@ else:
 
 </details>
 
-</br>
-</br>
+<br/>
+<br/>
 
 ***
 
@@ -131,7 +131,7 @@ else:
 
 ![Bisection search](https://swha0105.github.io/assets/intro_cs/image/lec_3_Untitled.png)
 
-</br>
+<br/>
 
 
 0부터 100까지 숫자가 있다고 하자. 그리고 정답은 67이라고 가정하자. 
@@ -193,7 +193,7 @@ Bisection search  x < 1
         print(guess,high,low,guess**(3)-cube)
     ```
 
-</br>
+<br/>
 
 ***
 
@@ -235,7 +235,7 @@ else:
 따라서 이렇게 **Float끼리 비교할때는 항상 유념하고** round 함수를 쓰자. ~~샷건 치지말고~~
 
 
-</br>
+<br/>
 
 ***
 
