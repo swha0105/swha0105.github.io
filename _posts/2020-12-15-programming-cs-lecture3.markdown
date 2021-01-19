@@ -7,10 +7,10 @@ tags: cs
 comments: true
 #mathjax: true
 ---
-<!-- 
+
 <script type="text/javascript" 
 src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
-</script> -->
+</script>
 
 # 3. Guess-and-Check, Approximation, Bisection
 # Contents
