@@ -153,6 +153,7 @@ b = func1(a)
 |:--:| 
 | Stack의 구조 [출처](http://www.tcpschool.com/c/c_memory_stackframe) |
 
+<br/>
 
 **Stack** 이라는 자료구조를 배우면 알겠지만, Stack이란 차곡차곡 쌓이고 나중에 쌓인게 먼저 나가는 (LIFO)형식의 자료구조를 뜻한다. 그 Stack이 메모리 구조에도 같은 개념으로 존재한다. 
 
@@ -187,15 +188,17 @@ z = f(x)
 
 ## global scope
 ```
+<br/>
 
-|![Scope의 구조](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_1.png)
-|:--:| 
-| Scope의 구조 |
+<img src="https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_1.png" width="300" height="200"> 
 
-|![Scope의 구조](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_2.png)
-|:--:| 
-| Scope의 구조 |
+<img src="https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_2.png" width="300" height="200">   
 
+
+
+
+<br/>
+<br/>
 
 위의 그림은 위의 코드가 함수 f 직전까지 실행 되었을 scope구조를 도식화 한 것이고 아래 그림은 코드가 끝났을때 Scope구조 이다. 
 
