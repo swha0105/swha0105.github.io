@@ -190,19 +190,19 @@ z = f(x)
 ```
 <br/>
 
-<img src="https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_1.png" width="300" height="200"> 
 
-<img src="https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_2.png" width="300" height="200">   
-
+Before Function F             | After Function F    
+:-------------------------:|:-------------------------:
+![1](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_1.png)  |![2](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_2.png)
 
 
 
 <br/>
 <br/>
 
-위의 그림은 위의 코드가 함수 f 직전까지 실행 되었을 scope구조를 도식화 한 것이고 아래 그림은 코드가 끝났을때 Scope구조 이다. 
+왼쪽 그림은 위의 코드가 함수 f 직전까지 실행 되었을 scope구조를 도식화 한 것이고 오른쪽쪽 그림은 코드가 끝났을때 Scope구조 이다. 
 
-위의 코드를 보자면 `global scope` 에서 f,x,z가 선언이 되었고 `f scope`에서 x가 선언되었다. 
+왼쪽 코드를 보자면 `global scope` 에서 f,x,z가 선언이 되었고 `f scope`에서 x가 선언되었다. 
 당연하게도 컴퓨터는 `global scope`의 x와 `f scope`의 x를 **전혀 다른것으로 인식** 할텐데 그 이유를 알아보자.
 
 코드를 디테일하게 설명하자면 `int` 형태인 Actual parameter인 `global scope의 x` 가 Formal parameter와 결합 (call by value)하여 `f scope의 x`에게 값을 전달하였다. 
@@ -248,6 +248,7 @@ print(plus_ten(1)) # result is 11
 |:--:| 
 | lambda 함수  [출처](https://dojang.io/mod/page/view.php?id=2359) |
 
+<br/>
 
 함수를 구성하는 formal parameter, return이 다있지만 `plus_ten` 라는 함수의 이름을 선언하는 부분이 빠졌다. x를 받아 10을 더해주는 함수는 lambda라는 이름으로 퉁쳐버렸다.
 
