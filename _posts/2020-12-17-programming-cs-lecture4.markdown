@@ -188,20 +188,16 @@ z = f(x)
 ## global scope
 ```
 
-
-|![Stack의 구조](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_1.png)
+|![Scope의 구조](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_1.png)
 |:--:| 
-| Stack의 구조 [출처](http://www.tcpschool.com/c/c_memory_stackframe) |
+| Scope의 구조 |
 
-![4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled%201.png](4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled%201.png)
+|![Scope의 구조](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_2.png)
+|:--:| 
+| Scope의 구조 |
 
-Fig 4.3 Initial state (Bell's slide)
 
-![4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled%202.png](4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled%202.png)
-
-Fig 4.4 Final state
-
-Fig 4.3는 위의 코드가 함수 f 직전까지 실행 되었을 scope구조를 도식화 한 것이고 Fig 4.4은 코드가 끝났을때 Scope구조 이다. 
+위의 그림은 위의 코드가 함수 f 직전까지 실행 되었을 scope구조를 도식화 한 것이고 아래 그림은 코드가 끝났을때 Scope구조 이다. 
 
 위의 코드를 보자면 `global scope` 에서 f,x,z가 선언이 되었고 `f scope`에서 x가 선언되었다. 
 당연하게도 컴퓨터는 `global scope`의 x와 `f scope`의 x를 **전혀 다른것으로 인식** 할텐데 그 이유를 알아보자.
@@ -216,6 +212,10 @@ call by reference를 할 경우, Formal parameter는 Actual parameter의 **주�
 **따라서 함수의 actual parameter로 mutable한 객체 (list,set,dict)과 같은 객체는 적합하지 않으며 사용할때 주의를 요구한다.**
 
 이와같은 성질을 이용하여 메인프로그램에 있는 변수들을 보호 하며 필요한 결과만 메인 프로그램에 return 할 수 있다. (**Abstraction**). 하지만 모든일이 그렇듯 규칙을 깨는 **global variable**이라는 놈이 존재하는데 이 친구는 많이 쓰면 코드가 굉장히 지저분해지고 강력히 비추한다. ~~따라서 자세한 설명은 생략한다~~
+
+<br/>
+
+***
 
 # Lambda function
 
@@ -239,9 +239,12 @@ plus_ten = lambda x: x + 10
 print(plus_ten(1)) # result is 11 
 ```
 
-![4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled%203.png](4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled%203.png)
 
-코드 및 그림 출처: [https://dojang.io/mod/page/view.php?id=2359](https://dojang.io/mod/page/view.php?id=2359)
+
+|![lambda 함수수](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_3.png)
+|:--:| 
+| lambda 함수  [출처](https://dojang.io/mod/page/view.php?id=2359) |
+
 
 함수를 구성하는 formal parameter, return이 다있지만 `plus_ten` 라는 함수의 이름을 선언하는 부분이 빠졌다. x를 받아 10을 더해주는 함수는 lambda라는 이름으로 퉁쳐버렸다.
 
@@ -254,7 +257,7 @@ print(plus_ten(1)) # result is 11
 
 이 Lambda함수를 `iterable 객체` 로 만들어 파이썬의 `내장 iterator`와 함께 사용 할 수 있다.
 
-예를들어, 리스트 각 요소에 특정 값 보다 큰 값만 반환하는 연산을 `**filter**`, **`map`** 함수를 통해 계산해보자
+예를들어, 리스트 각 요소에 특정 값 보다 큰 값만 반환하는 연산을 **`filter`**, **`map`** 함수를 통해 계산해보자
 
 ```python
 list_test = [1,50,20,80]
@@ -283,7 +286,13 @@ answer = list(filter(lambda x:x > ref_value,list_list))
 
 `map` 함수 뿐만 아닌   `zip` , `reduce` 과 같은 함수와 함께 쓰면 굉장히 강력한 기능이 될 수 있다.
 
-Reference:
+
+<br/>
+
+*** 
+
+## Reference
+
 
 1. [http://www.tcpschool.com/c/c_memory_structure](http://www.tcpschool.com/c/c_memory_structure)
 2. [https://yunmap.tistory.com/entry/프로그래밍언어-Formal-parameter-Actual-parameter-그리고-parameter-passing](https://yunmap.tistory.com/entry/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%96%B8%EC%96%B4-Formal-parameter-Actual-parameter-%EA%B7%B8%EB%A6%AC%EA%B3%A0-parameter-passing)
