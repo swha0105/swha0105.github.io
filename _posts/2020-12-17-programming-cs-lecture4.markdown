@@ -38,8 +38,8 @@ def testFunc(x): # x: **formal parameter,** example_function: **function name**
 	# """ This is **docstring** and will be shown when call help(example_function) 
   # or testFunc.__doc__ in main program """
 
-	x = x + 1                         #function body       
-	return x                          #return 
+  x = x + 1                         #function body       
+  return x                          #return 
 
 x = 3
 z = testFunc(x)  # x **actual parameter**
@@ -134,13 +134,13 @@ Parameter passing은 actual parameter가 formal parameter에게 값을 전달 �
 ```python
 # func2 stack frame
 def func2(x):
-	return x
+  return x
 # func2 scope
 
 # func1 stack frame
 def func1(x1):
-	x = func2(x1)
-	return x
+  x = func2(x1)
+  return x
 # func1 stack frame
 
 # main stack frame
@@ -177,9 +177,9 @@ Scope는 파이썬의 객체들이 유효한 범위를 이야기한다. 한국 �
 
 # f scope
 def f(x):
-	x = x + 1
-	print('in f(x): x =', x)
-	return x
+  x = x + 1
+  print('in f(x): x =', x)
+  return x
 # f scope
 
 x = 3 
