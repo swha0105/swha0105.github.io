@@ -6,34 +6,30 @@ categories: programming
 tags: cs
 comments: true
 ---
-
 # 4. Decomposition, Abstraction, Functions
-
-Class: Introduction into computer science
-Created: Dec 17, 2020 2:01 PM
-Materials: 4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/MIT6_0001F16_Lec4.pdf
-Reviewed: No
-Type: Lecture
-
 - Function feature (decomposition, abstraction)
 - Function component (Parameters)
 - Parameter Passing
 - Scope
 - Lambda function
 
-      (강의,인터넷,교과서 내용 취합하여 컨텐츠 목록 바꿈)
+  (강의,인터넷,교과서 내용 취합하여 컨텐츠 목록 바꿈)
 
 # Function features
 
 내가 학부 1학년때 기초 프로그래밍 수업을 드랍한 이유는 프로그래밍을 왜 배우는지, 배워서 어디에 쓰는지 전혀 몰랐기 때문이다. ~~이게 직업이 될줄이야~~ 그 당시 수업내용으로 함수를 배웠는데 "아니 그냥 코딩하면되는데 왜 굳이??" 라는 생각을 했었다. 과거의 나처럼 되지않기 위해 함수를 왜쓰는지 확실하게 알고가자..
 
-예를 들어, 자동차를 만든다고 치자. 설계도 던져주고 알아서 만들어라고 ~~대학원생~~ 할 수 있겠지만 좀 더 스마트한 방법이 있을것이다. 먼저, 기능이 다른 각 부품들을 따로 만들것이다. 엔진, 바퀴, 브레이크는 역할이 다르기 때문에 서로의 상세 기능들을 몰라도 각자 알아서 작동할 수 있다. 함수도 이러한 특성을 가지고 있는데 이러한 특성을 **Decomposition** 이라 한다**.** 따라서 엔진, 바퀴, 브레이크를 만드는 하청업체(함수)를 만들고 계약을 할 것이다.  
+예를 들어, 자동차를 만든다고 치자. 설계도 던져주고 알아서 만들어라고 ~~대학원생~~ 할 수 있겠지만 좀 더 스마트한 방법이 있을것이다. 먼저, 기능이 다른 각 부품들을 따로 만들것이다. 엔진, 바퀴, 브레이크는 역할이 다르기 때문에 서로의 상세 기능들을 몰라도 각자 알아서 작동할 수 있다. 함수도 이러한 특성을 가지고 있는데 이러한 특성을 **Decomposition** 이라 한다. 따라서 엔진, 바퀴, 브레이크를 만드는 하청업체(함수)를 만들고 계약을 할 것이다.  
 
 부품이 다 모아져서 조립을 해야 한다고 치자. 이 조립하여 자동차를 만드는걸 **메인프로그램을 만든다고** 표현해도 될 것이다. 그런데 조립하는 입장에서 엔진을 만들때 필요한 유체역학, 열역학 까지 알아야될까? 
 물론 엔진을 테스트는 해보아야할 것이다. 코드에서도 함수를 구성하면 **무조건** 확인하는 절차가 필요하다. 
-하지만 엔진을 만드는데 있어 필요한 세부지식까지 알아야 된다면 자동차 산업은 이렇게 발전하기 힘들었을것이다. 따라서, 엔진 안이 블랙박스처럼 어떻게 작동하는지는 몰라도 차를 조립하는데 문제는 없다. 이러한 특성을 **Abstraction** 이라한다**.**
+하지만 엔진을 만드는데 있어 필요한 세부지식까지 알아야 된다면 자동차 산업은 이렇게 발전하기 힘들었을것이다. 따라서, 엔진 안이 블랙박스처럼 어떻게 작동하는지는 몰라도 차를 조립하는데 문제는 없다. 이러한 특성을 **Abstraction** 이라한다.
 
 ~~차 점검받아야하는데~~
+
+<br/>
+
+***
 
 # Function components
 
@@ -73,10 +69,10 @@ z = testFunc(x)  # x **actual parameter**
 **(function arguments)**
 - 함수 Call(invocation) 을 하면 Formal Parameters는 Actual parameter와 **결합(bound)** 한다.
     1. Positional bound: 
-    -   Actual parameter와 Formal parameter의 순서대로 대응하여 결합
+        -   Actual parameter와 Formal parameter의 순서대로 대응하여 결합
     2. Keyword argument bound: 
-    -  Actual parameter가 들어갈 부분에 `Formal parameter = Value`  와 같이 선언
-    -  이와같은 방법으로 parameter를 bound할 경우, 함수 내에서 default값이 지정됨.
+        -  Actual parameter가 들어갈 부분에 `Formal parameter = Value`  와 같이 선언
+        -  이와같은 방법으로 parameter를 bound할 경우, 함수 내에서 default값이 지정됨.
         - Example code
 
             ```python
@@ -97,13 +93,17 @@ z = testFunc(x)  # x **actual parameter**
             Puchmajerova, Olga
             ```
 
+<br/>
+
+***
+
 # **Parameter Passing** (bound)
 
 앞서 언급한 bound의 개념은 좀 더 정확한 용어로 **Parameter passing**이라 부른다.
 Parameter passing은 actual parameter가 formal parameter에게 값을 전달 해주는 방법인데 
 파이썬은 넘겨지는 객체 종류에 따라 **Call by assignment**와 **Call by value**가 정해진다. 
 
-**Call by value**        : Actual이 Formal에 복사되어 local 변수처럼 사용됨
+**Call by value**     : Actual이 Formal에 복사되어 local 변수처럼 사용됨
 
 **Call by reference** : Formal에서 Actual의 주소값을 전달받아 사용 
 
@@ -115,9 +115,13 @@ Parameter passing은 actual parameter가 formal parameter에게 값을 전달 �
 - **Call by value**: 단일 값을 가지거나, static속성을 가지는 **Immutable object** (int,float,tuples,str)은 call by value를 사용하고 이 경우, actual parameter의 값을 함수내에서 복사해서 사용하기 때문에 원래의 객체에는 영향을 미치지 못한다
 - **Call by reference**: list, dict, set와 같은 **mutable object는** actual parameter에 주소값을 가져오는 call by reference를 이용하기 때문에 원래의 객체가 수정이 된다
 
-아마 추론컨데 Immutable에 해당되는 객체들은 용량이 대체로 작아 빠르고 안전한 **call by value** Mutable 객체들은 용량이 클 수 있어 복사하기 부담이 되니 주소값을 가져오는 **call by reference** 를 사용하는듯 하다.
+아마 추론컨데 Immutable에 해당되는 객체들은 용량이 대체로 작아 빠르고 안전한 **call by value**을 사용하고,  Mutable 객체들은 용량이 클 수 있어 복사하기 부담이 되니 주소값을 가져오는 **call by reference** 를 사용하는듯 하다.
 
 이에 대한 자세한 설명은 scope와 함께 서술되어있다.
+
+<br/>
+
+***
 
 # Stack & Scope
 
@@ -145,9 +149,10 @@ b = func1(a)
 # main stack frame
 ```
 
-![4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled.png](4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled.png)
+|![Stack의 구조](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled.png)
+|:--:| 
+| Stack의 구조 [출처](http://www.tcpschool.com/c/c_memory_stackframe) |
 
-Fig 4.2 stack 구조 (출처 : [링크](http://www.tcpschool.com/c/c_memory_stackframe))
 
 **Stack** 이라는 자료구조를 배우면 알겠지만, Stack이란 차곡차곡 쌓이고 나중에 쌓인게 먼저 나가는 (LIFO)형식의 자료구조를 뜻한다. 그 Stack이 메모리 구조에도 같은 개념으로 존재한다. 
 
@@ -157,7 +162,9 @@ Fig 4.2 stack 구조 (출처 : [링크](http://www.tcpschool.com/c/c_memory_stac
 
 참고로 이러한 형성과정중에 컴퓨터가 허용하는 stack메모리를 넘어가면 **stack overflow** 에러가 난다. ~~홈페이지 이름이 아니다~~ 
 
-Stack frame를 통해 함수의 변수들이 어떻게 메모리에 저장되는지 알아봤으니 이제 프로그램에서 어떠한 일이 발생하는지 알아보자. 
+Stack frame를 통해 함수의 변수들이 어떻게 실제 메모리에 저장되는지 알아봤으니 이제 프로그램에서 어떠한 일이 발생하는지 알아보자. 
+
+<br/>
 
 ## Scope
 
@@ -180,6 +187,11 @@ z = f(x)
 
 ## global scope
 ```
+
+
+|![Stack의 구조](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_1.png)
+|:--:| 
+| Stack의 구조 [출처](http://www.tcpschool.com/c/c_memory_stackframe) |
 
 ![4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled%201.png](4%20Decomposition,%20Abstraction,%20Functions%20e40f27725e5d4147a350dbdab4f10a40/Untitled%201.png)
 

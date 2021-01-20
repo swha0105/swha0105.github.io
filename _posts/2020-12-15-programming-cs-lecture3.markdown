@@ -23,6 +23,7 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
 - approximate solutions
 - bisection method
 
+    
 ***
 
 # Exhaustive enumeration (Guess and Check)
