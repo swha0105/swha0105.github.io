@@ -6,15 +6,8 @@ categories: programming
 tags: cs
 comments: true
 ---
-
-
 # 5. Tuples, Lists, Aliasing, Mutability, Cloning
 
-Class: Introduction into computer science
-Created: Dec 23, 2020 7:50 PM
-Materials: 5%20Tuples,%20Lists,%20Aliasing,%20Mutability,%20Cloning%2010be6c92437b42459e8bdb49056f61fb/MIT6_0001F16_Lec5.pdf
-Reviewed: No
-Type: Lecture
 
 # Contents
 

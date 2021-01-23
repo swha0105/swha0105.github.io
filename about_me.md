@@ -5,6 +5,9 @@ menu: true
 order: 1
 ---
 
+여기 자기 소개 적고  
+아래은 toggle 형태.
+
 ## seungwoo Ha
 
 Data science and Programmer based on Physics background  
@@ -25,7 +28,7 @@ Ulsan, (2019.09 ~)
 - CPU Parallelization of RMHD code by MPI (Message Passing Interface)
 - GPU Parallelization of Python code used for DL/ML preprocessing by NUMBA
 - Conference Homepage developed (Nginx + mariaDB)  ⇒ [Homepage Link](http://fm6.unist.ac.kr)
-
+홈페이지는 빼자. 
 ### JLK inspection
 
 Seoul, (2018.01 ~ 2019.09) 
