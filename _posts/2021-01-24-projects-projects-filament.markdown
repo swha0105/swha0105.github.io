@@ -50,13 +50,12 @@ comments: true
 
 모든 코드들은 **Python** 으로 구성했으며 3차원 데이터의 후처리 및 시각화는 **MATLAB** 의 3D Volumetric Image Processing 모듈을 사용하였다.
 
-<!-- (https://swha0105.github.io/assets/intro_cs/image/lec_2_Untitled_1.png) -->
 
 <br/>
 
 <p float="center">
-    <img src="https://github.com/swha0105/Filament_Project/tree/main/_pics/Sloan_sky_survey.png" width="400"/> 
-    <img src="https://github.com/swha0105/Filament_Project/tree/main/_pics/LSS_example.png" width="400" />
+    <img src="https://swha0105.github.io/assets/projects/filament/Sloan_sky_survey.png" width="400"/> 
+    <img src="https://swha0105.github.io/assets/projects/filament/LSS_example.png" width="400" />
 </p>
 
 Ref: Sloan sky survey(left), [Paper link](https://arxiv.org/pdf/1803.11156.pdf)(right)
