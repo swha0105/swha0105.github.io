@@ -103,7 +103,6 @@ Format: Binary (3차원)
 > `Filament` 와 `Wall`은 `Cluster`주변에 존재하기 때문에 데이터를 `Cluster` 주변 40~45Mpc/h 의 크기로 Crop하였다.  Crop을 한 데이터들도 크기가 250~300Mb 하기 때문에 ML/DL에 사용하기 적합하지 않았다. 따라서 Gaussian Pyramid 알고리즘을 2번 적용해 데이터를 압축하였다. 이 과정에서 기하학적 정보가 손실 되지 않았는지 체크하였고 아래 그림과 같이 확인 하였다
 <br/><br/>
 ![Gaussian example](https://swha0105.github.io/assets/projects/filament/Cluster_dens.png)
-가우시안 피라미드 설명 한거 링크..
 <br/>
 <br/>
 
