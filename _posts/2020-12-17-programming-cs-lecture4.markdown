@@ -15,6 +15,10 @@ comments: true
 
   (강의,인터넷,교과서 내용 취합하여 컨텐츠 목록 바꿈)
 
+<br/>
+
+***
+
 # Function features
 
 내가 학부 1학년때 기초 프로그래밍 수업을 드랍한 이유는 프로그래밍을 왜 배우는지, 배워서 어디에 쓰는지 전혀 몰랐기 때문이다. ~~이게 직업이 될줄이야~~ 그 당시 수업내용으로 함수를 배웠는데 "아니 그냥 코딩하면되는데 왜 굳이??" 라는 생각을 했었다. 과거의 나처럼 되지않기 위해 함수를 왜쓰는지 확실하게 알고가자..
@@ -244,7 +248,7 @@ print(plus_ten(1)) # result is 11
 
 
 
-|![lambda 함수수](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_3.png)
+|![lambda 함수](https://swha0105.github.io/assets/intro_cs/image/lec_4_Untitled_3.png)
 |:--:| 
 | lambda 함수  [출처](https://dojang.io/mod/page/view.php?id=2359) |
 

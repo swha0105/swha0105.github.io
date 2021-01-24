@@ -7,12 +7,12 @@ tags: cs
 comments: true
 ---
 # 5. Tuples, Lists, Aliasing, Mutability, Cloning
-
-
-# Contents
-
 - Tuple
 - List
+
+<br/>
+
+***
 
 # Tuple
 
@@ -21,18 +21,16 @@ comments: true
 - Sequence of  anything   (String is Sequence of Character)
 - Cannot change element values, **immutable** 
 ⇒ 튜플에 element를 추가하는건 가능, 삭제하거나 수정 불가능
-- 튜플에 element가 하나 있을 때 element뒤에 `,` 가 붙음  **(length 1인 string과 구분하기 위해)**
- a = (), a += (1),  print(a) ⇒ (1,)
+- 튜플에 element가 단단 하나 있을 때 element뒤에 `,` 가 붙음  **(length 1인 string과 구분하기 위해)**  
+ a = (), a += (1),  print(a) ⇒ (1,)  
+
 
 ### Operator
 
-기본적으로 **String operator**와 매우 비슷한 연산형태
-
-`+` : Concatenation of tuple   
-
-`*` : Repeat tuple
-
-     `-` , `/` 은 안됨.
+- 기본적으로 **String operator**와 매우 비슷한 연산형태
+- `+` : Concatenation of tuple   
+- `*` : Repeat tuple
+- `-` , `/` 은 안됨.
 
 ### Usage
 
@@ -85,6 +83,10 @@ comments: true
     (min_year,max_year,name) = tuple_handle(data)
     ```
 
+<br/>
+
+***
+
 # List
 
 ### Features
@@ -94,45 +96,49 @@ comments: true
 
 ### Operator
 
-- 새로운 리스트를 만들어내는 연산 (기존의 리스트에 영향 없음)
+1. 새로운 리스트를 만들어내는 연산 (기존의 리스트에 영향 없음)
 
-    `+` : Concatenation of list
+    - `+` : Concatenation of list
 
-    `*` : Repeat list
+    - `*` : Repeat list
 
-    `sorted(array)`: sorting array
+    - `sorted(array)`: sorting array
 
-- 기존의 리스트를 변형하는 연산  (mutable operation)
+2. 기존의 리스트를 변형하는 연산  (mutable operation)
 
-    `.` means Call methods or functions of list object (class)
+    - `.` means Call methods or functions of list object (class)
 
-    `.extend`: Concatenation of lists
+    - `.extend`: Concatenation of lists
 
-    `.append`: add element to list
+    - `.append`: add element to list
 
-    `array.sort()`: sorting array
+    - `array.sort()`: sorting array
 
-    `del array[index]`: remove element by index **`Time complexity: O(N)`**
+    - `del array[index]`: remove element by index **`Time complexity: O(N)`**
 
-    `array.remove(value)`: remove element by value **`Time complexity: O(N)`** 
+    - `array.remove(value)`: remove element by value **`Time complexity: O(N)`** 
 
-    `array.pop()`: remove last element **`Time complexity: O(1)`** 
+    - `array.pop()`: remove last element **`Time complexity: O(1)`**   
 
-    - 📋 TMI: list와 시간복잡도.
+<br/>
 
-        코딩을 하다보면 list의 요소들을 제거해줘야되는 연산을 많이 하게 될 것이다. list는 기본적으로 stack의 구조를 (LIFO) 따라 pop을 하게 될 경우 가장 마지막 요소가 빠지게 되고 시간 복잡도는 O(1)이게 된다. 하지만 가장 처음에 들어온 요소를 제거 하기 위한 pop(0), pop(1)과 같은 연산들은 O(N)의 시간복잡도를 가지고 이럴 경우 굉장히 비효율적인 연산이 된다.
+<details>    
+<summary> TMI: list와 시간복잡도. </summary>
 
-        이러한 연산이 필요한 경우 list가 아닌 파이썬의 built-in 모듈 collections의 deque를 사용하여 popleft, appendleft와 같은 연산을 활용하자. 
+코딩을 하다보면 list의 요소들을 제거해줘야되는 연산을 많이 하게 될 것이다. list는 기본적으로 stack의 구조를 (LIFO) 따라 pop을 하게 될 경우 가장 마지막 요소가 빠지게 되고 시간 복잡도는 O(1)이게 된다. 하지만 가장 처음에 들어온 요소를 제거 하기 위한 pop(0), pop(1)과 같은 연산들은 O(N)의 시간복잡도를 가지고 이럴 경우 굉장히 비효율적인 연산이 된다.
 
-### Aliases
+이러한 연산이 필요한 경우 list가 아닌 파이썬의 built-in 모듈 collections의 deque를 사용하여 popleft, appendleft와 같은 연산을 활용하자. 
+</details>
 
-- 리스트의 변수 이름은 **Object**를 가르키는 **Pointer**
-- 따라서 **Mutable operation**을 할때, 
- 1.  Object를 가르키는 **변수 이름이 많거나**
+<br/>
 
-     2.  **Iteration**연산을 통한 mutable operation을 하면
+### Aliases  
+- 리스트의 변수 이름은 **Object**를 가르키는 **Pointer** 이다. 따라서 **Mutable operation**을 할때,
 
-    문제가 발생할 확률이 **매우 높다**
+    1.  Object를 가르키는 **비슷한 변수 이름이 많거나**
+    2.  **Iteration**연산을 통한 mutable operation을 하면
+
+예상과 다르게 문제가 발생할 확률이 **매우 높다**. 특히 함수 안에서 List를 Mutable operation할때 실수할 확률이 높다. ~~경험담~~
 
 ```python
 #exmaple 1.
@@ -143,6 +149,8 @@ hot.append('pink')
 
 if hot == warm:
 	print("aliases") # it will be printed out
+
+#####
 
 #example 2.
 L1 = [1,2,3,4]

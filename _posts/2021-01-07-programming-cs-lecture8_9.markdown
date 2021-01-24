@@ -7,21 +7,13 @@ tags: cs
 comments: true
 ---
 # 8 & 9. Object Oriented Programming & Inheritance
-
-Class: Introduction into computer science
-Created: Jan 7, 2021 1:07 PM
-Materials: 8%20&%209%20Object%20Oriented%20Programming%20&%20Inheritance%2028563bfa8c3f44bdbfa304ce798a169e/MIT6_0001F16_Lec8.pdf, 8%20&%209%20Object%20Oriented%20Programming%20&%20Inheritance%2028563bfa8c3f44bdbfa304ce798a169e/MIT6_0001F16_Lec9.pdf
-Reviewed: No
-Type: Lecture
-
-# Contents
-
 - Object & Object Oriented Programming (OOP)
 - Class
-- Inheritance
+- Inheritance  
 
-대학원생때 응용수학을 기반으로한 플라즈마 물리현상을 시뮬레이션 하는 코드를 만드는 일을 주로 했었다. 여느 대학원생이 그렇듯이 보통 일을 혼자 했는데 그럴땐 이 OOP라는 개념이 익숙하지도 않고 필요성도 못느꼈다. 왜냐하면 코드를 거의 혼자 개발했기 때문에 코드의 내용을 다 이해한 상태에서 본인만 이해할 수 있는 코드를 만들어내도 결과만 정확하면 됐기때문에 별문제가 없었다.  
-~~울 교수님 아직 goto 쓰심~~ 그러고 3년 뒤 내가 만든 코드를 다시 보게 되는데... ~~말잇못~~
+<br/>
+
+***
 
 # Object & Object Oriented Programming
 
@@ -51,6 +43,9 @@ Type: Lecture
     또한 list는 .append, .extend 와 같은 함수들을 사용 할 수 있는데 이것들은 리스트 클래스에 선언되어있는 Method들이다 (아래에 설명). 이 method들은 해당 클래스 내에서 생성된 객체에만 사용해야 함으로 메인 프로그램과 격리되어 사용되어야 한다. 메인 프로그램에서는 method들을 사용할수 있지만 소스코드를 볼 수 없다. 이러한 가상의 벽을 `Interface` 라고 하고 이를 통해 함수의 기본 성질인 `abstraction`을 구현 할 수 있다.
 
  
+ <br/>
+ 
+ ***
 
 # Class
 
@@ -100,31 +95,35 @@ Class Coordinate():  넘어가도록 하겠다..
 
 **def __init__ (self, coords):**
 
-- __function__ 과 같은 형태는 파이썬에 내장되어있는 특수한 함수를 불러온다.
-- **__init__** 은 `class`가 선언되어 `Instance` 객체를 만들때 자동으로 불러오는 특수한 함수
-- **self는 선언되는 Instance 객체를 Formal parameter로 받는 특수한 Actual parameter**
+>- __function__ 과 같은 형태는 파이썬에 내장되어있는 특수한 함수를 불러온다.
+>- **__init__** 은 `class`가 선언되어 `Instance` 객체를 만들때 자동으로 불러오는 특수한 함수
+>- **self는 선언되는 Instance 객체를 Formal parameter로 받는 특수한 Actual parameter**
 
-    coords_a = Coordinate(a) 를 선언하면 자동으로 __init__ 이 실행 된다. 이때 coords_a는 self 인자로 들어가고, a는 coords로 들어가게 된다.  
+coords_a = Coordinate(a) 를 선언하면 자동으로 __init__ 이 실행 된다. 이때 coords_a는 self 인자로 들어가고, a는 coords로 들어가게 된다.  
 
 **def __str__ (self):**
 
-- 특수한 함수로 print() 문을 실행시켰을때 return되는 값을 정의한다.
+> - 특수한 함수로 print() 문을 실행시켰을때 return되는 값을 정의한다.
 
-    예를들어, __str__ 함수가 없다고 가정하고 coords_a = Coordinate(a) 한 뒤,  **print(coords_a)**를 실행 시키면 해당 Instance 객체의 메모리 주소값을 리턴한다. 메모리주소 대신 유용한 값을 리턴받고 싶을때  __str__ 에서 return할 값을 정의하면 **해당 Instance 객체의** **리턴값이** 된다. 따라서 디버깅할때 유용한 값들을 리턴 시키도록 하자. 
+예를들어, __str__ 함수가 없다고 가정하고 coords_a = Coordinate(a) 한 뒤,  **print(coords_a)**를 실행 시키면 해당 Instance 객체의 메모리 주소값을 리턴한다. 메모리주소 대신 유용한 값을 리턴받고 싶을때  __str__ 에서 return할 값을 정의하면 **해당 Instance 객체의** **리턴값이** 된다. 따라서 디버깅할때 유용한 값들을 리턴 시키도록 하자. 
 
 **def get_distance(self, other_point):**
 
-- Coordinate의 **Method**중 하나이며 **Coordinate로 생성된 Instance 객체**를 연산하는 정보를 담고 있다.
+> - Coordinate의 **Method**중 하나이며 **Coordinate로 생성된 Instance 객체**를 연산하는 정보를 담고 있다.
 
 **coords_a.get_distance(coords_b)**
 
-- coords_a는 coordinate **class**의 **instance** 객체이고, 해당 class의 **method**들도 함께 담고 있다.
-- get_distance의 self인자는 coords_a가 되고, other_point는 coords_b가 된다.
+> - coords_a는 coordinate **class**의 **instance** 객체이고, 해당 class의 **method**들도 함께 담고 있다.
+> - get_distance의 self인자는 coords_a가 되고, other_point는 coords_b가 된다.
 
 **Coordinate.get_distance(coords_a,coords_b)**
 
-- **Instance 객체**에 포함된 **method**를 통한 연산이 아닌, **Class**에서 직접 **Method**들을 불러와 연산 함
-- instance 객체를 받을 수 없으므로 get_distance의 self인자는 Formal parameter 중 첫번째와 bound 됨 (이 경우 coords_a가 self 인자로 bound됨)
+> - **Instance 객체**에 포함된 **method**를 통한 연산이 아닌, **Class**에서 직접 **Method**들을 불러와 연산 함
+> - instance 객체를 받을 수 없으므로 get_distance의 self인자는 Formal parameter 중 첫번째와 bound 됨 (이 경우 coords_a가 self 인자로 bound됨)
+
+<br/>
+
+***
 
 # Inheritance
 
@@ -231,63 +230,40 @@ class Rabbit(Animal):
 먼저 Person 클래스부터 살펴보자
 
 **class Person(Animal):**
-
-- Actual Parameter로 지정되어있는 Animal은 Animal 클래스에 속하는 모든 속성을 가져 온다.
+> - Actual Parameter로 지정되어있는 Animal은 Animal 클래스에 속하는 모든 속성을 가져 온다.
 
 **def __init__(self, name, age):**
+> -  Super class인 Animal과 함수 이름이 겹치기 때문에 Animal의 __init__ 함수가 작동하지 않고 Person class의 __init__ 만 작동한다.  (**Overriding**)
+> -  Super 클래스인 Animal의 **Instance variable** 들의 속성을 물려받으러면 Animal.init 과 같이 따로 실행해야한다.
+> - self.set_name은 Person class의 Super class인 Animal에서 상속받은 함수를 사용한다
 
-**Animal.__init__(self, age)**
 
-**self.set_name(name)**
-
-**self.friends = []**
-
-(Line number)
-
-1. name과 age는 Person에서 만들어진 Object들의 **data attribute**이다.
-2. __init__ 함수는 Super class인 Animal과 함수 이름이 겹치기 때문에 Animal의 __init__ 함수가 작동하지 않고 Person class의 __init__ 만 작동한다.  (**Overriding**)
-따라서 Super 클래스인 Animal의 `**Instance variable**` 들의 속성을 물려받으러면 Animal.__init__ 과 같이 따로 실행해야한다.
-3. self.set_name은 Person class의 Super class인 Animal에서 상속받은 함수를 사용한다
-4. self.friends는 `**Instance Variable**` 이다. 
-
-**Instance variable**: Instantiation 과정을 거쳐 생기는 변수로서 해당 Class에만 존재한다 (상속 되지않음)
-**Class variable**: Class 내에 존재하는 변수로서 상속되는 해당 클래스로 만들어진 모든 Instance (sub class포함) 에서 해당 값을 참조 & 수정이 가능하다
+>> **Instance variable**: Instantiation 과정을 거쳐 생기는 변수로서 해당 Class에만 존재한다 (상속 되지않음)  
+>> **Class variable**: Class 내에 존재하는 변수로서 상속되는 해당 클래스로 만들어진 모든 Instance (sub class포함) 에서 해당 값을 참조 & 수정이 가능하다 
+"""
 
 **def speak(self): ,  def add_friend(self, fname): , def age_diff(self, other):**
 
-- 이와 같은 함수들은 Super class인 Animal과 관계없이 Person 클래스 내 작동하는 함수 Method들이다.
-- 이를 물려받을 Sub class인 Student의 class에서는 이를 참조 가능하지만 Super class인 Animal은 참조가 불가능하다.
+> - 이와 같은 함수들은 Super class인 Animal과 관계없이 Person 클래스 내 작동하는 함수 Method들이다.  
+> - 이를 물려받을 Sub class인 Student의 class에서는 이를 참조 가능하지만 Super class인 Animal은 참조가 불가능하다.  
 
-Student 클래스는 상속을 보여주기 위한 예제로서 넘어가고
 
-Rabbit 클래스를 보자. 
+
+그 다음 Rabbit 클래스를 보자. 
 
 **tag = 1**
 
-- Class 변수로써 Rabbit 클래스를 이용해 만든 모든 Instance 들이 참조 가능
+> - **Class 변수**로써 Rabbit 클래스를 이용해 만든 모든 Instance 들이 참조 가능
 
 **def __init__(self, age, parent1=None, parent2=None):**
 
-**Animal.__init__(self, age)**
-
-**self.parent1 = parent1**
-
-**self.parent2 = parent2**
-
-**self.rid = Rabbit.tag**
-
-**Rabbit.tag += 1**
-
-1. formal parameter인 parent1,2 의 Default 값은 None 이다. (따로 지정안하면 None)
-2. Super class인 Animal의 **Instance Variable**들을 상속 받는다
-
- 5,6  Class Variable인 Rabbit.tag를 가져와 해당 Instance에 적용한다.
+> - formal parameter인 parent1,2 의 Default 값은 None 이다. (따로 지정안하면 None)
+> - Super class인 Animal의 **Instance Variable**들을 상속 받는다
+> - Class Variable인 Rabbit.tag를 가져와 해당 Instance에 적용한다.
 
 **def __add__(self, other):**
-
-return Rabbit(0, self, other)
-
-- 특수함수로써 객체를 `+` 연산 했을시 수행해하는 연산을 포함하고 있다.
+> - return Rabbit(0, self, other)
+> - 특수함수로써 객체를 `+` 연산 했을시 수행해하는 연산을 포함하고 있다.
 
 ~~너무 힘들다~~
 

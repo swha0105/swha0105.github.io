@@ -7,8 +7,6 @@ tags: cs
 comments: true
 ---
 # 2. Branching and Iteration
-# Contents
-
    - string object type
    - branching and conditionals
    - indentation 

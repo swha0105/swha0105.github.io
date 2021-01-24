@@ -16,8 +16,6 @@ src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
 </script>
 
 # 3. Guess-and-Check, Approximation, Bisection
-# Contents
-
 - ~~string manipulation~~ (2단원에 같이 정리함)
 - guess and check algorithms (exhaustive enumeration)
 - approximate solutions
