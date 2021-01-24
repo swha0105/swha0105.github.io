@@ -6,23 +6,14 @@ categories: projects
 tags: projects
 comments: true
 ---
-
-
-# **Filament Identification via Machine Learning**
-이건 제목으로 
-
-<br/>
-
-***
-
 ## **Project Info**
 ### Statistical study on morphologies of Leo filaments via Label spreading 
 - **기간:** 19.09 ~ 21.01
-- **주관 및 관련 기관:**  CHEA(Center for High Energy Astrophysics) ,선도연구센터
+- **주관 및 관련 기관:**  CHEA(Center for High Energy Astrophysics), 선도연구센터
 - **사용 언어** : Python, MATLAB
 - **사용 기술** :
-    - Label Spreading (Machine learning),
-    - DFS(Depth-First Search), 
+    - Label Spreading (Machine learning)
+    - DFS(Depth-First Search) 
     - 3차원 이미지 처리(Gaussian pyramid, Skeletonization)
     - gpu 가속
 <br/>
@@ -59,12 +50,13 @@ comments: true
 
 모든 코드들은 **Python** 으로 구성했으며 3차원 데이터의 후처리 및 시각화는 **MATLAB** 의 3D Volumetric Image Processing 모듈을 사용하였다.
 
+<!-- (https://swha0105.github.io/assets/intro_cs/image/lec_2_Untitled_1.png) -->
 
 <br/>
 
 <p float="center">
-    <img src="_pics/Sloan_sky_survey.png" width="400"/> 
-    <img src="_pics/LSS_example.png" width="400" />
+    <img src="https://github.com/swha0105/Filament_Project/tree/main/_pics/Sloan_sky_survey.png" width="400"/> 
+    <img src="https://github.com/swha0105/Filament_Project/tree/main/_pics/LSS_example.png" width="400" />
 </p>
 
 Ref: Sloan sky survey(left), [Paper link](https://arxiv.org/pdf/1803.11156.pdf)(right)
