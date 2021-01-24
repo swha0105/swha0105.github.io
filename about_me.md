@@ -4,29 +4,34 @@ title: About Me
 menu: true
 order: 1
 ---
-물리학을 전공했고 -- 프로그래머 이직중 
-했던거 소개 
--컴터 강점 소개
+물리학을 전공했고 코드 개발을 7년정도 하고 있는 꿈나무 개발자 입니다.
 
-간단하게 내 소개 할 수 있는거 
+수학과 머신러닝에 관심이 있고 새로운 기술에 대해 호기심이 많습니다.  
+세상에 존재하는 수많은 데이터에 숨어있는 진리를 찾아내 사람들에게 도움이 되고 사회에 긍정적인 일을 하는게 꿈인 프로그래머 입니다.
 
-새로운거 진짜 좋아함, 술 좋아함 
+새로운 사람을 만나고 색다른 경험을 하는게 삶의 원동력 입니다.  
+ 클래식 부터 인디까지 음악을 사랑하고 맥주랑 위스키에 미쳐있습니다. 
 
-여기 자기 소개 적고  
-아래은 toggle 형태.
+<br/>
+<br/>
+<br/>
 
-<!-- <details>
-<summary> Curriculum Vitae </summary> -->
+###  My CV is here ↓
+--- 
 
-## Seungwoo Ha
+
+
+<br/>
+
+# Seungwoo Ha
 
 Data science and Programmer based on Physics background  
 hsw636@gmail.com  |  [CV (PDF version)](https://drive.google.com/file/d/1XxErYolLMBeynPvPcVpJGWJm9yVqx5rV/view?usp=sharing)  |  [LinkedIn](https://www.linkedin.com/in/seungwoo-ha-838aa919b/)  | [Github](https://github.com/swha0105)  
 
 <br/>
 
-## **Work Experiences**
 
+# **Work Experiences**
 ---
 
 ### CHEA (Center for High Energy Astrophysics),   Ulsan, (2019.09 ~ 2021.02)
@@ -52,9 +57,10 @@ hsw636@gmail.com  |  [CV (PDF version)](https://drive.google.com/file/d/1XxErYol
 
 <br/>
 
-## Project & Co-work experience
-
+# Project & Co-work experience
 ---
+
+
 
 ### 고에너지 천체물리 연구 (19.09 ~ 21. 02)
 
@@ -86,46 +92,34 @@ hsw636@gmail.com  |  [CV (PDF version)](https://drive.google.com/file/d/1XxErYol
 ---
 
 ### Python
-
-수정해야됨.
-
 My main programming language. I've been working with it for over 2~3 years. I've used it for data progressing especially big and large data set related with physics. I experienced many modules for various purposes such as Cv2, Pandas, Matplotlib, Numpy for general propose processing and Networkx, Scikit-learn, Keras, Tensorflow for ML/DL.  
-For CS knowledge, I studied and implemented codes containing concept of Algorithms, Data structure. Hash, Stack/Queue, Heap, Dynamic programming, DFS/BFS and Binary search were adopted for developing codes.
 
-Keywords: Data preprocessing, Scikit-learn, Keras-Tensorflow, 
+**Keywords: Large scale data processing, Scikit-learn, Keras-Tensorflow**
 
 ### MATLAB
-
 My auxiliary tool for programming and visualization. Since I've worked with Matlab for 6~7 years, but not much intensive experience than python. Mainly, I used it for 3D Visualization and specific module which doesn't work in Python such as 3D image toolbox, VolumeViewer  
 
-Keywords: 3D data processing & visualization 
+**Keywords: 3D data processing & visualization**
 
 ### FORTRAN & MPI
+I've worked with it for 7~8 years and has been used for developing code for MHD physics simulation and implementation of applied mathematics schemes. 
+For parallelization (MPI, Message Passing Interface), which is main work in my master thesis, I trained 3 years intensively and successfully adopted parallelization to scientific code
 
-It is my main tools for science works. I've worked with it for 7~8 years. Mostly, I used Fortran 90 with Intel Fortran compiler. It has been used for developing code for MHD physics simulation and implementation of applied mathematics schemes. 
+**Keywords: Scientific code with applied Mathematics & Physics, Parallelization with Supercomputer** 
 
-For parallelization (MPI, Message Passing Interface), which is main work in my master thesis, I trained 3 years intensively and successfully adopted not only FORTRAN code but FFT codes with various domain such as cuboids, sliced domain. Furthermore, I applied Hybrid parallelization method that used OPENMP with MPI.  
+### Linux & E.T.C
+I've experiences linux enviornment more than 7 years and managed Lab supercomputer for 3 years. For nowdays, I'm using linux as WSL + Docker for my development enviornemnt. 
 
-Keywords: Scientific code --? ,Parallelization with Supercomputer??, 
-
-### Spark 
-
-### Linux & 나머지?
-For supercomputer, I managed Lab supercomputer for 3 years. I used bash shell to control Linux environment and program install. 
-Personally, I am using my personal desktop with Ubuntu and Linux Mint for 4~5 years. 
-
-docker, WSL, 이런거 잘한다.
-
-Also, I hosted conference web page in Ubuntu server with Nginx and MariaDB  [Homepage Link](http://fm6.unist.ac.kr/) 그리고 이 페이지.
+Also, I hosted conference web page in Ubuntu server with Nginx and MariaDB  [Homepage Link](https://fm6.unist.ac.kr/) and gitpages with jekyll
 
 
-
-
----
+<br/>
 
 # Papers and Talks
 
-## SCI Papers 
+---
+
+### SCI Papers 
 
 > 1. **Turbulence Dynamo in the Stratified Medium of Galaxy Cluster. ApJ (2019)**  
 Specific works: Developed MHD (Magneto HydroDynamics) turbulence code and parallelization, FFT Parallelization  
@@ -152,26 +146,14 @@ Specific works: Developed RMHD (Relativistic MHD)  shock code and parallelizatio
 (KNAG meeting / 2016 /  Korea Astronomy & Space science Institute in Daejeon, S.Korea )
 
 
----
+<br/>
 
-# Languages
-
-### Korean  
-- Native speaker
-
-### English
-
-- Intermediate level for communication (TOEIC Speaking Level 6. in 2017)  
-- Well -Trained for English writing  (TOEIC Writing Level 7. in 2017)  
-- All courses in university were taken in English (2010~2018)
-
-
-
----
 
 # Education
 
-## B.S in UNIST 2010 ~ 2015
+---
+
+### B.S in UNIST 2010 ~ 2015
 
 **1st Track: Environmental and Climate Science**   
 2012~2013 Climate change lab in UNIST UEE
@@ -179,10 +161,26 @@ Specific works: Developed RMHD (Relativistic MHD)  shock code and parallelizatio
 **2nd Track: Physics**  
 2013~2015 Computation Astrophysics lab in UNIST SNS
 
-## Physics M.S in UNIST 2015 ~ 2018
- **Thesis**: MPI Parallelization and Cylindrical-coordinate wave analysis for High-order MHD code  
- **Advisor**: Dongsu Ryu   
- **Keywords**:  Fluid Physics, Plasma Physics, Code works
+### Physics M.S in UNIST 2015 ~ 2018
+**Thesis**: MPI Parallelization and Cylindrical-coordinate wave analysis for High-order MHD code  
+**Advisor**: Dongsu Ryu   
+**Keywords**:  Fluid Physics, Plasma Physics, Code works
 
+<br/>
+
+
+# Languages
+
+---
+
+### Korean  
+- Native speaker
+
+### English
+- Intermediate level for communication (TOEIC Speaking Level 6. in 2017)  
+- Well -Trained for English writing  (TOEIC Writing Level 7. in 2017)  
+- All courses in university were taken in English (2010~2018)
+
+<br/>
 
 </details>

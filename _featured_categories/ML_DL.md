@@ -6,5 +6,5 @@ menu: true
 submenu: true
 order: 5
 description: >
-  주로 Data Science 및 그 외 개발에 관련된 모든 것.  
+  ML/DL 공부 및 알고리즘 정리
 ---
