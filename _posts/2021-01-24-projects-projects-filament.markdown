@@ -53,10 +53,7 @@ comments: true
 
 <br/>
 
-<p float="center">
-    <img src="https://swha0105.github.io/assets/projects/filament/Sloan_sky_survey.png" width="400"/> 
-    <img src="https://swha0105.github.io/assets/projects/filament/LSS_example.png" width="400" />
-</p>
+![Gaussian example](https://swha0105.github.io/assets/projects/filament/LSS_example.JPG)
 
 Ref: Sloan sky survey(left), [Paper link](https://arxiv.org/pdf/1803.11156.pdf)(right)
 
@@ -77,9 +74,10 @@ Format: Binary (3차원)
 
 기존의 연구들은,  물리학적 정보를 사용하지 않고 기하학적 정보들만으로 `Filament` 와 `Wall` 을 구분하는 시도를 하였다. 
 
-1.  3차원 밀도공간에서 [Hessian Matrix](https://en.wikipedia.org/wiki/Hessian_matrix) 의 Eigenvalue를 계산해 **Shape strength** 를 구성하는 방법이 있다. 각각의 **Shape Stength** 는 특정 포인트에서의 주변 밀도의 구조를 고려해 **구, 원기둥, 평면** 정도 를 나타낸다. **Shape Strength**를 이용해 `Filament` 와 `Wall`의 후보군을 찾아낸 뒤, 알려진 물리량과 함께 `Filament`를 판단한다 ([논문 1](https://arxiv.org/abs/1401.7866), [논문 2](https://arxiv.org/abs/1209.2043))
+1.  3차원 밀도공간에서 [Hessian Matrix](https://en.wikipedia.org/wiki/Hessian_matrix) 의 Eigenvalue를 계산해 **Shape strength** 를 구성하는 방법이 있다. 각각의 **Shape Stength** 는 특정 포인트에서의 주변 밀도의 구조를 고려해 **구, 원기둥, 평면** 정도 를 나타낸다. **Shape Strength**를 이용해 `Filament` 와 `Wall`의 후보군을 찾아낸 뒤, 알려진 물리량과 함께 `Filament`를 판단한다 ([논문 1](https://arxiv.org/abs/1401.7866), [논문 2](https://arxiv.org/abs/1209.2043))\
+
     <p float="center">
-        <img src="_pics/signature_equation.png" width="400"/> 
+        <img src="https://swha0105.github.io/assets/projects/filament/signature_equation.png" width="400"/> 
     </p>
     Eq 1. Shape Strength. for each lambda means Eigenvalue of Hessian Matrix 
 <br/>
@@ -104,7 +102,7 @@ Format: Binary (3차원)
 1. **Gaussian Pyramid를 통한 데이터 압축**  -> code 링크   
 `Filament` 와 `Wall`은 `Cluster`주변에 존재하기 때문에 데이터를 `Cluster` 주변 40~45Mpc/h 의 크기로 Crop하였다.  Crop을 한 데이터들도 크기가 250~300Mb 하기 때문에 ML/DL에 사용하기 적합하지 않았다. 따라서 Gaussian Pyramid 알고리즘을 2번 적용해 데이터를 압축하였다. 이 과정에서 기하학적 정보가 손실 되지 않았는지 체크하였고 아래 그림과 같이 확인 하였다
 <br/><br/>
-![Gaussian example](_pics/Cluster_dens.png)
+![Gaussian example](https://swha0105.github.io/assets/projects/filament/Cluster_dens.png)
 가우시안 피라미드 설명 한거 링크..
 
 <br/>
@@ -115,7 +113,7 @@ Format: Binary (3차원)
 **Shape Signature**는 밀도 데이터의 **Hessian Matrix**를 구성하여 **Eigenvalue**를 계산하고 [논문](https://arxiv.org/abs/1401.7866)에 나온대로 적절히 조합하여 **Shape Strength**을 계산한다.  
 이는 주변의 밀도분포를 고려하여 특정 포인트가 어떤 형태를 띄고 있는지 숫자로 나타내준다. 이 과정은 매우 큰 계산자원을 필요로 하기에 **GPU를 이용한 가속화**를 하여 CPU로 처리했을때에 비해 약 10~100배 정도 빠른속도를 구현하였다. 
 <br/>
-![Signature visualization](_pics/signature_visual.JPG)
+![Signature visualization](https://swha0105.github.io/assets/projects/filament//signature_visual.JPG)
 <br/>
 위의의의 그림은 왼쪽 위부터 시계방향으로 `Density`, `Filament signature`, `Wall signature`, `Cluster signature`를 나타낸다. 
 
@@ -128,7 +126,7 @@ Label spreading에 대한 자세한 설명은 여기로.. (링크)
 거대우주구조 4가지 구조중 `Cluster`와 `Void`는 물리량으로 정확히 정의가 된다. 
 또한, `Filament`는 `Cluster`와, `Wall`은 `Void`와 상대적인 물리량 및 기하학적으로 비슷한 특성을 가진다.   
 이를 이용해 `Cluster`와 `Void`를 X-ray 및 온도를 이용하여여 정확히 정의 한 뒤 이를 **Label**로 가정한다. Label의 **기하학적 정보와 물리량들**을 이용해 Unlabeled 데이터 안에 존재하는`Filament`와 `Wall`에 대한 **Classification**을 한다.<br/>
-![Gaussian example](_pics/label_spreading_example.JPG)
+![Gaussian example](https://swha0105.github.io/assets/projects/filament//label_spreading_example.JPG)
 <br/>
 왼쪽 그림은 밀도, 오른쪽 그림은 Label spreading이후 `Filament`라 Classification 된 부분을 의미한다. 
 <br/>
@@ -137,7 +135,7 @@ Label spreading에 대한 자세한 설명은 여기로.. (링크)
 4. **MATLAB을 통한 후처리 및 DFS를 통한 Filament 개별화** -> Skeleton 코드, DFS 코드
 식별된 Filament를 하나씩 개별화화 하기 위해 MATLAB의 `3D Volumetric Image Processing`을 이용해 **Skeletonized**를 하였다.
 <br/>
-![Skeleton example](_pics/Skeletonization.png)
+![Skeleton example](https://swha0105.github.io/assets/projects/filament//Skeletonization.png)
 <br/>
 Skeletonized된 데이터를 이용하여 Python의 모듈 `Networkx`을 이용해 **Graph** 화 하고 **DFS** 개념을 활용해 Cluster 중심에서 부터 Filament가 끝나는 지점까지 길찾기를 하여 필라멘트 개별화를 하였다.
 
@@ -154,25 +152,25 @@ Skeletonized된 데이터를 이용하여 Python의 모듈 `Networkx`을 이용�
 ### **1. Linear density**
 먼저, Filament가 잘 segmentation 되었는지 확인하기 위해 구해 볼수 있는 **Linear density**를 구해보았다. 기존 논문들과 10배 가량 차이를 보았지만, 이는 시뮬레이션 환경에서 `암흑물질`을 고려 여부의 차이로 나타나는 것으로 이를 보정하면 충분히 **reliable한 결과**라고 판단 하였다.
 <br/>
-![Linear Density](_pics/linear_density.png)
+![Linear Density](https://swha0105.github.io/assets/projects/filament//linear_density.png)
 왼쪽은 [기존 논문](https://arxiv.org/abs/1401.7866)의 Linear density이고 오른쪽은 우리가 계산한 Filamnet Linear density의 평균을 나타낸다.  
 
 ### **2. Curvature**
 Filament가 제대로 식별이 됐다고 판단이 되었으므로 우리의 목적인 **Curvature**를 계산해보기로 하였다. 
 
 3차원상에서 Curvature를 계산하는 수식은 아래와 같다.
-![Curvature](_pics/curvature_equation.png)
+![Curvature](https://swha0105.github.io/assets/projects/filament//curvature_equation.png)
 
 총 105개의 Filament의 Mean Curvature, Max Curvature를 구하였고 히스토그램으로 나타내었다.
 
-![Curvature_statistics](_pics/curvature.png)
+![Curvature_statistics](https://swha0105.github.io/assets/projects/filament//curvature.png)
 
 위의 데이터를 분석하면 우리가 찾던 Highly curved filament (Curvature > 0.4) 가 존재한다. 하지만 105개중 2개 존재함으로 통계적으로 유효하기 위해 좀 더 많은 데이터가 필요할것으로 보인다.
 
 
 어떤 필라멘트들이 Highly curvature를 가지는지 알아보기 위해 Length와 함께 데이터를 구성해보았다.
 
-![Curvature_statistics](_pics/curvature_length.png)
+![Curvature_statistics](https://swha0105.github.io/assets/projects/filament//curvature_length.png)
 
 15~20 Mpc/h 의 길이를 가지는 Filament들이 Highly curvature를 가지는 것으로 보였다. 하지만 앞서 언급 했듯이 통계적으로 분석하기 위해 좀 더 많은 데이터가 필요할것으로 보인다.
 
