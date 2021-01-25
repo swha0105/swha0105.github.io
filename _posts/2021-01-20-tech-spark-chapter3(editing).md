@@ -65,32 +65,19 @@ Auhdioscrobbler에서 만든 데이터 셋이고 https://www.last.fm/ 에 추천
 
 ```python
 !wget https://storage.googleapis.com/aas-data-sets/profiledata_06-May-2005.tar.gz
-```
-
-    --2021-01-20 06:53:32--  https://storage.googleapis.com/aas-data-sets/profiledata_06-May-2005.tar.gz
-    Resolving storage.googleapis.com (storage.googleapis.com)... 34.64.4.16, 34.64.4.80, 2404:f340:10:1802::2010, ...
-    Connecting to storage.googleapis.com (storage.googleapis.com)|34.64.4.16|:443... connected.
-    HTTP request sent, awaiting response... 200 OK
-    Length: 135880312 (130M) [application/gzip]
-    Saving to: ‘profiledata_06-May-2005.tar.gz’
-    
-    profiledata_06-May- 100%[===================>] 129.58M  10.1MB/s    in 13s     
-    
-    2021-01-20 06:53:45 (10.0 MB/s) - ‘profiledata_06-May-2005.tar.gz’ saved [135880312/135880312]
-    
-    
-
-
-```python
 !tar xvf ./data/profiledata_06-May-2005.tar.gz
-```
 
-    profiledata_06-May-2005/
-    profiledata_06-May-2005/artist_data.txt
-    profiledata_06-May-2005/README.txt
-    profiledata_06-May-2005/user_artist_data.txt
-    profiledata_06-May-2005/artist_alias.txt
-    
+
+# 실행결과
+profiledata_06-May-2005/
+profiledata_06-May-2005/artist_data.txt
+profiledata_06-May-2005/README.txt
+profiledata_06-May-2005/user_artist_data.txt
+profiledata_06-May-2005/artist_alias.txt
+
+```
+       
+<br/>
 
 ## Spark session
 
@@ -109,10 +96,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.window import Window
 # from pytz import timezone
 # from pytz import utc
-```
 
-
-```python
 EXECUTOR_MEMORY = "2g"
 EXECUTOR_CORES = 2
 EXECUTORE_INSTANCES = 3
@@ -135,112 +119,76 @@ spark = (
     .getOrCreate()
 )
 
-spark.sparkContext.getConf().getAll()
 ```
 
+---
+
+Spark 기본 설정을 해주는 코드.  
+
+<details>
+<summary> 실행결과 </summary>
+<div markdown="1">   
+[('spark.executor.memory', '2g'),  
+('spark.executor.instances', '3'),  
+('spark.driver.host', '0b63c6cfbaf6'),  
+('spark.driver.extraJavaOptions',  
+'"-Dio.netty.tryReflectionSetAccessible=true"'),  
+('spark.app.id', 'local-1611128012143'),  
+('spark.driver.port', '33195'),  
+('spark.kryoserializer.buffer.max', '1024m'),  
+('spark.executor.id', 'driver'),  
+('spark.driver.maxResultSize', '1g'),  
+('spark.driver.memory', '1g'),  
+('spark.executor.cores', '2'),  
+('spark.executor.extraJavaOptions',  
+'"-Dio.netty.tryReflectionSetAccessible=true"'),  
+('spark.sql.catalogImplementation', 'hive'),  
+('spark.rdd.compress', 'True'),  
+('spark.app.name', 'Advanced analytics with SPARK - Chapter 3'),  
+('spark.serializer.objectStreamReset', '100'),  
+('spark.master', 'local[*]'),  
+('spark.submit.pyFiles', ''),  
+('spark.submit.deployMode', 'client'),  
+('spark.ui.showConsoleProgress', 'true')]  
+
+</div>
+</details>    
 
 
+Executor_instance: = --num-executor와 같음  executor의 갯수 설정  
+Executor_cores: 각 executor가 사용하는 thread의 갯수
 
-    [('spark.executor.memory', '2g'),
-     ('spark.executor.instances', '3'),
-     ('spark.driver.host', '0b63c6cfbaf6'),
-     ('spark.driver.extraJavaOptions',
-      '"-Dio.netty.tryReflectionSetAccessible=true"'),
-     ('spark.app.id', 'local-1611128012143'),
-     ('spark.driver.port', '33195'),
-     ('spark.kryoserializer.buffer.max', '1024m'),
-     ('spark.executor.id', 'driver'),
-     ('spark.driver.maxResultSize', '1g'),
-     ('spark.driver.memory', '1g'),
-     ('spark.executor.cores', '2'),
-     ('spark.executor.extraJavaOptions',
-      '"-Dio.netty.tryReflectionSetAccessible=true"'),
-     ('spark.sql.catalogImplementation', 'hive'),
-     ('spark.rdd.compress', 'True'),
-     ('spark.app.name', 'Advanced analytics with SPARK - Chapter 3'),
-     ('spark.serializer.objectStreamReset', '100'),
-     ('spark.master', 'local[*]'),
-     ('spark.submit.pyFiles', ''),
-     ('spark.submit.deployMode', 'client'),
-     ('spark.ui.showConsoleProgress', 'true')]
+---
 
+<br/>
 
 
 ## Load dataset and Preprocessing
 
+---
 
-```python
-!pwd
-data_path = '/home/jovyan/work/ch03/profiledata_06-May-2005/'
-import os
-```
+### Data summary   
 
-    /home/jovyan/work/ch03
-    
+#### user_artist_data.txt   
+- User가 어떤 artist들을 몇번 play했는지 기록한 data
+- 3 columns: userid artistid playcount
 
 
-```python
-!cat '/home/jovyan/work/ch03/profiledata_06-May-2005/README.txt'
-```
+#### artist_data.txt
+- Artist와 번호를 대응시켜 저장
 
-    Music Listening Dataset
-    Audioscrobbler.com
-    6 May 2005
-    --------------------------------
-    
-    This data set contains profiles for around 150,000 real people
-    The dataset lists the artists each person listens to, and a counter
-    indicating how many times each user played each artist
-    
-    The dataset is continually growing; at the time of writing (6 May 2005) 
-    Audioscrobbler is receiving around 2 million song submissions per day
-    
-    We may produce additional/extended data dumps if anyone is interested 
-    in experimenting with the data. 
-    
-    Please let us know if you do anything useful with this data, we're always
-    up for new ways to visualize it or analyse/cluster it etc :)
-    
-    
-    License
-    -------
-    
-    This data is made available under the following Creative Commons license:
-    http://creativecommons.org/licenses/by-nc-sa/1.0/
-    
-    
-    Files
-    -----
-    
-    user_artist_data.txt
-        3 columns: userid artistid playcount
-    
-    artist_data.txt
-        2 columns: artistid artist_name
-    
-    artist_alias.txt
-        2 columns: badid, goodid
-        known incorrectly spelt artists and the correct artist id. 
-        you can correct errors in user_artist_data as you read it in using this file
-        (we're not yet finished merging this data)
-        
-        
-    Contact Info
-    ------------
-    rj@audioscrobbler.com
-    irc://irc.audioscrobbler.com/audioscrobbler
-    
+#### artist_alias.txt
+- 2 columns: badid, goodid
+- 한 artist가 여러이름으로 저장되어있음, 이름에 대한 테크
 
-### user_artist_data
-
-- empty space로 컬럼 구분
-- id, count 모두 integer type로 구성됨
-
+---
 
 ```python
 !head /home/jovyan/work/ch03/profiledata_06-May-2005/user_artist_data.txt
 ```
-
+<details>
+<summary> 데이터 구조 </summary>
+<div markdown="1">   
     1000002 1 55
     1000002 1000006 33
     1000002 1000007 8
@@ -252,8 +200,58 @@ import os
     1000002 1000024 329
     1000002 1000025 1
     
+</div>
+</details>    
+
+```python
+!head /home/jovyan/work/ch03/profiledata_06-May-2005/artist_data.txt
+```
+<details>
+<summary> 데이터 구조 </summary>
+<div markdown="1">   
+    1134999	06Crazy Life
+    6821360	Pang Nakarin
+    10113088	Terfel, Bartoli- Mozart: Don
+    10151459	The Flaming Sidebur
+    6826647	Bodenstandig 3000
+    10186265	Jota Quest e Ivete Sangalo
+    6828986	Toto_XX (1977
+    10236364	U.S Bombs -
+    1135000	artist formaly know as Mat
+    10299728	Kassierer - Musik für beide Ohren
+
+</div>
+</details>    
 
 
+```python
+!head /home/jovyan/work/ch03/profiledata_06-May-2005/artist_alias.txt
+```
+<details>
+<summary> 데이터 구조 </summary>
+<div markdown="1">   
+    1092764	1000311
+    1095122	1000557
+    6708070	1007267
+    10088054	1042317
+    1195917	1042317
+    1112006	1000557
+    1187350	1294511
+    1116694	1327092
+    6793225	1042317
+    1079959	1000557
+
+</div>
+</details>    
+
+<br/>
+
+---
+
+
+### Data를 읽고 Schema에 load하는 부분
+
+#### user_artist_data.txt   
 ```python
 user_artist_schema = T.StructType([
     T.StructField("userid", T.IntegerType(), True),
@@ -272,39 +270,7 @@ user_artist_df = (
 
 user_artist_df.show(5)
 ```
-
-    +-------+--------+---------+
-    | userid|artistid|playcount|
-    +-------+--------+---------+
-    |1000002|       1|       55|
-    |1000002| 1000006|       33|
-    |1000002| 1000007|        8|
-    |1000002| 1000009|      144|
-    |1000002| 1000010|      314|
-    +-------+--------+---------+
-    only showing top 5 rows
-    
-    
-
-### artist_data
-
-
-```python
-!head /home/jovyan/work/ch03/profiledata_06-May-2005/artist_data.txt
-```
-
-    1134999	06Crazy Life
-    6821360	Pang Nakarin
-    10113088	Terfel, Bartoli- Mozart: Don
-    10151459	The Flaming Sidebur
-    6826647	Bodenstandig 3000
-    10186265	Jota Quest e Ivete Sangalo
-    6828986	Toto_XX (1977
-    10236364	U.S Bombs -
-    1135000	artist formaly know as Mat
-    10299728	Kassierer - Musik für beide Ohren
-    
-
+#### artist_data
 
 ```python
 artist_schema = T.StructType([
@@ -324,38 +290,7 @@ artist_df = (
 artist_df.show(5, False)
 ```
 
-    +--------+----------------------------+
-    |artistid|artistname                  |
-    +--------+----------------------------+
-    |1134999 |06Crazy Life                |
-    |6821360 |Pang Nakarin                |
-    |10113088|Terfel, Bartoli- Mozart: Don|
-    |10151459|The Flaming Sidebur         |
-    |6826647 |Bodenstandig 3000           |
-    +--------+----------------------------+
-    only showing top 5 rows
-    
-    
-
 ### artist_alias
-
-
-```python
-!head /home/jovyan/work/ch03/profiledata_06-May-2005/artist_alias.txt
-```
-
-    1092764	1000311
-    1095122	1000557
-    6708070	1007267
-    10088054	1042317
-    1195917	1042317
-    1112006	1000557
-    1187350	1294511
-    1116694	1327092
-    6793225	1042317
-    1079959	1000557
-    
-
 
 ```python
 artist_alias_schema = T.StructType([
@@ -374,39 +309,40 @@ artist_alias_df = (
 
 artist_alias_df.show(5, False)
 ```
+---
 
-    +--------+-------+
-    |badid   |goodid |
-    +--------+-------+
-    |1092764 |1000311|
-    |1095122 |1000557|
-    |6708070 |1007267|
-    |10088054|1042317|
-    |1195917 |1042317|
-    +--------+-------+
-    only showing top 5 rows
-    
-    
+- option("header"): data의 첫 row가 header경우 True로 반환한다.  
+- option("sep"): data끼리의 간격을 지정한다. 이 경우 Space  
 
-- user_artist_df의 artistid 필드를 artist_df를 참조하여 badid를 goodid로 교체
-- broadcase 함수 적용
-- cache 함수를 적용하면 Storage 탭에서 메모리 사용량을 알 수 있음
+---
 
+### 읽은 데이터들을 병합하는 부분
 
 ```python
 new_user_artist_df = (
     user_artist_df
     .join(F.broadcast(artist_alias_df), user_artist_df.artistid == artist_alias_df.badid, "left")
-    .withColumn("artistid", F.when(F.col("badid").isNull(), F.col("artistid")).otherwise(F.col("goodid")))
+    .withColumn("artistid", F.when(F.col("badid").isNull(),  F.col("artistid")).otherwise(F.col("goodid")))
     .where(F.col("badid").isNotNull())
     .cache()
 )
 ```
 
+---
+
+- user_artist_df 데이터에 artist_alias_df를 붙이는데, user_artist_df의 artistid가 alias에 등록되어있는 badid와 같을때, left join을 한다.
+- user_artist_df의 artistid 필드를 artist_df를 참조하여 badid를 goodid로 교체
+- broadcase 함수 적용
+- cache 함수를 적용하면 Storage 탭에서 메모리 사용량을 알 수 있음
+
+---
 
 ```python
 new_user_artist_df.show()
 ```
+<details>
+<summary> 데이터 구조 </summary>
+<div markdown="1">   
 
     +-------+--------+---------+-------+-------+
     | userid|artistid|playcount|  badid| goodid|
@@ -434,7 +370,13 @@ new_user_artist_df.show()
     +-------+--------+---------+-------+-------+
     only showing top 20 rows
     
-    
+ </div>
+</details>    
+
+
+<br>
+
+---
 
 ## Build Model (Spark Tutorial)
 
@@ -456,19 +398,27 @@ als = ALS(seed=42,
 als_model = als.fit(new_user_artist_df)
 ```
 
+--- 
+ALS 모델 (링크)  
+
+
+### Implicit vs Explicit 
+
+Explicit feedback은 데이터가 가지고 있는 값이 우리가 사용해야할 데이터와 일치할때 사용된다  
+예를 들어, 이 예제와같이 음악추천 시스템을 만들때 유저가 듣는 음악에 대해 평점을 매긴다면 그 평점에 대한 데이터를 사용하면 Explicit feedback이 된다.  
+
+예제에서 사용하고 있는 데이터는 단순히 조회수로만 카운팅하며 이럴 경우 많은 bias나 오차가 생길수 있다. (틀어놓고 딴짓한다던가.. 기타등등) 이런 데이터를 이용하는것을 Implicit feedback이라고 한다. Implicit은 Explicit에 비해 사용하기 힘들지만 큰 데이터를 모을수 있는 장점이 있다.
+
+
+---
 
 ```python
 predictions = als_model.transform(test)
 evaluator = RegressionEvaluator(metricName="rmse", labelCol="playcount", predictionCol="prediction")
 rmse = evaluator.evaluate(predictions)
-print("Root-mean-square error = " + str(rmse))
-```
 
-    Root-mean-square error = 11.475695888786678
     
 
-
-```python
 # Generate top 10 movie recommendations for each user
 userRecs = als_model.recommendForAllUsers(10)
 # Generate top 10 user recommendations for each movie
@@ -477,17 +427,22 @@ movieRecs = als_model.recommendForAllItems(10)
 # Show recomeadations
 # userRecs.show(n=10, truncate=False)
 # movieRecs.show(n=10, truncate=False)
-```
 
-
-```python
 # Generate top 10 movie recommendations for a specified set of users
 users = new_user_artist_df.select(als.getUserCol()).distinct().limit(3)
 userSubsetRecs = als_model.recommendForUserSubset(users, 10)
 
+print("Root-mean-square error = " + str(rmse))
 users.show(n=3, truncate=False)
 userSubsetRecs.show(n=3, truncate=False)
 ```
+
+<details>
+<summary> 실행결과 </summary>
+<div markdown="1">   
+
+    Root-mean-square error = 11.475695888786678
+
 
     +-------+
     |userid |
@@ -505,21 +460,21 @@ userSubsetRecs.show(n=3, truncate=False)
     |1000509|[[1017916, 633.2707], [2043183, 617.6902], [6799188, 440.63922], [1101322, 329.008], [1001017, 271.35806], [2036225, 232.64966], [1248506, 231.83801], [7034181, 212.84283], [7018959, 210.13376], [1237708, 204.71098]]   |
     +-------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     
-    
+</div>    
+</details>
 
 
 ```python
 # Generate top 10 user recommendations for a specified set of movies
 movies = new_user_artist_df.select(als.getItemCol()).distinct().limit(3)
 movieSubSetRecs = als_model.recommendForItemSubset(movies, 10)
-```
 
-
-```python
 movies.show(n=3, truncate=False)
 movieSubSetRecs.show(n=3, truncate=False)
 ```
-
+<details>
+<summary> 실행결과 </summary>
+<div markdown="1">   
     +--------+
     |artistid|
     +--------+
@@ -535,8 +490,11 @@ movieSubSetRecs.show(n=3, truncate=False)
     |1239554 |[[1077099, 957.29675], [2213427, 686.50806], [1031723, 643.5707], [2019846, 614.0945], [1058542, 552.22235], [1073616, 512.73346], [1064240, 511.27615], [1010177, 495.19293], [2042801, 492.02536], [2248675, 471.95676]]|
     |1001129 |[[1041675, 6512.148], [2027150, 6130.94], [1036787, 4110.981], [2009645, 2701.3748], [1041919, 2336.6821], [2045193, 2287.1392], [1001440, 1945.2133], [2017087, 1920.5879], [1058542, 1863.7944], [1047972, 1838.2716]]  |
     +--------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    
-    
+</div> 
+</details>
+  
+
+<br/>
 
 ## Build Model (Text Book)                                                                                 
 
@@ -544,14 +502,17 @@ movieSubSetRecs.show(n=3, truncate=False)
 ```python
 als_model.userFactors.show(1, truncate=False) # Rank 10
 ```
-
+<details>
+<summary> 실행결과 </summary>
+<div markdown="1">  
     +---+-----------------------------------------------------------------------------------------------------------------------------+
     |id |features                                                                                                                     |
     +---+-----------------------------------------------------------------------------------------------------------------------------+
     |90 |[-0.028082313, 7.6311367E-4, 0.2491423, -0.5567669, -0.13148631, -0.3197596, 4.7639868E-4, -0.64081705, 0.6159623, -0.577028]|
     +---+-----------------------------------------------------------------------------------------------------------------------------+
     only showing top 1 row
-    
+</div>    
+</details>
     
 
 
@@ -567,6 +528,9 @@ existing_artist_ids = [row.artistid for row in existing_artist_ids]
 
 artist_df.where(F.col("artistid").isin(existing_artist_ids)).show(n=30, truncate=False)
 ```
+<details>
+<summary> 실행결과 </summary>
+<div markdown="1">   
 
     +--------+----------------------------------+
     |artistid|artistname                        |
@@ -604,7 +568,8 @@ artist_df.where(F.col("artistid").isin(existing_artist_ids)).show(n=30, truncate
     +--------+----------------------------------+
     only showing top 30 rows
     
-    
+</div>    
+</details>
 
 
 ```python
@@ -618,7 +583,13 @@ def makeRecomendations(model, userid, howmany):
 
 recomendation = makeRecomendations(als_model, userID, 3)
 recomendation.show()
+
 ```
+
+<details>
+<summary> 실행결과 </summary>
+<div markdown="1">   
+
 
     +--------+----------+
     |artistid|prediction|
@@ -630,15 +601,8 @@ recomendation.show()
     
     
 
-
-```python
-recomendation
-```
-
-
-
-
-    DataFrame[artistid: int, prediction: float]
+</div>    
+</details>
 
 
 
@@ -680,10 +644,10 @@ evaluator = RegressionEvaluator(
 
 # Build cross validation using CrossValidator
 cv = CrossValidator(estimator=als, estimatorParamMaps=param_grid, evaluator=evaluator, numFolds=5)
-```
 
 
-```python
+
+
 # Fit cross validator to the 'train' dataset
 model = cv.fit(train)
 
@@ -699,23 +663,26 @@ print("**Best Model**")
 print("  Rank:", best_model._java_obj.parent().getRank())
 print("  MaxIter:", best_model._java_obj.parent().getMaxIter())
 print("  RegParam:", best_model._java_obj.parent().getRegParam())
-```
 
 
-```python
+
+
 # Generate n Recommendations for all users
 recommendations = best_model.recommendForAllUsers(5)
 recommendations.show(10, False)
-```
 
 
-```python
+
+
 nrecommendations = recommendations\
     .withColumn("rec_exp", F.explode("recommendations"))\
     .select("userid", "rec_exp.artistid", "rec_exp.rating")
     
 nrecommendations.limit(10).show()
 ```
+<details>
+<summary> 실행결과 </summary>
+<div markdown="1">  
 
     +-------+--------+---------+
     | userid|artistid|   rating|
@@ -732,7 +699,10 @@ nrecommendations.limit(10).show()
     |1000465| 1337692|20.663816|
     +-------+--------+---------+
     
-    
+ </div>    
+</details>
+
+   
 
 ## Prediction vs Real Data 
 
@@ -740,7 +710,9 @@ nrecommendations.limit(10).show()
 ```python
 nrecommendations.join(artist_df, on="artistid").filter('userid = 1000190').sort(F.col("rating").desc()).show()
 ```
-
+<details>
+<summary> 실행결과 </summary>
+<div markdown="1">  
     +--------+-------+---------+-----------------+
     |artistid| userid|   rating|       artistname|
     +--------+-------+---------+-----------------+
@@ -752,6 +724,9 @@ nrecommendations.join(artist_df, on="artistid").filter('userid = 1000190').sort(
     +--------+-------+---------+-----------------+
     
     
+</div>    
+</details>
+
 
 
 ```python
@@ -762,7 +737,9 @@ nrecommendations.join(artist_df, on="artistid").filter('userid = 1000190').sort(
     .sort(F.col("playcount").desc())
 ).show()
 ```
-
+<details>
+<summary> 실행결과 </summary>
+<div markdown="1">  
     +--------+-------+---------+--------------------+
     |artistid| userid|playcount|          artistname|
     +--------+-------+---------+--------------------+
@@ -776,3 +753,6 @@ nrecommendations.join(artist_df, on="artistid").filter('userid = 1000190').sort(
     +--------+-------+---------+--------------------+
     
     
+</div>    
+</details>
+
