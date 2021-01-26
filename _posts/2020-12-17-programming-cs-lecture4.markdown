@@ -301,8 +301,8 @@ answer = list(filter(lambda x:x > ref_value,list_list))
 
 ## Reference
 
-
-1. [http://www.tcpschool.com/c/c_memory_structure](http://www.tcpschool.com/c/c_memory_structure)
-2. [https://yunmap.tistory.com/entry/프로그래밍언어-Formal-parameter-Actual-parameter-그리고-parameter-passing](https://yunmap.tistory.com/entry/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%96%B8%EC%96%B4-Formal-parameter-Actual-parameter-%EA%B7%B8%EB%A6%AC%EA%B3%A0-parameter-passing)
-3. [https://code13.tistory.com/214](https://code13.tistory.com/214)
-4. [https://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference](https://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference)
+1. [Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec4.pdf) 
+2. [http://www.tcpschool.com/c/c_memory_structure](http://www.tcpschool.com/c/c_memory_structure)
+3. [https://yunmap.tistory.com/entry/프로그래밍언어-Formal-parameter-Actual-parameter-그리고-parameter-passing](https://yunmap.tistory.com/entry/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%96%B8%EC%96%B4-Formal-parameter-Actual-parameter-%EA%B7%B8%EB%A6%AC%EA%B3%A0-parameter-passing)
+4. [https://code13.tistory.com/214](https://code13.tistory.com/214)
+5. [https://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference](https://stackoverflow.com/questions/986006/how-do-i-pass-a-variable-by-reference)

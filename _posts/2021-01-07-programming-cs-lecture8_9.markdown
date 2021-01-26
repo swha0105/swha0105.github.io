@@ -268,3 +268,13 @@ class Rabbit(Animal):
 ~~너무 힘들다~~
 
 ~~Dr. Ana Bell 진짜 설명잘한다..~~
+
+
+<br/>
+
+*** 
+
+## Reference
+
+[Lecture pdf 1](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec8.pdf)   
+[Lecture pdf 2](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec9.pdf) 

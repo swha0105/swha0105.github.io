@@ -150,3 +150,12 @@ comments: true
     OOP는 다음강의에.. 
 
 ~~점점 정리내용이 짧아지는건 기분탓인가?~~
+
+
+<br/>
+
+*** 
+
+## Reference
+
+[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec7.pdf) 

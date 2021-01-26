@@ -140,3 +140,14 @@ $$O(3^n)$$   | $$ 2 n^{30} + 3^n $$
     > - Recursive Function (O(n)) Calls
 - O(c^n): Input 데이터가 늘어날때 **Exponential** 하게 시간이 증가한다
     > - 2 more than Recursive Function calls  (Hanoi's Tower)
+
+
+<br/>
+
+*** 
+
+## Reference
+
+[Lecture pdf 1](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec10.pdf)   
+
+[Lecture pdf 2](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec11.pdf) 

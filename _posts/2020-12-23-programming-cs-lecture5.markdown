@@ -181,3 +181,12 @@ print(L1) = [2,3,4]  #only element 1 was deleted
     - import copy후 , L1_copy = copy.deepcopy(L1)을 하게 되면 새로운 객체를 형성하게 된다.
 
 이 두개의 차이점은 아직 알아보지 못하였다. 시간날때 알아보도록...
+
+
+<br/>
+
+*** 
+
+## Reference
+
+[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec5.pdf) 

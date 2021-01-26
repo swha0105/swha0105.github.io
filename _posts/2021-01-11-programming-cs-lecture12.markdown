@@ -182,3 +182,12 @@ Bisect search가 강력한건 알겠지만 사용하러면 sorted 되어있어�
 정말 막무가내 개발을 했었구나를 느낀 동시에 어쩌면 앞으로 커리어의 전환점이 될 수도 있겠다는 느낌이 들정도로 유익했다. 다음강의는 MIT courseware의 Introduction to Algorithms이 될거 같다. 다음 강의도 배울게 많았으면 좋겠다
 
 # **Think Computationally & Think Recursively**
+
+
+<br/>
+
+*** 
+
+## Reference
+
+[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec11.pdf) 

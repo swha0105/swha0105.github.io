@@ -220,9 +220,14 @@ d = {1:1, 2:2}
 
 ~~이번 렉쳐는 하노이의 탑에서 에너지를 다써서 더이상 정리 못하겠다~~
 
-
-
 <br/>
+
+*** 
+
+## Reference
+
+[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec6.pdf) 
+
 <br/>
 
 ### 코스 절반쯤에서 쓰는 후기

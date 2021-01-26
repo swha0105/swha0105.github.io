@@ -239,4 +239,4 @@ else:
 ***
 
 ## Reference
-[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec2.pdf) 
+[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec3.pdf) 
