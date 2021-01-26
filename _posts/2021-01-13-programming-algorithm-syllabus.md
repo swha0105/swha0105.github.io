@@ -29,6 +29,6 @@ Introduction to Computer Science and Programming in Python 에 이어 MIT course
 
 강의계획표는 아래와같다
 
-![Time table 1](https://swha0105.github.io/assets/intro_algorithm/image/syllabus_Untitled.png)
+![Time table 1](https://swha0105.github.io/assets/intro_algorithm/image/syllabus_Untitled.png)  
 ![Time table 2](https://swha0105.github.io/assets/intro_algorithm/image/syllabus_Untitled_1.png)
 

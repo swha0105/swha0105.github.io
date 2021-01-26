@@ -92,6 +92,7 @@ Semantics|같은 문장이라도 다양한 뜻 존재.| 오직 한가지 뜻이 
     Source code를 컴퓨터가 알아 들을수 있게 Compile을 하는 언어 (C,Fortran), Interpreter를 통해 결과를 실시간으로 피드백 해주는 언어 (Python,MATLAB) 
     <details>
     <summary>TMI: Compiler언어 vs Interpreted 언어</summary>
+    <div markdown="1">   
         두 언어의 차이는 `컴파일 시점` 이다. 런타임 전에 컴파일을 하면 compiler 언어, 그렇지 않으면 interpreted언어 
 
         **Compiler 예시** 
@@ -109,6 +110,7 @@ Semantics|같은 문장이라도 다양한 뜻 존재.| 오직 한가지 뜻이 
         - 운영체제마다 별도의 라이브러리가 필요 없지만 Python을 설치할때 OS를 선택하는 이유는 바이트코드에서 기계어로 넘어갈때 어떤 기계어로 바꿀지 결정하기 위해서.
 
         출처: [링크](https://wayhome25.github.io/cs/2017/04/13/cs-14/)
+    </div>
     </details>  
 
 ## What is program
@@ -124,5 +126,5 @@ non-scalar: Object안에 접근할 수 있는 내부구조가 존재하여 Objec
 
 
 ### Reference
-[Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec1.pdf)  
-https://wayhome25.github.io/cs/2017/04/13/cs-14/
+1. [Lecture pdf](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/intro_cs/material/Lec1.pdf)  
+2. https://wayhome25.github.io/cs/2017/04/13/cs-14/
