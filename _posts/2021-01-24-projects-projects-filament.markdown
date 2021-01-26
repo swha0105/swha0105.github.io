@@ -99,7 +99,7 @@ Format: Binary (3차원)
 
 ## **Approach** : 
   
-### 1. **Gaussian Pyramid를 통한 데이터 압축**  -> code 링크   
+### 1. **Gaussian Pyramid를 통한 데이터 압축**  -> [code](https://github.com/swha0105/Filament_Project/blob/main/pyramid.py) 
 > `Filament` 와 `Wall`은 `Cluster`주변에 존재하기 때문에 데이터를 `Cluster` 주변 40~45Mpc/h 의 크기로 Crop하였다.  Crop을 한 데이터들도 크기가 250~300Mb 하기 때문에 ML/DL에 사용하기 적합하지 않았다. 따라서 Gaussian Pyramid 알고리즘을 2번 적용해 데이터를 압축하였다. 이 과정에서 기하학적 정보가 손실 되지 않았는지 체크하였고 아래 그림과 같이 확인 하였다
 <br/><br/>
 ![Gaussian example](https://swha0105.github.io/assets/projects/filament/Cluster_dens.png)
@@ -107,7 +107,7 @@ Format: Binary (3차원)
 <br/>
 
 
-### 2. **GPU 병렬화를 통한 Signature 및 Shape strength계산** -> code 링크  
+### 2. **GPU 병렬화를 통한 Signature 및 Shape strength계산** -> [code](https://github.com/swha0105/Filament_Project/blob/main/gpu_signature.py) 
 > 기존 연구방법을 참고하여 기하학적 정보를 **Shape Signature**를 계산하여 사용하기로 하였다. 
 **Shape Signature**는 밀도 데이터의 **Hessian Matrix**를 구성하여 **Eigenvalue**를 계산하고 [논문](https://arxiv.org/abs/1401.7866)에 나온대로 적절히 조합하여 **Shape Strength**을 계산한다.  
 이는 주변의 밀도분포를 고려하여 특정 포인트가 어떤 형태를 띄고 있는지 숫자로 나타내준다. 이 과정은 매우 큰 계산자원을 필요로 하기에 **GPU를 이용한 가속화**를 하여 CPU로 처리했을때에 비해 약 10~100배 정도 빠른속도를 구현하였다. 
@@ -118,12 +118,12 @@ Format: Binary (3차원)
 <br/>
 
  
-### 3. **Label Spreading을 통한 Filament 식별** -> code 링크  
-> Label spreading에 대한 자세한 설명은 여기로.. (링크)  
-**Label spreading**은 개수가 적지만 확실한 Label를 통해 Unlabeled 데이터에 Label을 지정 알고리즘으로 **Semi-supervised Learning** 중 하나 이다.    
+### 3. **Label Spreading을 통한 Filament 식별** -> [code](https://github.com/swha0105/Filament_Project/blob/main/label_spreading_v2.py) 
+### [Label spreading에 대한 포스팅](https://swha0105.github.io/_posts/2021-01-24-projects-projects-filament.markdown)  
+>**Label spreading**은 개수가 적지만 확실한 Label를 통해 Unlabeled 데이터에 Label을 지정 알고리즘으로 **Semi-supervised Learning** 중 하나 이다.    
 거대우주구조 4가지 구조중 `Cluster`와 `Void`는 물리량으로 정확히 정의가 된다.   
 또한, `Filament`는 `Cluster`와, `Wall`은 `Void`와 물리량 및 기하학적으로 비슷한 특성을 가진다.  이를 이용해 `Cluster`와 `Void`를 X-ray 및 온도를 이용하여 정확히 정의 한 뒤 이를 **Label**로 가정한다. Label의 **기하학적 정보와 물리량들**을 이용해 Unlabeled 데이터 안에 존재하는`Filament`와 `Wall`에 대한 **Classification**을 시도 한다.<br/><br/>
-![Gaussian example](https://swha0105.github.io/assets/projects/filament//label_spreading_example.JPG)
+![Gaussian example](https://swha0105.github.io/assets/projects/filament/label_spreading_example.JPG)
 <br/>
 왼쪽 그림은 밀도, 오른쪽 그림은 Label spreading이후 `Filament` Classification 된 부분을 의미한다.   
 <br/>
@@ -131,7 +131,7 @@ Format: Binary (3차원)
 
 
 
-### 4. **MATLAB을 통한 후처리 및 DFS를 통한 Filament 개별화** -> Skeleton 코드, DFS 코드
+### 4. **MATLAB을 통한 후처리 및 DFS를 통한 Filament 개별화** -> [Skeleton code](https://github.com/swha0105/Filament_Project/blob/main/ref/matlab/skeleton.m), [DFS code](https://github.com/swha0105/Filament_Project/blob/main/find_filament_v2.py)
 > 식별된 Filament를 개별화 위해 MATLAB의 `3D Volumetric Image Processing`을 이용해 **Skeletonized**를 하였다.
 <br/><br/>
 ![Skeleton example](https://swha0105.github.io/assets/projects/filament//Skeletonization.png)
@@ -176,6 +176,8 @@ Filament가 제대로 식별이 됐다고 판단이 되었으므로 우리의 �
 <br/>
 <br/>
 
+---
+
 ## **Summary**
 
 위와 같은 일련의 과정으로 Machine Learning을 도입하여 Large Scale Structure of the universe에서의 Galaxy of Filament를 segmentation 및 Identification하는 작업을 하였다.
@@ -186,6 +188,8 @@ Code works은 끝났으니, 데이터가 생성되는대로 좀 더 테스트를
 
 <br/>
 <br/>
+
+---
 
 ### reference
 [1] [https://aip.scitation.org/doi/pdf/10.1063/1.3382336](https://aip.scitation.org/doi/pdf/10.1063/1.3382336)
