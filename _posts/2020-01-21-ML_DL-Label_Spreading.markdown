@@ -14,7 +14,7 @@ comments: true
 
 # Label spreading 요약
 
-**`Label spreading`** 에 대해 한줄 요약하자면, 알려진 Label로 부터 모르는 Unlabel에 대해 `특정 공간상의 상대적인 거리`를 구하여 가장 가까운 알려진 Label로 지정하는 알고리즘이다 
+**`Label spreading`** 에 대해 한줄 요약하자면, **알려진 Label로 부터 모르는 Unlabel에 대해 `특정 공간상의 상대적인 거리`를 구하여 가장 가까운 알려진 Label로 지정하는 알고리즘이다** 
 
 이 알고리즘은 데이터 셋이 Label과 Unlabel이 섞여있고, Unlabel에 대한 정보를 Label로 부터 추측하고 싶을때 사용할 수 있고 **`Semi-supervised learning`**중 하나이다. 
 
@@ -31,12 +31,12 @@ comments: true
 
 ## Preparation
 데이터 셋 (Data set) $$X = [ x_{1},x_{2},...x_{l},x_{l+1},...,x_{n} ]$$ 안에   
-레이블 존재하는 지점의 데이터 Label point는 $$x_{L} $$  $$(1 \leq L \leq l)$$ 이고  
-레이블 존재하지 않는 지점의 데이터 Unlabel point은 $$x_{U} $$ $$(l+1 \leq U \leq n)$$  가 있다고 가정하자.
+$$x_{L} $$  $$(1 \leq L \leq l)$$ 레이블 존재하는 지점의 데이터 즉, Labeled data point 와  
+$$x_{U} $$ $$(l+1 \leq U \leq n)$$ 레이블 존재하지 않는 지점의 데이터, Unlabeled data point 가 있다고 가정하자.
 
 그리고 데이터 셋에 대응되는 레이블 데이터 $$Y = [y_{1},y_{2}, ... y_{l}, y_{l+1}, ... ,y_{n} ]$$ 는  
-레이블이 존재하면 $$y_{i} \subset [-1,1]$$ $$(1	\leq L \leq l)$$  이고  
-레이블이 없으면 $$y_{i} = 0$$ $$(l+1 \leq U \leq n)$$  이다
+레이블이 존재하면 $$y_{L} \subset [-1,1]$$ $$(1	\leq L \leq l)$$  이고  
+레이블이 없으면 $$y_{U} = 0$$ $$(l+1 \leq U \leq n)$$  이다
 
 그리고 알고리즘의 주인공 Normalized Graph Laplacian은  
 **$$S = D^{-\frac{1}{2}}WD^{-\frac{1}{2}}$$** (D는 [Degree Matrix](https://en.wikipedia.org/wiki/Degree_matrix))  라고 정의 한다.  
@@ -57,12 +57,13 @@ L = D - A 이고 A는 adjacency matrix 즉, 우리가 사용하고 있는 W와 �
 
 ## Algorithm
 
-1. W (adjacency matrix)를 계산 한다. 
+1. [W (adjacency matrix)](https://en.wikipedia.org/wiki/Adjacency_matrix)를 계산 한다. 
     - W는 모든 포인트들끼리의 거리 정보를 담고 있다.
     - W의 거리 정보는는 knn, rbf 등 여러 형태로 계산 될 수 있다.
-2. S (Normalized Graph Laplacian Matrix) 를 계산한다.
+2. [S (Normalized Graph Laplacian Matrix)](https://en.wikipedia.org/wiki/Laplacian_matrix#Symmetric_normalized_Laplacian) 를 계산한다.
     - Noramlized하지 않고 사용하는 알고리즘은 Label propagation
-    - Noramlized의 정확한 역할은 [Ref 2 ](https://swha0105.github.io/assets/ml/paper/Learning_with_Local_and_Global_Consistency.pdf) 있는데 너무 어려워서 정리 못함..    
+    - Noramlized의 정확한 역할은 [Ref 2 ](https://swha0105.github.io/assets/ml/paper/Learning_with_Local_and_Global_Consistency.pdf) 에 있는데 너무 어려워서 정리 못함..
+    - 의미적으로는 W와 같다고 생각해도 무방할 듯.    
  
 3. $$Y^{t+1} = \alpha S Y^{t} + (1-\alpha)Y^{0}$$ 이 수렴할 때까지 Iteration한다.
     - Alpha는 Hyperparameter로써, Initial 정보를 얼마나 간직할것인지 결정한다. 
@@ -98,13 +99,12 @@ L = D - A 이고 A는 adjacency matrix 즉, 우리가 사용하고 있는 W와 �
 
 ## Reference
 
-[1]. Rie Johnson, Tong Zhang  On the Effectiveness of Laplacian Normalization for Graph Semi-supervised Learning, , JMLR, 2007, [Paper link](https://swha0105.github.io/assets/ml/paper/On_the_Effectiveness_of_Laplacian_Normalization_for_Graph.pdf) 
+[1]. Rie Johnson, Tong Zhang.  On the Effectiveness of Laplacian Normalization for Graph Semi-supervised Learning, , JMLR, 2007, [Paper link](https://swha0105.github.io/assets/ml/paper/On_the_Effectiveness_of_Laplacian_Normalization_for_Graph.pdf) 
 
 [2].Dengyong Zhou, Olivier Bousquet, Thomas Navin Lal,
-Jason Weston, and Bernhard Scholkopf   
-Learning with Local and Global Consistency [Paper link](https://swha0105.github.io/assets/ml/paper/Learning_with_Local_and_Global_Consistency.pdf) 
+Jason Weston, and Bernhard Scholkopf.  Learning with Local and Global Consistency [Paper link](https://swha0105.github.io/assets/ml/paper/Learning_with_Local_and_Global_Consistency.pdf) 
 
-[1]. Mastering machine learning algorithms : expert techniques to implement 
+[3]. Mastering machine learning algorithms : expert techniques to implement 
 popular machine learning algorithms and fine-tune your models (book)
-[]
-논문, Scikit learn
+
+[4]. [Scikit learn link](https://scikit-learn.org/stable/modules/generated/sklearn.semi_supervised.LabelSpreading.html)

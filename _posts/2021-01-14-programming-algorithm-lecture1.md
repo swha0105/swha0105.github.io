@@ -69,6 +69,8 @@ comments: true
 
 <br/>
 
+***
+
 # 2D peak-finding
 
 ### **Problems**:
@@ -112,6 +114,7 @@ comments: true
 
 <br/>
 
+***
 
 ## Reference
 [Lecture pdf](https://swha0105.github.io/assets/intro_algorithm/material/lec.png)  
