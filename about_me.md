@@ -183,4 +183,4 @@ Specific works: Developed RMHD (Relativistic MHD)  shock code and parallelizatio
 
 <br/>
 
-</details>
+
