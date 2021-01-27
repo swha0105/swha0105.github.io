@@ -13,6 +13,10 @@ Chapter 3 제목은 `음악 추천과 Audioscrobbler 데이터셋`이다.
 
 여기서 사용된 추천 알고리즘은 ALS(Alternating Least Square)이고 관련된 자세한 내용은 [여기](https://swha0105.github.io/projects/2021/01/27/ML_DL-ml-ALS/) 정리 해놓았다.
 
+<br/>
+
+***
+
 ## Data set
 Auhdioscrobbler에서 만든 데이터 셋이고 https://www.last.fm/ 에 추천 시스템을 구축하는데 사용 되었다. 총 3개의 데이터로 구성되어있고 모두 txt 파일이다.    
 
@@ -26,15 +30,11 @@ Auhdioscrobbler에서 만든 데이터 셋이고 https://www.last.fm/ 에 추천
 3. **artist_alias.txt**: badid  goodid
    - Artist들의 이름이 통일 되어있지 않음으로 여러 이름들의 형태를 저장
 
-## ALS (Alternating Least Squares)
-자세한 내용은 여기로..
+<br/>
 
+***
 
-
-
-<!-- ALS 에 대한 자세한 설명은 여기 따로 정리를 해 -->
-
-# Chapter 3 Code
+# Code
 
 
 ## Referrence
