@@ -49,6 +49,18 @@ CF는 Implicit feedback에 적합하게 만들어 졌고
 
 ***
 
+<details>
+<summary> Implicit vs Explicit </summary>
+<div markdown="1">
+
+Explicit feedback은 데이터가 가지고 있는 값이 우리가 사용해야할 데이터와 일치할때 사용된다  
+예를 들어, 이 예제와같이 음악추천 시스템을 만들때 유저가 듣는 음악에 대해 평점을 매긴다면 그 평점에 대한 데이터를 사용하면 Explicit feedback이 된다.  
+
+예제에서 사용하고 있는 데이터는 단순히 조회수로만 카운팅하며 이럴 경우 많은 bias나 오차가 생길수 있다. (틀어놓고 딴짓한다던가.. 기타등등) 이런 데이터를 이용하는것을 Implicit feedback이라고 한다. Implicit은 Explicit에 비해 사용하기 힘들지만 큰 데이터를 모을수 있는 장점이 있다.
+
+</div>
+</details>
+
 # Prvious work
 
 **기존 연구들은 크게 Neighborhood models와  Latent factor models 2가지로 나뉜다.**

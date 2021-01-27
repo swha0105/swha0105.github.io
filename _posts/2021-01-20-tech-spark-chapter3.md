@@ -37,26 +37,17 @@ Auhdioscrobbler에서 만든 데이터 셋이고 https://www.last.fm/ 에 추천
 # Code
 
 
-## Referrence
+**Referrence**
 - ALS 알고리즘 설명 : https://ggoals.github.io/Spark_ALS_Algorithm_tuning/
 - Towards data science : https://towardsdatascience.com/build-recommendation-system-with-pyspark-using-alternating-least-squares-als-matrix-factorisation-ebe1ad2e7679
 - Spark tutorial : https://spark.apache.org/docs/latest/ml-collaborative-filtering.html
 - 코드 원본 : https://github.com/dream2globe/advanced-spark
 
-## Download data
 
 
 ```python
 !wget https://storage.googleapis.com/aas-data-sets/profiledata_06-May-2005.tar.gz
 !tar xvf ./data/profiledata_06-May-2005.tar.gz
-
-
-# 실행결과
-profiledata_06-May-2005/
-profiledata_06-May-2005/artist_data.txt
-profiledata_06-May-2005/README.txt
-profiledata_06-May-2005/user_artist_data.txt
-profiledata_06-May-2005/artist_alias.txt
 
 ```
        
@@ -85,10 +76,7 @@ EXECUTOR_CORES = 2
 EXECUTORE_INSTANCES = 3
 DRIVER_MEMORY = "1g"
 DRIVER_MAX_RESULT_SIZE = "1g"
-```
 
-
-```python
 spark = (
     SparkSession.builder.appName(f"Advanced analytics with SPARK - Chapter 3")
     .config("spark.executor.memory", EXECUTOR_MEMORY)
@@ -105,8 +93,6 @@ spark = (
 ```
 
 ---
-
-Spark 기본 설정을 해주는 코드.  
 
 <details>
 <summary> 실행결과 </summary>
@@ -135,8 +121,12 @@ Spark 기본 설정을 해주는 코드.
 ('spark.ui.showConsoleProgress', 'true')]  
 
 </div>
-</details>    
+</details> 
 
+<br/>
+
+
+Spark 기본 설정을 해주는 코드.  
 
 Executor_instance: = --num-executor와 같음  executor의 갯수 설정  
 Executor_cores: 각 executor가 사용하는 thread의 갯수
@@ -147,22 +137,6 @@ Executor_cores: 각 executor가 사용하는 thread의 갯수
 
 
 ## Load dataset and Preprocessing
-
----
-
-### Data summary   
-
-#### user_artist_data.txt   
-- User가 어떤 artist들을 몇번 play했는지 기록한 data
-- 3 columns: userid artistid playcount
-
-
-#### artist_data.txt
-- Artist와 번호를 대응시켜 저장
-
-#### artist_alias.txt
-- 2 columns: badid, goodid
-- 한 artist가 여러이름으로 저장되어있음, 이름에 대한 테크
 
 ---
 
@@ -230,11 +204,8 @@ Executor_cores: 각 executor가 사용하는 thread의 갯수
 <br/>
 
 ---
+**data load 및 schema생성**
 
-
-### Data를 읽고 Schema에 load하는 부분
-
-#### user_artist_data.txt   
 ```python
 user_artist_schema = T.StructType([
     T.StructField("userid", T.IntegerType(), True),
@@ -252,10 +223,7 @@ user_artist_df = (
 )
 
 user_artist_df.show(5)
-```
-#### artist_data
 
-```python
 artist_schema = T.StructType([
     T.StructField("artistid", T.IntegerType(), True),
     T.StructField("artistname", T.StringType(), True),
@@ -271,11 +239,7 @@ artist_df = (
 )
 
 artist_df.show(5, False)
-```
 
-### artist_alias
-
-```python
 artist_alias_schema = T.StructType([
     T.StructField("badid", T.IntegerType(), True),
     T.StructField("goodid", T.IntegerType(), True),
@@ -294,12 +258,13 @@ artist_alias_df.show(5, False)
 ```
 ---
 
+- Schema를 만든 다음에 data를 load하는 습관.
 - option("header"): data의 첫 row가 header경우 True로 반환한다.  
 - option("sep"): data끼리의 간격을 지정한다. 이 경우 Space  
 
 ---
 
-### 읽은 데이터들을 병합하는 부분
+**읽은 데이터들을 병합하는 부분**
 
 ```python
 new_user_artist_df = (
@@ -309,20 +274,11 @@ new_user_artist_df = (
     .where(F.col("badid").isNotNull())
     .cache()
 )
-```
 
----
-
-- user_artist_df 데이터에 artist_alias_df를 붙이는데, user_artist_df의 artistid가 alias에 등록되어있는 badid와 같을때, left join을 한다.
-- user_artist_df의 artistid 필드를 artist_df를 참조하여 badid를 goodid로 교체
-- broadcase 함수 적용
-- cache 함수를 적용하면 Storage 탭에서 메모리 사용량을 알 수 있음
-
----
-
-```python
 new_user_artist_df.show()
+
 ```
+
 <details>
 <summary> 데이터 구조 </summary>
 <div markdown="1">   
@@ -357,6 +313,34 @@ new_user_artist_df.show()
 </details>    
 
 
+---
+
+
+- withColumn("artist")(F.when..)
+    > "artist" column을 대체 한다.   
+    F.col("badid").isNull() 만족하면,  F.col("artistid")로 대체, F.col("badid").isNull() 이 아니면 F.col("goodid")
+- cache 함수를 적용하면 Storage 탭에서 메모리 사용량을 알 수 있음
+
+<br/>
+
+<details>
+<summary> Join의 종류 </summary>
+<div markdown="1">
+Spark에는 여러 join의 형태가 있다. 그 중 일부만 정리했다.
+1. Inner join: 두 데이터에 공통적으로 존재하지 않으면 지우고 condition을 만족하는것만 return (default)
+2. Left join: left에 있는 모든 데이터를 기준으로, right 데이터들이 condition을 만족하면 값을 이어 붙이고 만족하지 못하면 null 을 붙임.  
+3. right join: right에 있는 모든 데이터를 기준으로, left 데이터들이 condition을 만족하면 값을 이어 붙이고 만족하지 못하면 null 을 붙임. 
+4. outer join: 양쪽 데이터를 condition에 관계없이 다 붙인다.
+
+|![join 종류](https://commons.wikimedia.org/wiki/File:SQL_Joins.svg)   
+|:--:| 
+| 출처: https://commons.wikimedia.org/wiki/File:SQL_Joins.svg |
+
+</div>
+</details>
+
+
+
 <br>
 
 ---
@@ -379,28 +363,10 @@ als = ALS(seed=42,
 
 (train, test) = new_user_artist_df.randomSplit([0.8, 0.2])
 als_model = als.fit(new_user_artist_df)
-```
 
---- 
-ALS 모델 (링크)  
-
-
-### Implicit vs Explicit 
-
-Explicit feedback은 데이터가 가지고 있는 값이 우리가 사용해야할 데이터와 일치할때 사용된다  
-예를 들어, 이 예제와같이 음악추천 시스템을 만들때 유저가 듣는 음악에 대해 평점을 매긴다면 그 평점에 대한 데이터를 사용하면 Explicit feedback이 된다.  
-
-예제에서 사용하고 있는 데이터는 단순히 조회수로만 카운팅하며 이럴 경우 많은 bias나 오차가 생길수 있다. (틀어놓고 딴짓한다던가.. 기타등등) 이런 데이터를 이용하는것을 Implicit feedback이라고 한다. Implicit은 Explicit에 비해 사용하기 힘들지만 큰 데이터를 모을수 있는 장점이 있다.
-
-
----
-
-```python
 predictions = als_model.transform(test)
 evaluator = RegressionEvaluator(metricName="rmse", labelCol="playcount", predictionCol="prediction")
 rmse = evaluator.evaluate(predictions)
-
-    
 
 # Generate top 10 movie recommendations for each user
 userRecs = als_model.recommendForAllUsers(10)
