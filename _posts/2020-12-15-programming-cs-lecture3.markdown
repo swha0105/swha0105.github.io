@@ -111,10 +111,12 @@ else:
 
 <details>
 <summary>TMI: 현대 응용수학과 근사법 </summary>
+<div markdown="1">   
 
 대학원생때 ~~신물나게~~ 했던 프로젝트 중 유한차분법 (FDM, Finite difference Method)의 한 방법인 WENO(Weighted Essentially Non-Oscillatory)를 사용해서 충격파, 플라즈마 불안정성과 같은 비선형적인 물리현상을 묘사하는 일이 있었다.  
 이런 WENO를 포함한 현대 계산수학과 계산물리에 최전선에 사용되고 있는 응용수학 방법들도 모두 근사방법을 따른다. 해석학적인 해가 없는 비선형적 모델을 푸는 최적의 방법이 수많은 iteration을 통한 근사방법이다.
 
+</div>
 </details>
 
 <br/>

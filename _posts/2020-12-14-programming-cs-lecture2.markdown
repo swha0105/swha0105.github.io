@@ -23,16 +23,18 @@ comments: true
     
     <details> 
     <summary>example</summary>
-    s = "hello"  <br />  <br />  
+    <div markdown="1">   
+
+    s = "hello"    <br />  
     
     try 1: s[0] = 'y'   ⇒  string인 s를 바꾸려고 접근  
     TypeError: 'str' object does not support item assignment 
     <br />  
     try 2: s = 'y' +s[1:len(s)]  ⇒ 기존 s와 "hello" 의 바인딩을 버리고 새로운 객체를 생성해서 바인딩  
-    No error   <br />  
-
     
     ![schematic](https://swha0105.github.io/assets/intro_cs/image/lec_2_Untitled.png)
+
+   </div>
     </details>
 
 
@@ -43,10 +45,12 @@ comments: true
 
         <details> 
         <summary> TMI: Python2 문법</summary>  
-        Python2에서는 ` '4' < 3` 의 결과는 `False`  였다.   <br />  
-        Python3에서는 위와같은 표현은 `TypeError` 가 나오며 앞선 강의에서 나온 Static semantic이 틀렸다고 할 수 있다. 
+         <div markdown="1">   
 
+        Python2에서는  `'4' < 3` 의 결과는 `False`  였다.  Python3에서는 위와같은 표현은 `TypeError` 가 나오며 앞선 강의에서 나온 Static semantic이 틀렸다고 할 수 있다. 
         교과서에 말하기를 이러한 애매한 문법, 즉 Semantics가 좋지 않은 표현들은 현대 컴퓨터 언어에서 퇴출되고 있는 추세라고 한다.
+
+         </div>
         </details>
 
 ---

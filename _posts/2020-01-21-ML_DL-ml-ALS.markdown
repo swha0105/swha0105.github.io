@@ -87,9 +87,9 @@ CF는 Implicit feedback에 적합하게 만들어 졌고
 
 
 ## Latent factor models
-- 관찰된 rating을 설명하는 Latent factor를 발견하기 위해 전반적인 접근을 하는 모델 ~~먼말인지 모르겠다~~    
+- 관찰된 rating을 설명하는 Latent factor를 발견하기 위해 전반적인 접근을 하는 모델 
 - user-item observation matrix를 SVD시킴.  
-~~이 논문에선 너무 짧게 설명 되어있다. 시간나면 여기 부분 다시 공부~~
+- 여기서 소개 하는 모델도 이 방법을 따름. (아래 설명..)
 
 <br/> 
 
