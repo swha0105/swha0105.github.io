@@ -1,19 +1,24 @@
 ---
 layout: post
-title:  "[ML Algorithms] Paper review - ALS"
+title:  "[ML Paper review] Collaborative Filtering for Implicit Feedback Datasets (ALS)"
 subtitle:   "Alteranting Least Squares 추천 알고리즘."
 categories: ml_dl
 tags: ml
 comments: true
 ---
 
+
 <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
 
-# Collaborative Filtering for Implicit Feedback Datasets
 
-이 논문은 추천시스템을 소개하는 논문이고 ALS(Alternating Least Square)에 대해 처음 소개한 논문으로 알고있다. 
+
+
+**들어가기전..**
+
+<br/>
+이 논문은 추천시스템을 소개하는 논문이고 ALS(Alternating Least Square)에 대해 처음 소개한 논문으로 알고있다. Spark공부하면서 ALS 추천시스템 실습이 있었기에에 관련 논문 찾아보고 정리한 내용이다.
 
 <br/>
 
@@ -177,3 +182,4 @@ $$Y^{T}(C^{u}-1)Y$$ 값에 대해서는 $$C^{u}-1$$은 user가 선호하는 즉,
 ### Ref
 1. [논문 링크](https://swha0105.github.io/assets/ml/paper/Collaborative_Filtering_for_Implicit_Feedback_Datasets.pdf)       
 2. 논문만으로는 전부를 이해하지 못해 이 [블로그](https://yamalab.tistory.com/89)를 참조하였다.
+
