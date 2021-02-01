@@ -7,10 +7,29 @@ tags: ml
 comments: true
 ---
 
-<script type="text/javascript" id="MathJax-script" async
+<!-- <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script> -->
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 </script>
 
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
 
 # Label spreading 요약
 
@@ -30,7 +49,7 @@ comments: true
 이게 무슨말인가?? 라고 생각들면 당연한거다. 천천히 아래 수식을 따라가보자. 
 
 ## Preparation
-데이터 셋 (Data set) $$X = [ x_{1},x_{2},...x_{l},x_{l+1},...,x_{n} ]$$ 안에   
+데이터 셋 (Data set) $$ X = [x_{1},x_{2},...x_{l},x_{l+1},...,x_{n} ]$$ 안에   
 $$x_{L} $$  $$(1 \leq L \leq l)$$ 레이블 존재하는 지점의 데이터 즉, Labeled data point 와  
 $$x_{U} $$ $$(l+1 \leq U \leq n)$$ 레이블 존재하지 않는 지점의 데이터, Unlabeled data point 가 있다고 가정하자.
 

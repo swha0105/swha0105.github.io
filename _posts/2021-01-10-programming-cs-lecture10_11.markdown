@@ -11,6 +11,9 @@ comments: true
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
 
+
+
+
 # 10 & 11. Understanding Program Efficiency
 - Estimation of algorithm efficiency
 - Big-O notation

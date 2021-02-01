@@ -7,18 +7,35 @@ tags: ml
 comments: true
 ---
 
-
-<script type="text/javascript" id="MathJax-script" async
+<!-- <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script> -->
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 </script>
 
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
 
 
 
 **들어가기전..**
 
 <br/>
-이 논문은 추천시스템을 소개하는 논문이고 ALS(Alternating Least Square)에 대해 처음 소개한 논문으로 알고있다. Spark공부하면서 ALS 추천시스템 실습이 있었기에에 관련 논문 찾아보고 정리한 내용이다.
+
+[이 논문은](https://swha0105.github.io/assets/ml/paper/Collaborative_Filtering_for_Implicit_Feedback_Datasets.pdf) 추천시스템을 소개하는 논문이고 ALS(Alternating Least Square)에 대해 처음 소개한 논문으로 알고있다. Spark공부하면서 ALS 추천시스템 실습이 있었기에에 관련 논문 찾아보고 정리한 내용이다.
 
 <br/>
 
