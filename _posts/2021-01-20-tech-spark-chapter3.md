@@ -7,7 +7,6 @@ tags: spark
 comments: true
 ---
 
-# Chapter 3
 Chapter 3 제목은 `음악 추천과 Audioscrobbler 데이터셋`이다.  
 음악 감상 데이터셋을 받아 추천 알고리즘을 사용하여 특정 유저에 대한 추천 아티스트들을 보여주는 실습이다. ~~그냥 유튜브 생각하면 쉽다~~
 
