@@ -7,13 +7,10 @@ tags: ml
 comments: true
 ---
 
-<!-- <script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script> -->
-
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 </script>
+
 
 <script>
 MathJax = {
@@ -28,7 +25,6 @@ MathJax = {
 <script type="text/javascript" id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
-
 
 
 **들어가기전..**
@@ -110,7 +106,7 @@ Explicit feedback은 데이터가 가지고 있는 값이 우리가 사용해야
     이때, Item j들은 이미 알고 있다. ($$S^{k}$$ 집합에 속한다)  
 
     $$ 
-    r_{ui} = \frac{ \sum_{j \subset S^{k} (i;u)} s_{ij}r_{uj}  }{\Sigma_{j \subset S^{k} (i;u)} s_{ij} } 
+    r_{ui} = \frac{ \sum_{j \subset S^{k} (i;u)} s_{ij}r_{uj}  }{\sum_{j \subset S^{k} (i;u)} s_{ij} } 
     $$    
 
     >$$r_{ui}$$ 는 User u와 Item i에 대한 연관성  
