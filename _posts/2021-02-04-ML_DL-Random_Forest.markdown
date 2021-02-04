@@ -6,7 +6,8 @@ categories: ml_dl
 tags: ml
 comments: true
 ---
-# 들어가기 전 
+
+**들어가기전..**
 
 Recision Tree와 Random forest에 대해 알고 있는것들을 구체적으로 정리하기 위해 포스팅을 한다.  
 Review paper나 책을 찾아보았지만 깔끔하게 정리된것을 못찾아서 발품(?)팔아서 여기저기 찾으며 혼자 정리 해보았다.  
@@ -41,7 +42,7 @@ $$ 균일한 = \begin{cases} 비슷한 \; 범주 \quad (분류 문제) \\ 비슷
 **`Intermediate node`**(중간 마디): Branch가 생기는 마디. 데이터가 이 노드를 통과할때 마다 최소 2개 이상의 집합으로 분류가 된다.   
 **`Terminal node`**(끝 마디): Branch가 더이상 생기지 않고 끝나는 마디.
 
-[decision tree](https://swha0105.github.io/assets/ml/img/DecisionTree.JPG)  
+![decision tree](https://swha0105.github.io/assets/ml/img/DecisionTree.JPG)  
 
 <br/>
 
