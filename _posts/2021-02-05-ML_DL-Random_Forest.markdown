@@ -37,7 +37,9 @@ Random forest는 예전에 하드코딩도 해보았고 사용하면서 알고�
    1. base 모델들이 서로 독립적
    2. base 모델이 최소한의 성능을 가져야함. (무작위 이상)
 
-![Error rate](https://swha0105.github.io/assets/ml/img/RF_error_rate.JPG) 
+    <p float="center">
+        <img src="https://swha0105.github.io/assets/ml/img/RF_error_rate.JPG" width="300"/> 
+    </p>
 
 
 ### 장점 
