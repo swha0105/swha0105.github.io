@@ -30,12 +30,15 @@ Random forest는 예전에 하드코딩도 해보았고 사용하면서 알고�
 
 ### 앙상블
 
-앙상블이란 여러 트리들을 한번에 묶는 개념이고 이때 트리들을 base model이라고 한다.   
-Decision tree를 앙상블로 구성하면 랜덤포레스트가 된다.  
-이때 랜덤포레스트가 단일 decision tree보다 더 좋은 성능을 보이러면 base model의 조건이 있다. 
+- 앙상블이란 여러 모델들을 사용하여 결과를 도출하는 개념이다.  
+- Random Forest는 Decision tree를 base model로 앙상블을 구성한다.
+- 앙상블의 결과가 단일 Base model의 결과보다 좋기 위해 base model이 가져야할 조건은 다음과 같다. 
 
-- base 모델들이 서로 독립적
-- base 모델이 최소한의 성능을 가져야함. (무작위 이상)
+   1. base 모델들이 서로 독립적
+   2. base 모델이 최소한의 성능을 가져야함. (무작위 이상)
+
+![Error rate](https://swha0105.github.io/assets/ml/img/RF_error_rate.JPG) 
+
 
 ### 장점 
 
@@ -43,13 +46,13 @@ Decision tree를 앙상블로 구성하면 랜덤포레스트가 된다.
 - Non parametric model, 즉 비모수적 모델이다. 사전에 데이터 분포에 대한 가정이 필요없다. (보통 많은 모델들은 gaussian distribution을 가정한다. )
 
 
-### 성능 향상
+## 성능 향상
 
-**1. Diversity를 확보**  
+**<U> 1. Diversity를 확보 </U>**  
 
    - **Bagging**: 여러개의 Traning data set를 생성하여 각 데이터셋 마다 개별 Decision tree를 생성한다.   
 
-**2. Random의 성질을 확보**  
+**<U> 2. Random의 성질을 확보 </U>**  
 
    - **Random subspace** : Decision tree 구축 시 모든 feature를 사용하지 않고 무작위로 몇개만 선택하여 모델 학습.
 
@@ -61,54 +64,45 @@ Decision tree를 앙상블로 구성하면 랜덤포레스트가 된다.
 
 ## Bagging (Bootstrap + AGGregatING): 
 
-
 ### Bootstrapping (샘플링 기법)
 - **복원 추출**, 이때 원래 데이터 수만큼 샘플링을 한다.
 - 이를 통해 만든 데이터 셋을 **Bootstrapping set** 이라 한다
 - 복원 추출을 원래 데이터 수만큼 샘플링 하였기 때문에 데이터가 중복 될 수 있음. 
 
-### Aggregating  .
-
+### Aggregating.
 - Aggregating은 어떤 것을 합치고 모은다는 개념.
-- Aggregating에는 여러 방법이 존재.
+- 각 트리가 예측한 결과를 취합하여 다수결 혹은 평균값으로 Random forest값 결정. **(Voting)**
 
-<br/>
-
-# 아직 작성중
-
-<br/>
-
-#### Major voting 
+**<U>1. Major voting</U>**
 
 $$ Ensemble(\hat{y}) =  \underset{i}{argmax} ( \sum_{j=1}{n} I (\hat{y_{j}} = i), i \in {0,1} )$$
 
-=> 앙상블에 있는 트리들이 0,1 중 많은 쪽으로
+   - 각 트리 예측한 Label들중 많은 쪽으로 Voting
 
-이러면 트레이닝 accuracy 고려안함. ㅎ트리에 대한 확신이 없는 상태. 
-
-#### Weighted voting 
+**<U>2. Weighted voting</U>**
 
 $$ Ensemble(\hat{y}) =  \underset{i}{argmax} \frac{ \sum_{j=1}{n} (TrainAcc_{j}) I (\hat{y_{j}} = i)}{\sum_{j=1}{n} (TrainAcc_{j})}  , i \in {0,1} )$$
 
-#### Pridicted probaility Weighted voting
+- 각 트리의 Training Accuracy를 고려하여 Voting
+
+**<U>3. Pridicted probaility Weighted voting</U>**
 
 $$ Ensemble(\hat{y}) =  \underset{i}{argmax} ( \frac{1}{n} \sum_{j=1}{n} P(y=i) , i \in {0,1} )$$
 
--> 확률은 노드에 대한 조건부 확률 인듯. 
-
+- 각 트리에 대해서 모든 Label에 대해 정확히 분류한 비율을 확률로 계산하여 높은 쪽으로 트리가 Voting.  
 
 <br/>
 
 # 랜덤포레스트 평가
 
-랜덤포레스트 특성. 
+- 각각의 개별 tree는 overfitting 될 수 있음.
+- Tree 수가 충분히 많을 때, error 의 upper bound인 **generalization error**를 계산 할 수 있음.  
+  > generalization error < $$\frac{\bar{\rho} ( 1 - s^2)}{s^2}$$  
+  > $$\bar{\rho}$$: Decision Tree 사이의 평균 상관관계  
+  > s: 올바로 예측한 tree와 잘못 예측한 tree수 차이의 평균.
 
-tree수가 충분히 많을때 
-
-generalization error < \fracP\bar{\rho} ( 1 - s^2)}{s^2}
-
-rho: decision tree 사이의 평균 상관관계  -> 독립
-s: 올바로 예측한 tree와 잘못 예측한 tree수 차이의 평균 -> 개별 tree
+$$\bar{\rho}$$: base model인 decision tree끼리는 서로 독립적이야 한다는 전제조건.  
+s: base model인 decision tree에 대해 최소한의 성능은 나와야 된다는 전제조건
 
 
 변수의 중요성
