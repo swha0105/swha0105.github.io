@@ -1237,8 +1237,6 @@ validated_model.bestModel.stages[2].extractParamMap()
 </details> 
 
 
-## 
-
 <br/>
 
 ```python
