@@ -112,9 +112,12 @@ else:
 
 <details>
 <summary>TMI: Epsilon-delta 증명 </summary>
+<div markdown="1">   
     
 
 자연대/공대생이라면 학부 1학년때 배우는 미적분학에서 Epsilon-delta증명을 배웠을것이다. 그 증명의 개념을 활용해 이 예제에서 epsilon을 극한을 이용해 무한소로 보내면 ans가 5에 일치 하다는걸 알 수 있다. 이 Approximation solution도 똑같은 개념이지만 컴퓨터에서 극한을 이용해 무한소로 보내면 무한루프가 돌것이기 때문에 어느정도 Tolerance 범위 안에서 찾게 한다.
+
+</div>
 </details>
 
 <br/>

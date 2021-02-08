@@ -124,10 +124,14 @@ comments: true
 
 <details>    
 <summary> TMI: list와 시간복잡도. </summary>
+<div markdown="1">   
+
 
 코딩을 하다보면 list의 요소들을 제거해줘야되는 연산을 많이 하게 될 것이다. list는 기본적으로 stack의 구조를 (LIFO) 따라 pop을 하게 될 경우 가장 마지막 요소가 빠지게 되고 시간 복잡도는 O(1)이게 된다. 하지만 가장 처음에 들어온 요소를 제거 하기 위한 pop(0), pop(1)과 같은 연산들은 O(N)의 시간복잡도를 가지고 이럴 경우 굉장히 비효율적인 연산이 된다.
 
 이러한 연산이 필요한 경우 list가 아닌 파이썬의 built-in 모듈 collections의 deque를 사용하여 popleft, appendleft와 같은 연산을 활용하자. 
+
+</div>
 </details>
 
 <br/>

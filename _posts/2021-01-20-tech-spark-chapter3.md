@@ -10,7 +10,7 @@ comments: true
 Chapter 3 제목은 `음악 추천과 Audioscrobbler 데이터셋`이다.  
 음악 감상 데이터셋을 받아 추천 알고리즘을 사용하여 특정 유저에 대한 추천 아티스트들을 보여주는 실습이다. ~~그냥 유튜브 생각하면 쉽다~~
 
-여기서 사용된 추천 알고리즘은 ALS(Alternating Least Square)이고 관련된 자세한 내용은 [여기](https://swha0105.github.io/projects/2021/01/27/ML_DL-ml-ALS/) 정리 해놓았다.
+여기서 사용된 추천 알고리즘은 ALS(Alternating Least Square)이고 관련된 자세한 내용은 [여기](https://swha0105.github.io/_posts/2021-01-27-ML_DL-ml-ALS.markdown) 정리 해놓았다.
 
 <br/>
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Spark] About Spark"
+title:  "[모두연 스터디 Spark] About Spark"
 subtitle:   "분산 처리 클러스터와 Spark의 기본 개념 "
 categories: tech
 tags: spark

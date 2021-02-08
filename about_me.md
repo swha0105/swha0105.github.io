@@ -4,22 +4,21 @@ title: About Me
 menu: true
 order: 1
 ---
-물리학을 전공했고 코드 개발을 7년정도 하고 있는 꿈나무 개발자 입니다.
+물리학을 전공한 꿈나무 개발자 입니다.
 
 수학과 머신러닝에 관심이 있고 새로운 기술에 대해 호기심이 많습니다.  
+공부한 내용을 체계적으로 정리하고 싶어 블로그를 시작하였고 특히 수학적으로 잘 정리된 내용을 찾을 수가 없어 느리지만 수학 위주로 이해하고 글을 쓰고있습니다.
+
 세상에 존재하는 수많은 데이터에 숨어있는 진리를 찾아내 사람들에게 도움이 되고 사회에 긍정적인 일을 하는게 꿈인 프로그래머 입니다.
 
 새로운 사람을 만나고 색다른 경험을 하는게 삶의 원동력 입니다.  
 클래식 부터 인디까지 음악을 사랑하고 맥주랑 위스키 러버입니다.
 
 <br/>
-<br/>
-<br/>
 
-###  My CV is here ↓
---- 
-
-
+<details>    
+<summary> <b> Curriculum Vitae </b> </summary>
+<div markdown="1">   
 
 <br/>
 
@@ -184,3 +183,5 @@ Specific works: Developed RMHD (Relativistic MHD)  shock code and parallelizatio
 <br/>
 
 
+</div>
+</details>
