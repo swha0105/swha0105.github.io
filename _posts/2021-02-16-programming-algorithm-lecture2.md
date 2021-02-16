@@ -82,17 +82,11 @@ D1 = "The cat" , D2 = "The dog" 일때 가장 기본적인 Idea는 다음과 같
 
 $$d(D1,D2) = \arccos(\frac{D_{1} \cdot D_{2}}{|D1||D2|})$$
 
-이 Idea는 매우 naive하고 누구나 생각 할 수 있지만 모든 Word에 대해 공간을 Span하는게 굉장히 비현실적이다. 만약 서로 다른 word들이 100개가 있다면 100차원의 matrix를 구성해야 할 것이고 메모리는 물론이고 계산시간이 실용적이지 않을것이다.  
-따라서 이 강의에서는 문서간의 거리를 계산하는 다양한 알고리즘을 소개한다. ~~Homework로 알려줌~~
 
-<!-- ### Algorithm
-
-1. Split each document into words
-2. count word frequencies (document vectors)
-3. compute dot product  -->
 
 ## Solving methods
 
+강의에서는 위와 같은 Idea를 구현하는 여러 방법을 소개하였다.  
 각 방법에 대해 1 메가 바이트 정도되는 문서 두개 비교할때 걸리는 시간을 측정하였다.   
 
 
