@@ -96,105 +96,67 @@ $$d(D1,D2) = \arccos(\frac{D_{1} \dot D_{2}}{|D1||D2|})$$
 
 
 ### Method 1. 위에서 언급된 방법. 문서를 두 벡터로 표현하고 각도를 계산 
-
+[Code link]() 228.1(s)
 1. split the text lines into words
 2. count frequency of each word
 3. sort words into alphabetic order
 4. Inner product & Get angle
 
-[Code link]() 228.1
+### Method 1.1 List extend 사용
+ 
+Method 1 코드의 **문서에 존재하는 word들을 list로 리턴하는 부분** 을 다음과 같이 바꾸었다. 
 
-여기서 문서에 존재하는 word들을 list로 리턴하는 부분 
+word_list = word_list + words_in_line (변경전)  
+word_list.extend(words_in_line)  (변경후)  
 
-word_list = word_list + words_in_line ⇒ word_list.extend(words_in_line)
+변경 후 164.7(s)가 걸린다. [Code link]()
 
-하면 164.7 초. 
+<details>    
+<summary> list의 append와 extend </summary>
+<div markdown="1">   
 
-1. Python의 re 모듈을 사용해 일치되는 모든 word를 찾은 뒤,  각각을 itertaion한다. 
+![Computer & Mathematics](https://swha0105.github.io/assets/intro_algorithm/image/lec2_3.png)  
 
-    Time complexity: O(c^n)  **쓰지 말라고 강조  (228.1)**
+[출처](https://m.blog.naver.com/wideeyed/221541104629)
 
-    - Pseudo code
+</div>
+</details>
 
-        ```python
-        import re 
-        re.findall (r“ w+”, doc)
+### Method 2. Method 1을 Dictionary로 구현. 
 
-        for char in doc:
-        	if not alphanumeric
-        		add previous word
-        			(if any) to list
-        	  start new word
-        ```
+알고리즘은 Method 1과 동일하다.  
+Dictionary를 구성하여 단어와 빈도수를 `key`와 `value`로 구성한다.  
 
-    Lecture code link
+[code link]() 71.7(s)
 
-     
+~~ 왜 빠른지는 좀 더 알아봐야한다~~
 
-2. Word들을 sorting하여 총 몇개가 일치하는지 계산.
+### Method 2.1 String 내장 함수
 
-    Time complexity: O( k * log k)  + O(k) , k is number of words  (164.7)
+Method 2의 대문자를 소문자로 바꾸는 함수에서 string class의 method인 `**maketrans**` `**translate**`를 사용하였다.
+위와같은 method를 사용하면 string을 쉽게 치환을 할 수 있다.
 
-    - Pseudo code
+[code link]() 18.3(s)
 
-        ```python
-        sort word list
+### Method 2.2 Merge sort
 
-        for word in list:
-        	if same as last word: 
-        		increment counter
-        	else: 
-        		add last word and count to list 
-        		reset counter to 0
-        ```
+Method 2.1에 대해 insert sort대신 **merge sort**를 사용하였다. (다음 강의 주제)
 
-    Lecture code link
+[code link]() 11.5(s)
 
-3. doc1의 모든 word을 iteration할때 python의 in 기능을 활용하여 doc2에 일치하는 word가 있는지 확인한다.
+### Method 2.3 Treat whole file as a single "line"
 
-    Time complexity: O(k1 * k2), k1 is number of words in doc1 (123.1)
+지금까지는 line by line으로 word들을 분석하였지만 이 방법은 문서를 통째로 한 line으로 인식한다.
 
-    - Pseudo code
-
-        ```python
-        for word, count1 in doc1:
-        	if word, count2 in doc2: 
-        		total += count1 * count2
-        ```
-
-    Lecture code link
-
-4. e  71.7
-5. e 18.3
-6. e 11.5
-7. e 1.8
-8. e 0.2
-
-LSA 와 비슷.!! 
-
-model of computation
-
-- specifies
-- what operation an algorithms is allowed
-
-2 programming style 
-
-2 model of computations
-
-Random Access Machine (≠ Random Access memory)
-
-Pointer Machine
-
- Random Access memory (giant array and constant access time whether point location is  )
-
-len(L) is built-in function
+[code link]() 0.2(s)
 
 
-## 
+**Method 1** 과 **Method 2.3**은 약 1000배 차이가 난다.  
+이렇듯 같은 알고리즘을 구현하는 데도 있어 효율을 생각하며 코딩을 해야한다..
 
-ref 
+#### ref 
 
-[https://medium.com/@rabin_gaire/models-of-computation-document-distance-7be4a9850067](https://medium.com/@rabin_gaire/models-of-computation-document-distance-7be4a9850067)
+[1.](https://medium.com/@rabin_gaire/models-of-computation-document-distance-7be4a9850067)
 
 
 
