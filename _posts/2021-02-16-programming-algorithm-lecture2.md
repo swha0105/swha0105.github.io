@@ -79,7 +79,8 @@ comments: true
 
 D1 = "The cat" , D2 = "The dog" 일때 가장 기본적인 Idea는 다음과 같다.   
 **모든 Word에 대한 공간을 Span하고 공간상 두 벡터의 각도를 계산한다.**
-$$d(D1,D2) = \arccos(\frac{D_{1} \dot D_{2}}{|D1||D2|})$$
+
+$$d(D1,D2) = \arccos(\frac{D_{1} \cdot D_{2}}{|D1||D2|})$$
 
 이 Idea는 매우 naive하고 누구나 생각 할 수 있지만 모든 Word에 대해 공간을 Span하는게 굉장히 비현실적이다. 만약 서로 다른 word들이 100개가 있다면 100차원의 matrix를 구성해야 할 것이고 메모리는 물론이고 계산시간이 실용적이지 않을것이다.  
 따라서 이 강의에서는 문서간의 거리를 계산하는 다양한 알고리즘을 소개한다. ~~Homework로 알려줌~~
@@ -96,7 +97,7 @@ $$d(D1,D2) = \arccos(\frac{D_{1} \dot D_{2}}{|D1||D2|})$$
 
 
 ### Method 1. 위에서 언급된 방법. 문서를 두 벡터로 표현하고 각도를 계산 
-[Code link]() 228.1(s)
+[Code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist1.py)   228.1(s)
 1. split the text lines into words
 2. count frequency of each word
 3. sort words into alphabetic order
@@ -109,54 +110,59 @@ Method 1 코드의 **문서에 존재하는 word들을 list로 리턴하는 부�
 word_list = word_list + words_in_line (변경전)  
 word_list.extend(words_in_line)  (변경후)  
 
-변경 후 164.7(s)가 걸린다. [Code link]()
+ [Code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist2.py)   164.7(s)
 
 <details>    
 <summary> list의 append와 extend </summary>
 <div markdown="1">   
 
 ![Computer & Mathematics](https://swha0105.github.io/assets/intro_algorithm/image/lec2_3.png)  
+append는 x 그 자체를 원소로 넣고 extend는 iterable의 각 항목들을 넣음
 
 [출처](https://m.blog.naver.com/wideeyed/221541104629)
 
 </div>
 </details>
 
+<br/>
+
 ### Method 2. Method 1을 Dictionary로 구현. 
 
 알고리즘은 Method 1과 동일하다.  
 Dictionary를 구성하여 단어와 빈도수를 `key`와 `value`로 구성한다.  
 
-[code link]() 71.7(s)
+[code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist4.py) 71.7(s)
 
 ~~ 왜 빠른지는 좀 더 알아봐야한다~~
 
 ### Method 2.1 String 내장 함수
 
-Method 2의 대문자를 소문자로 바꾸는 함수에서 string class의 method인 `**maketrans**` `**translate**`를 사용하였다.
+Method 2의 대문자를 소문자로 바꾸는 함수에서 string class의 method인 **maketrans** **translate**를 사용하였다.
 위와같은 method를 사용하면 string을 쉽게 치환을 할 수 있다.
 
-[code link]() 18.3(s)
+[code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist5.py) 18.3(s)
 
 ### Method 2.2 Merge sort
 
 Method 2.1에 대해 insert sort대신 **merge sort**를 사용하였다. (다음 강의 주제)
 
-[code link]() 11.5(s)
+[code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist6.py) 11.5(s)
 
 ### Method 2.3 Treat whole file as a single "line"
 
 지금까지는 line by line으로 word들을 분석하였지만 이 방법은 문서를 통째로 한 line으로 인식한다.
 
-[code link]() 0.2(s)
+[code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist8.py) 0.2(s)
 
+<br/>
+<br/>
 
 **Method 1** 과 **Method 2.3**은 약 1000배 차이가 난다.  
 이렇듯 같은 알고리즘을 구현하는 데도 있어 효율을 생각하며 코딩을 해야한다..
 
 #### ref 
 
-[1.](https://medium.com/@rabin_gaire/models-of-computation-document-distance-7be4a9850067)
+[1. https://medium.com/@rabin_gaire/models-of-computation-document-distance-7be4a9850067](https://medium.com/@rabin_gaire/models-of-computation-document-distance-7be4a9850067)
 
 
 
