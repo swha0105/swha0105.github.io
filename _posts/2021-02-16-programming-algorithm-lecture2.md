@@ -98,17 +98,17 @@ $$d(D1,D2) = \arccos(\frac{D_{1} \cdot D_{2}}{|D1||D2|})$$
 
 ### Method 1. 위에서 언급된 방법. 문서를 두 벡터로 표현하고 각도를 계산 
 [Code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist1.py)   228.1(s)
-1. split the text lines into words
-2. count frequency of each word
-3. sort words into alphabetic order
-4. Inner product & Get angle
+> 1. split the text lines into words
+> 2. count frequency of each word
+> 3. sort words into alphabetic order
+> 4. Inner product & Get angle
 
 ### Method 1.1 List extend 사용
  
-Method 1 코드의 **문서에 존재하는 word들을 list로 리턴하는 부분** 을 다음과 같이 바꾸었다. 
+- Method 1 코드의 **문서에 존재하는 word들을 list로 리턴하는 부분** 을 다음과 같이 바꾸었다. 
 
-word_list = word_list + words_in_line (변경전)  
-word_list.extend(words_in_line)  (변경후)  
+> word_list = word_list + words_in_line (변경전)  
+> word_list.extend(words_in_line)  (변경후)  
 
  [Code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist2.py)   164.7(s)
 
@@ -129,28 +129,28 @@ append는 x 그 자체를 원소로 넣고 extend는 iterable의 각 항목들�
 ### Method 2. Method 1을 Dictionary로 구현. 
 
 알고리즘은 Method 1과 동일하다.  
-Dictionary를 구성하여 단어와 빈도수를 `key`와 `value`로 구성한다.  
+- Dictionary를 구성하여 단어와 빈도수를 `key`와 `value`로 구성한다.  
 
 [code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist4.py) 71.7(s)
 
-~~ 왜 빠른지는 좀 더 알아봐야한다~~
+hash 개념인거 같은데 왜 빠른지는 좀 더 알아봐야한다..
 
 ### Method 2.1 String 내장 함수
 
-Method 2의 대문자를 소문자로 바꾸는 함수에서 string class의 method인 **maketrans** **translate**를 사용하였다.
-위와같은 method를 사용하면 string을 쉽게 치환을 할 수 있다.
+- Method 2의 대문자를 소문자로 바꾸는 함수에서 string class의 method인 **maketrans** **translate**를 사용하였다.
+- 위와같은 method를 사용하면 string을 쉽게 치환을 할 수 있다.
 
 [code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist5.py) 18.3(s)
 
 ### Method 2.2 Merge sort
 
-Method 2.1에 대해 insert sort대신 **merge sort**를 사용하였다. (다음 강의 주제)
+- Method 2.1에 대해 insert sort대신 **merge sort**를 사용하였다. (다음 강의 주제)
 
 [code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist6.py) 11.5(s)
 
 ### Method 2.3 Treat whole file as a single "line"
 
-지금까지는 line by line으로 word들을 분석하였지만 이 방법은 문서를 통째로 한 line으로 인식한다.
+- 지금까지는 line by line으로 word들을 분석하였지만 이 방법은 문서를 통째로 한 line으로 인식한다.
 
 [code link](https://swha0105.github.io/assets/intro_algorithm/material/docdist8.py) 0.2(s)
 
