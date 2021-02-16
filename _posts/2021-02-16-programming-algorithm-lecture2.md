@@ -12,6 +12,10 @@ comments: true
 - Model of computation
 - Document distance
 
+<br/>
+
+---
+
 # Model of computation
 
 - Input에서 Output을 계산하는 일련의 과정과 그 cost를 시뮬레이션하는 **수학 모델**
@@ -24,36 +28,44 @@ comments: true
 
 ### **Computer ↔ Mathematics**
 
-![Lecture%202%20Models%20of%20Computation,%20Document%20Distance%20bbe38b0719234f0f83b59497a1da83dc/Untitled.png](Lecture%202%20Models%20of%20Computation,%20Document%20Distance%20bbe38b0719234f0f83b59497a1da83dc/Untitled.png)
 
-### Type of Model of computation
+![Computer & Mathematics](https://swha0105.github.io/assets/intro_algorithm/image/lec2_1.png)  
+
+
+## Type of Model of computation
 
 1. **Random Access Machine (RAM, ≠ Random Access Memory)**
     - Object들은 정렬된 메모리 Array에 위치해있다.
     - Memory에 접근하고 저장하는 시간과 Simple operation (+,=,*,/) 은 1 time step을 소비한다.
     - Instruction은 한번에 하나만 실행 될 수 있다.
+
 2. **Pointer Machine**
     - Object들은 Dynamically allocated 되어있다 (linked list, directed graph)
     - 연산을 할 수 없고 input을 읽을수만 있다.
     - Object들을 Pointer (Reference) 로 다룬다
 
-    ### **Python model**
+### **Python model**
 
-    - Python은 RAM과 Pointer Machine 개념이 모두 공존한다.
-    - Object들의 type과 연산에 따라 유용한 개념을 따라 사용된다.
+- Python은 RAM과 Pointer Machine 개념이 모두 공존한다.
+- Object들의 type과 연산에 따라 유용한 개념을 따라 사용된다.
 
-    1. List: (tuple.string)
-        - 기본적으로 RAM의 개념을 따른다.
+1. List: (tuple.string)
+    - 기본적으로 RAM의 개념을 따른다.
 
-            a. L[i] = L[j] + 5 ⇒ ( O(1) )
+        a. L[i] = L[j] + 5 ⇒ ( O(1) )
 
-            b. L = L1 + L2 (  O(L1) + O(L2) )
+        b. L = L1 + L2 (  O(L1) + O(L2) )
 
-        - Pointer Machine의 개념을 따르는 연산도 있다.
+    - Pointer Machine의 개념을 따르는 연산도 있다.
 
-            a. L.attribute()   ( O(1) ) 
+        a. L.attribute()   ( O(1) ) 
 
-    위의 개념들과 Dict, Heapq, Long에 대해서는 짧게 있다는것만 소개하고 넘어감. 강의 후반부에 다시 배운다고 언급됨.
+위의 개념들과 Dict, Heapq, Long에 대해서는 짧게 있다는것만 소개하고 넘어감. 강의 후반부에 다시 배운다고 언급됨.
+
+<br/>
+
+---
+
 
 # Document Distance problem
 
@@ -62,34 +74,35 @@ comments: true
 
 ### Idea
 
-![Lecture%202%20Models%20of%20Computation,%20Document%20Distance%20bbe38b0719234f0f83b59497a1da83dc/Untitled%201.png](Lecture%202%20Models%20of%20Computation,%20Document%20Distance%20bbe38b0719234f0f83b59497a1da83dc/Untitled%201.png)
+![Computer & Mathematics](https://swha0105.github.io/assets/intro_algorithm/image/lec2_2.png)  
 
-D1 = "The cat" , D2 = "The dog"
 
+D1 = "The cat" , D2 = "The dog" 일때 가장 기본적인 Idea는 다음과 같다.   
 **모든 Word에 대한 공간을 Span하고 공간상 두 벡터의 각도를 계산한다.**
+$$d(D1,D2) = \arccos(\frac{D_{1} \dot D_{2}}{|D1||D2|})$$
 
-d(D1,D2) = arccos(\frac{D_{1}D_{2}}{|D1||D2|}) 
+이 Idea는 매우 naive하고 누구나 생각 할 수 있지만 모든 Word에 대해 공간을 Span하는게 굉장히 비현실적이다. 만약 서로 다른 word들이 100개가 있다면 100차원의 matrix를 구성해야 할 것이고 메모리는 물론이고 계산시간이 실용적이지 않을것이다.  
+따라서 이 강의에서는 문서간의 거리를 계산하는 다양한 알고리즘을 소개한다. ~~Homework로 알려줌~~
 
-이 Idea는 매우 naive하고 누구나 생각 할 수 있지만 모든 Word에 대해 공간을 Span하는게 굉장히 비현실적이다. 만약 서로 다른 word들이 100개가 있다면 100차원의 matrix를 구성해야 할 것이고 메모리는 물론이고 계산시간이 실용적이지 않을것이다.
-
-### Algorithm
+<!-- ### Algorithm
 
 1. Split each document into words
 2. count word frequencies (document vectors)
-3. compute dot product 
+3. compute dot product  -->
 
-### Solving methods
+## Solving methods
 
-1 메가 바이트 정도되는 문서 두개 비교.
+각 방법에 대해 1 메가 바이트 정도되는 문서 두개 비교할때 걸리는 시간을 측정하였다.   
 
-Method 1. 위에서 언급된 방법. 문서를 두 벡터로 표현하고 각도를 계산
+
+### Method 1. 위에서 언급된 방법. 문서를 두 벡터로 표현하고 각도를 계산 
 
 1. split the text lines into words
 2. count frequency of each word
 3. sort words into alphabetic order
 4. Inner product & Get angle
 
-228.1
+[Code link]() 228.1
 
 여기서 문서에 존재하는 word들을 list로 리턴하는 부분 
 
@@ -176,6 +189,29 @@ Pointer Machine
 
 len(L) is built-in function
 
+
+## 
+
 ref 
 
 [https://medium.com/@rabin_gaire/models-of-computation-document-distance-7be4a9850067](https://medium.com/@rabin_gaire/models-of-computation-document-distance-7be4a9850067)
+
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
