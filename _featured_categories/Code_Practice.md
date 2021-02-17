@@ -1,7 +1,7 @@
 ---
 layout: list
-title: Code Practice
-slug: code practice
+title: Code_Practice
+slug: code_practice
 menu: true
 submenu: false
 order: 6
