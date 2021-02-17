@@ -15,17 +15,17 @@ comments: true
 
 모든 트럭이 다리를 지나가는 가능한 가장 빠른 시간을 찾아라.  
 이때, 트럭은 한번에 하나씩 출발할 수 있으며 1초에 1만큼 움직인다.  
-또한 다리에 올라가있는 트럭의 총 무게는 다리의 하중을 넘기면 안된다.
+또한 다리에 올라가있는 트럭의 총 무게는 다리의 하중을 넘기면 안된다.  
 
-bridge_length: 다리 길이
-weight: 다리가 견딜 수 있는 하중
+bridge_length: 다리 길이  
+weight: 다리가 견딜 수 있는 하중  
 truck_weight: 트럭의 무게
-
+  
 <br/>
 
 # 문제 풀이
 
-1. bridge 객체를 만든다.
+1. bridge 객체를 만든다. 이때, bridge는 먼저 들어온대로 나가야되기 때문에 (FIFO) **Stack** 개념이 필요하다.
 2. bridge에 무게가 허락하면 truck_weights에서 하나 가져온다.
 3. bridge에 올라간 truck은 올라간 시간 + bridge_length과 함께 저장되기 때문에 정해진 시간이 되면 truck은 빠지게된다.
 

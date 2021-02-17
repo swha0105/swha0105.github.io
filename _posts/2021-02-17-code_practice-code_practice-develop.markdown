@@ -23,7 +23,8 @@ Progresses에는 각 기능의 완성도 담겨있고 speeds에는 각 기능의
 
 - Progress에 speeds를 더해 맨 앞에 element가 100이 되는대로 pop한다. 
 - 이때, 뒤에 있는 element들이 100인것도 pop한다. 다만, 100이 끊기는 순간 종료한다.
-- 의외로 날짜 정보는 필요없다.
+- **먼저 들어온 순서, 즉 list의 앞쪽부터 봐야되기 (FIFO) 때문에 Stack개념이 필요하다.** 
+- **list의 element sum은 numpy가 편하지만 외부 라이브러리는 시간상 여기서는 map함수를 통해 구현하였다.**
 
 <br/>
 
