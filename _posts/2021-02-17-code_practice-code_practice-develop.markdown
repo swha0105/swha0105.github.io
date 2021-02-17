@@ -63,6 +63,6 @@ def solution(progresses, speeds):
 
 1. list element sum은 map을 통해 해야한다. ~~귀찮~~  
 
-2. while의 조건문 순서에 따라 결과가 달라진다.
+2. **while의 조건문 순서에 따라 결과가 달라진다.**
     - 주석처리 되어있는 조건으로 돌리면 progress가 존재하는지 확인하기 전에 0번째 요소를 체크하기 때문에 IndexError가 난다
 
