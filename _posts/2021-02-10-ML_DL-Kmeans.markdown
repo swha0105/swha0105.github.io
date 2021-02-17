@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[ML Algorithms] Kmeans"
+title:  "[ML/DL Lecture] Kmeans"
 subtitle:   "unsupervised learning"
 categories: ml_dl
 tags: ml

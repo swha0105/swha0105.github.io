@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[ML Paper review] Collaborative Filtering for Implicit Feedback Datasets (ALS)"
+title:  "[ML/DL Paper] Collaborative Filtering for Implicit Feedback Datasets (ALS)"
 subtitle:   "Alteranting Least Squares 추천 알고리즘."
 categories: ml_dl
 tags: ml

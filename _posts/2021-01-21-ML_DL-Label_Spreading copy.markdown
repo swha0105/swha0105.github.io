@@ -1,31 +1,16 @@
 ---
 layout: post
-title:  "[ML Algorithms] Label Spreading"
+title:  "[ML/DL Paper] Label Spreading"
 subtitle:   "Semi-supervised Learning"
 categories: ml_dl
 tags: ml
 comments: true
 ---
 
-<script>
-MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-</script>
 
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']]
-  },
-  svg: {
-    fontCache: 'global'
-  }
-};
-</script>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-</script>
+**들어가기전..**
 
-# Label spreading 요약
+[Paper link](https://swha0105.github.io/assets/ml/paper/Learning_with_Local_and_Global_Consistency.pdf) 이 논문은 Label propagation에서 발전된 형태인 **Label spreading**에 대해 언급한 내용이고 [Filament Project](https://swha0105.github.io/projects/2021/01/24/projects-projects-filament/)를 수행할때 사용하기 위해 참고한 논문이다.
 
 **`Label spreading`** 에 대해 한줄 요약하자면, **알려진 Label로 부터 모르는 Unlabel에 대해 `특정 공간상의 상대적인 거리`를 구하여 가장 가까운 알려진 Label로 지정하는 알고리즘이다** 
 
@@ -121,3 +106,24 @@ Jason Weston, and Bernhard Scholkopf.  Learning with Local and Global Consistenc
 popular machine learning algorithms and fine-tune your models (book)
 
 [4]. [Scikit learn link](https://scikit-learn.org/stable/modules/generated/sklearn.semi_supervised.LabelSpreading.html)
+
+
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
