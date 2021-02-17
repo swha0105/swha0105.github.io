@@ -1,21 +1,19 @@
 ---
 layout: post
 title:  "[프로그래머스] 멀쩡한 사각형"
-subtitle:  "Legal TOTO"
+subtitle:  "Programmers"
 categories: code_practice
 tags: code_practice
 comments: true
 ---
 
-
-
-![Signature visualization](https://swha0105.github.io/assets/code_practice/P_rectangle.JPG)
+![Problem](https://swha0105.github.io/assets/code_practice/P_rectangle.JPG)
 
 <br/>
 
 # 문제 개요
 
-가로 세로 1cm인 정사각형으로 이루어진 직사각형을 대각선을 따라 잘라냈을때 멀쩡하게 살아있는 사각형의 갯수를 구하여라 
+가로 세로 1cm인 정사각형으로 이루어진 직사각형을 대각선을 따라 잘라냈을때 멀쩡하게 살아있는 사각형의 갯수를 구하여라
 
 <br/>
 
