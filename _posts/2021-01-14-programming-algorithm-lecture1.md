@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Intro Algorithms] Algorithmic thinking, peak finding"
-subtitle:   "Introduction to Computer Science and Programming"
+subtitle:   "Introduction Algorithms"
 categories: programming
 tags: algorithms
 comments: true

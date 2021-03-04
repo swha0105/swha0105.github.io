@@ -1,31 +1,39 @@
+---
+layout: post
+title:  "[Intro Algorithms] Searching and Sorting Algorithms"
+subtitle:   "Introduction to Algorithms"
+categories: programming
+tags: cs
+comments: true
+---
 
-
-- Kind of sorting 
+# 3. Searching and Sorting Algorithms
+- About sorting 
 - Recursion tree expansion
 
 
+<br/>
 
-# why sorting
+---
 
+# About Sorting
 
-Sorting problem
+### Sorting problem 정의
 
-Input: array A[1:n]
-Output: permutation of B[1:n] of A (B[1] <= B[2] <= B[n])
+**Input:** array A[1:n]  
+**Output:** permutation of B[1:n] of A (B[1] <= B[2] <= ... B[n])  
 
-using for Binary search, data compression, computer graphics... 
+Binary search, data compression, computer graphics.. 와 같은 많은 용도로 사용됨
 
+---
 
-## kind of soring algorithm
-
-1. insertion sort
+## 1. insertion sort
 
 ### Algorithm
 1. key (A[j]) 를 이미 정렬된 sub-array (A[1:j-1])에 **pairwise swap** 으로 위치를 찾아 insert.
 2. 1번 과정을 j = (2,len(A))에 대해 반복한다.
 
-### pseudo code
-
+### Pseudo code
 ```python
 
 for j in range(2,len(A)):
@@ -39,14 +47,13 @@ for j in range(2,len(A)):
 
 ```
 
-### Time complexity:
-O(n^2), In place algorithm
-
-- comparison are substantially more expensive than swaps.
+### complexity:
+Time: O(n^2)  
+Space: O(1), In place algorithm
 
 <br/>
 
-2. binary insertion sort
+## 2. binary insertion sort
 
 ### Algorithm
 1. key (A[j]) 를 이미 정렬된 sub-array (A[1:j-1])에 **binary search** 으로 위치를 찾아 insert.
@@ -56,15 +63,14 @@ O(n^2), In place algorithm
 - 알고리즘은 pairwise swap에서 binary search로 바뀐것을 제외하고 insertion sort와 동일하다.
 - Key를 insert할때 이미 정렬된 sub-array에서 key가 들어갈 곳을 만들기 위해 값들을 이동시킨다. 이때, elementwise하게 이동시킬 경우와 block단위로 이동시킬 경우 time complexity가 다르다.
 
-
-### Time complexity: 
-elementwise move: O(n^2)  
-block move: O(n logn)  
-In place algorithm
+### Complexity: 
+Time for elementwise move: O(n^2)   
+Time for block move: O(n logn)    
+Space: O(1), In place algorithm
 
 <br/>
 
-3. merge sort
+## 3. Merge sort
 
 ### Algorithm
 A[1:n]에 대해,
@@ -105,19 +111,22 @@ def merge(left, right):
     return result
 
 ```
-[출처](https://ratsgo.github.io/data%20structure&algorithm/2017/10/03/mergesort/)
+[코드 출처](https://ratsgo.github.io/data%20structure&algorithm/2017/10/03/mergesort/)
 
 ### Features
 - divide & conquer approach
 - in-place algorithm을 array의 반을 keep하는 방법으로 구현가능 하지만 성능이 안좋아 잘 사용되지 않는다.
 - 따라서, **insertion sort보다 공간복잡도 면에서 불리함이 존재한다.**
 
-### Time complexity
+### Complexity
 - Time: O(n logn), Space: O(n) 
 - Time: O(n logn), Space: O(1) (in-place implement, but not good) 
 
+<br/>
 
-# recursion tree expansion
+---
+
+# Recursion tree expansion
 
 - Recursion algorithm의 time complexity를 증명하는 방법 중 하나.
 
@@ -125,14 +134,33 @@ Merge sort를 예로 들자면 다음과 같다.
 
 $$ T(n) = c1 + 2 * T(n/2) + cn (c > 0 )$$
 
-> T(n): time complexity of work done for n items
-> c1: constant time in order to divide array
-> c: merge part
+> T(n): time complexity of work done for n items  
+> c: merge part  
+> c1: constant time in order to divide array (ignored)
 
-여기서 c1은 무시하도록 한다. 
 
 ![recursion tree](https://swha0105.github.io/assets/intro_algorithm/image/lec3_1.png)  
 
 n의 크기를 가지는 array A를 merge sort할때의 time complexity를 계산하는 그림이다.  
 각 단계(세로) 별로 leaf의 개수는 n으로 동일하다. 그리고 n이 더이상 나누어질때 까지 연산하는 횟수는  log(n)이 된다.   
 따라서, n번의 연산을 log(n)만큼 하기 때문에 시간복잡도는 O(n log(n))이 된다.
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>

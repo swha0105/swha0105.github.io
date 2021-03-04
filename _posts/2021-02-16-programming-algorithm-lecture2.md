@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Intro Algorithms] Models of Computation, Document Distance"
-subtitle:   "Introduction to Computer Science and Programming"
+subtitle:   "Introduction to Algorithms"
 categories: programming
 tags: algorithms
 comments: true
