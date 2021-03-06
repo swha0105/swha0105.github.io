@@ -12,10 +12,10 @@ comments: true
 - **주관 및 관련 기관:**  CHEA(Center for High Energy Astrophysics), 선도연구센터
 - **사용 언어** : Python, MATLAB
 - **사용 기술** :
-    - Label Spreading (Machine learning)
-    - DFS(Depth-First Search) 
+    - Label Spreading
+    - Path Finding, DFS(Depth-First Search) 
     - 3차원 이미지 처리(Gaussian pyramid, Skeletonization)
-    - gpu 가속
+    - Gpu 병렬화
 <br/>
 <br/>
 
