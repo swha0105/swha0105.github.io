@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "Filament Identification in LSS via Machine learning"
+title:  "머신러닝/딥러닝을 통한 3차원 거대우주구조 데이터상의 은하 필라멘트 검출"
 subtitle:   "Statistical study on morphologies of Leo filaments via Label spreading"
 categories: projects
 tags: projects
 comments: true
 ---
 ## **Project Info**
-### Statistical study on morphologies of Leo filaments via Label spreading 
+### 머신러닝/딥러닝을 통한 3차원 거대우주구조 데이터상의 은하 필라멘트 검출 
 - **기간:** 19.09 ~ 21.01
 - **주관 및 관련 기관:**  CHEA(Center for High Energy Astrophysics), 선도연구센터
 - **사용 언어** : Python, MATLAB
