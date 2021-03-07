@@ -1,10 +1,14 @@
 ---
 layout: post
-title:  "[모두연 스터디 Spark] Chapter 4"
+title:  "[모두연 풀잎스쿨 14기] Chapter 4"
 subtitle:   "Random Forest"
 categories: tech
 tags: spark
 comments: true
+---
+
+**본 포스팅은 모두의연구소(home.modulabs.co.kr) 풀잎스쿨에서 진행된 `Advanced Analytics with Spark` 과정 내용을 공유 및 정리한 자료입니다.**  
+  
 ---
 
 Chapter 4 제목은 `의사 결정 나무로 산림 식생 분포 예측하기`이다.  
