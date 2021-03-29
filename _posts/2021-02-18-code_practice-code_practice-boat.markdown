@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[프로그래머스] 타겟넘버"
+title:  "[프로그래머스] 구명보트"
 subtitle:  "Programmers"
 categories: code_practice
 tags: code_practice
