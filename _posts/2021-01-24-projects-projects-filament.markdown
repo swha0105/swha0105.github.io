@@ -10,16 +10,17 @@ comments: true
 ### 머신러닝/딥러닝을 통한 3차원 거대우주구조 데이터상의 은하 필라멘트 검출 
 - **기간:** 19.09 ~ 21.01
 - **주관 및 관련 기관:**  CHEA(Center for High Energy Astrophysics), 선도연구센터
-- **사용 언어** : Python, MATLAB
+- **사용 언어** : Python, MATLAB, Scikit-learn, Tensorflow-Keras
 - **사용 기술** :
-    - Label Spreading
+    - Label Spreading, 3D-Unet
     - Path Finding, DFS(Depth-First Search) 
-    - 3차원 이미지 처리(Gaussian pyramid, Skeletonization)
-    - Gpu 병렬화
+    - 3차원 이미지 처리 & 시각화
+    - Python 코드 gpu 병렬화
 <br/>
 <br/>
 
-***
+--- 
+
 ## **Intro & Problem** : 
 <!-- **거대우주구조 시뮬레이션에서 Cluster, Filament, Wall Classification** -->
 
