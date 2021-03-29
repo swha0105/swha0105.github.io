@@ -25,7 +25,7 @@ order: 1
 # Seungwoo Ha
 
 Data science and Programmer based on Physics background  
-hsw636@gmail.com  |  [CV (PDF version)](https://drive.google.com/file/d/1XxErYolLMBeynPvPcVpJGWJm9yVqx5rV/view?usp=sharing)  |  [LinkedIn](https://www.linkedin.com/in/seungwoo-ha-838aa919b/)  | [Github](https://github.com/swha0105)  
+hsw636@gmail.com  |  [CV (PDF version)](https://drive.google.com/file/d/1dQ2ivz6Z-qYQDMgppmy8lqtu-fvF9gfQ/view?usp=sharing)  |  [LinkedIn](https://www.linkedin.com/in/seungwoo-ha-838aa919b/)  | [Github](https://github.com/swha0105)  
 
 <br/>
 
