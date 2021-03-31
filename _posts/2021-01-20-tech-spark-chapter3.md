@@ -326,21 +326,18 @@ new_user_artist_df.show()
 
 <br/>
 
-<details>
-<summary> Join의 종류 </summary>
-<div markdown="1">
+### Join의 종류
+
 Spark에는 여러 join의 형태가 있다. 그 중 일부만 정리했다.
 1. Inner join: 두 데이터에 공통적으로 존재하지 않으면 지우고 condition을 만족하는것만 return (default)
 2. Left join: left에 있는 모든 데이터를 기준으로, right 데이터들이 condition을 만족하면 값을 이어 붙이고 만족하지 못하면 null 을 붙임.  
 3. right join: right에 있는 모든 데이터를 기준으로, left 데이터들이 condition을 만족하면 값을 이어 붙이고 만족하지 못하면 null 을 붙임. 
 4. outer join: 양쪽 데이터를 condition에 관계없이 다 붙인다.
 
-|![join 종류](https://commons.wikimedia.org/wiki/File:SQL_Joins.svg)   
+|![join 종류](https://upload.wikimedia.org/wikipedia/commons/9/9d/SQL_Joins.svg)   
 |:--:| 
-| 출처: https://commons.wikimedia.org/wiki/File:SQL_Joins.svg |
+| [출처](https://upload.wikimedia.org/wikipedia/commons/9/9d/SQL_Joins.svg) |
 
-</div>
-</details>
 
 
 
@@ -414,6 +411,13 @@ userSubsetRecs.show(n=3, truncate=False)
     
 </div>    
 </details>
+
+
+- pyspark ml library에 있는 ALS모델 구축.
+- 위 데이터는 User가 특정 artist의 음악을 play한 횟수를 카운트 하는 측면에서는 explicit 하지만, artist의 음악을 play 한다고 해서 그 artist를 선호한다고 단정지을 수 없고 간접적으로 추론만 가능하니 implicit 데이터 라고 볼 수 있다.
+- 그런데 왜 implicitPrefs 해서 성능이 잘나오는지는 잘모르겠다..
+
+<br/>
 
 
 ```python
@@ -557,154 +561,13 @@ recomendation.show()
 </details>
 
 
+- ALS 모델의 가중치 확인
+- 한 유저에 대한 모든 artist의 음악 play한 횟수 조회.
+- 한 유저에 대해 artist prediction 높은 순서대로 orderby. 
 
-### Build Model (towards data science)
+<br/>
 
-
-```python
-# Import the required functions
-from pyspark.ml.evaluation import RegressionEvaluator
-from pyspark.ml.recommendation import ALS
-from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
-from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
-from pyspark.ml.evaluation import RegressionEvaluator
-
-# Create ALS model
-als = ALS(
-         userCol="userid", 
-         itemCol="artistid",
-         ratingCol="playcount", 
-         nonnegative = True, 
-         implicitPrefs = False,
-         coldStartStrategy="drop"
-)
-
-# Add hyperparameters and their respective values to param_grid
-param_grid = (
-    ParamGridBuilder()
-    .addGrid(als.rank, [5, 30])
-    .addGrid(als.regParam, [4.0, 0.0001])
-    .addGrid(als.alpha, [1.0, 40.0])    
-    .build()
-)
-
-# Define evaluator as RMSE and print length of evaluator
-evaluator = RegressionEvaluator(
-    metricName="rmse", 
-    labelCol="playcount", 
-    predictionCol="prediction") 
-
-# Build cross validation using CrossValidator
-cv = CrossValidator(estimator=als, estimatorParamMaps=param_grid, evaluator=evaluator, numFolds=5)
-
-
-
-
-# Fit cross validator to the 'train' dataset
-model = cv.fit(train)
-
-# Extract best model from the cv model above
-best_model = model.bestModel
-
-# View the predictions
-test_predictions = best_model.transform(test)
-RMSE = evaluator.evaluate(test_predictions)
-print(RMSE)
-
-print("**Best Model**")
-print("  Rank:", best_model._java_obj.parent().getRank())
-print("  MaxIter:", best_model._java_obj.parent().getMaxIter())
-print("  RegParam:", best_model._java_obj.parent().getRegParam())
-
-
-
-
-# Generate n Recommendations for all users
-recommendations = best_model.recommendForAllUsers(5)
-recommendations.show(10, False)
-
-
-
-
-nrecommendations = recommendations\
-    .withColumn("rec_exp", F.explode("recommendations"))\
-    .select("userid", "rec_exp.artistid", "rec_exp.rating")
-    
-nrecommendations.limit(10).show()
-```
-<details>
-<summary> 실행결과 </summary>
-<div markdown="1">  
-
-    +-------+--------+---------+
-    | userid|artistid|   rating|
-    +-------+--------+---------+
-    |1000144| 2043183|61.646343|
-    |1000144| 1273059|59.896374|
-    |1000144| 1027760| 38.36873|
-    |1000144| 9985060| 37.61595|
-    |1000144| 2091861| 36.61011|
-    |1000465| 6672069|21.925694|
-    |1000465| 1032434|21.773518|
-    |1000465| 6812406|21.544062|
-    |1000465| 2091861|  21.4468|
-    |1000465| 1337692|20.663816|
-    +-------+--------+---------+
-    
- </div>    
-</details>
-
-   
-
-## Prediction vs Real Data 
-
-
-```python
-nrecommendations.join(artist_df, on="artistid").filter('userid = 1000190').sort(F.col("rating").desc()).show()
-```
-<details>
-<summary> 실행결과 </summary>
-<div markdown="1">  
-    +--------+-------+---------+-----------------+
-    |artistid| userid|   rating|       artistname|
-    +--------+-------+---------+-----------------+
-    | 6672069|1000190|32.698563|           hiro:n|
-    |    2513|1000190|30.011713|          Merzbow|
-    | 2091861|1000190|  29.3715|Purified in Blood|
-    | 2043183|1000190|  29.2197|       中川幸太郎|
-    | 1167516|1000190|27.088203|       Putsch '79|
-    +--------+-------+---------+-----------------+
-    
-    
-</div>    
-</details>
-
-
-
-```python
-(
-    new_user_artist_df.select("userid", "artistid", "playcount")
-    .join(artist_df, on="artistid")
-    .filter('userid = 1000190')
-    .sort(F.col("playcount").desc())
-).show()
-```
-<details>
-<summary> 실행결과 </summary>
-<div markdown="1">  
-    +--------+-------+---------+--------------------+
-    |artistid| userid|playcount|          artistname|
-    +--------+-------+---------+--------------------+
-    |     754|1000190|       20|           Sigur Rós|
-    | 6715171|1000190|        9|        The '89 Cubs|
-    | 1283231|1000190|        6|The Les Claypool ...|
-    | 1290488|1000190|        4|The Nation of Uly...|
-    | 1146220|1000190|        1|   Animal Collective|
-    | 1013111|1000190|        1|  Murder City Devils|
-    | 1004758|1000190|        1|         Silver Jews|
-    +--------+-------+---------+--------------------+
-    
-    
-</div>    
-</details>
-
+## 마무리 & 배운점
+- 이 단원 정리하며 ALS에 대해 논문찾아보고 관련내용을 [정리하였다](https://swha0105.github.io/ml_dl/2021/01/27/ML_DL-ml-ALS/). 수학적으로 굉장히 간단한 내용이라 비교적 이해하기 편했다.
+- column의 join 형태에 대해 찾아보고 정리했다. 아직 이해가 부족한듯 하지만 대충 흐름은 잡히는듯.
+- ALS 논문을 찾다 발견했는데 요즘은 이 ALS을 바탕으로 좀 더 advanced된 알고리즘을 사용한다고 한다. 시간될때 찾아보도록 하자.
