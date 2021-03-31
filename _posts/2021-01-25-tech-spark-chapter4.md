@@ -1681,9 +1681,20 @@ pd.DataFrame(importances, columns=["feature", "importance"]).sort_values("import
 </div>
 
 <br/>
+
+
+
+## 마무리
+- feature들을 VectorIndexer를 통해 categorical feature로 변환
+- sparse vector는 저장공간을 줄이기 위해 값과, 인덱스 번호만 저장되어있는 형태로 따로 저장 
+- pipeline으로 모델을 구성하는건 익숙하진 않지만 Data의 흐름에 따라 코드 읽기가 쉽다.
+- **ParamGridBuilder 을 통해 hyperparameter set를 찾기!!**
+
 <br/>
 
 ---
+
+
 
 ## Referrence
 - pandas udf: https://docs.microsoft.com/ko-kr/azure/databricks/spark/latest/spark-sql/udf-python-pandas

@@ -329,8 +329,14 @@ for k in [5,10,15,20]:
     15 0.9999231883576829
     20 0.999933043370616
 
+<br/>
 
+---
 
+## 마무리
+- 왜 최적의 K 가 안찾아지는지 아무도 알아내지 못했다.. 아마 데이터가 책에 나온 형태와 다른것으로 추론됨
+- pipeline의 구성, Transformer, Estimator개념에 대해 알아보았다.
+- K-clustering 평가 방법 silhouette score에 대해 알아보았다.
 
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
