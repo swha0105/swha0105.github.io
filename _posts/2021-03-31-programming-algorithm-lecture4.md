@@ -9,18 +9,12 @@ comments: true
 
 # 4. Heaps and heap sort
 - Heap, Priority Queue.
-- Heap Time-complexity
+- Heap Operation & Time-complexity
 - Heap sort
 
 <br/>
 
 ---
-
-- heap (node, child, leaf) 설명된거 사진
-- max heap 사진넣기
-- time complexity 증명
-
-https://ict-nroo.tistory.com/55
 
 # Heap & Priority Queue
 
@@ -39,8 +33,10 @@ https://ict-nroo.tistory.com/55
 - Heap은 Priority queue (우선순위 큐)를 구현해놓은것이다.
 - Heap은 nearly complete binary tree이다.
 
+
+Complete binary tree 와 Full binary tree 비교  
 ![heap sturcture](https://swha0105.github.io/assets/intro_algorithm/image/lec4_trees.PNG)
-https://ict-nroo.tistory.com/55
+[그림 출처](https://ict-nroo.tistory.com/55)
 
 ### Heap structure and type
 
@@ -53,52 +49,19 @@ https://ict-nroo.tistory.com/55
 > right(i) = 2i+1,  node i에 대한 right index return  
 
 
-- max heap은 parent(i)의 key값이  left(i) 값과 right(i) 값보다 크다.
-min heap: min heap은 parent(i)가 left(i)와 right(i)보다 크다.
-
-
-#### Max-heap pseudocode
-
-```python
-
-def Build_max_heap(A):
-    for i in range(n/2,1,-1):
-        heap = Max_heapify(A,i)
-
-
-def Max_heapify(A,i):
-    l = left(i) # l = 2*i
-    r = right(i) # r = 2*i+1
-
-    if(l = heap-size(A) and A[l] > A[i]):
-        largest = l
-    else:
-        largest = i 
-
-    if(r = heap-size(A) and A[r] > A[largest]):
-        largest = r
-
-    if largest != i:
-        A[i],A[largest] = A[largest],A[i]
-        Max_heapify(A,largest)
-
-```
-
-- Build_max_heap: Unordered array에서 max heap을 만드는 연산    
-
+- max heap은 parent(i)의 key값이  left(i) 값과 right(i) 값보다 크다.  
 
 <br/>
 
-# Heapify Time-complexity
+---
 
-트리 구조  (node, level, height 다 적은 그림)
+# Heap Operation & Time-complexity
 
-Max Heap 기준.
 
-### - Max_heapify:
+### Max_heapify:
 - Max heap을 규칙을 어기는 하나의 node를 고치는 연산.  
 
-|![max_heapify]()   
+|![max_heapify](https://swha0105.github.io/assets/intro_algorithm/image/lec4_maxheap.png)
 |:--:| 
 | [출처](https://ratsgo.github.io/data%20structure&algorithm/2017/09/27/heapsort/) |
 
@@ -109,42 +72,60 @@ Max Heap 기준.
 - worst case일때는 트리의 높이만큼 비교연산을 해야됨, 
 - Time complexity: O(log n)의 시간복잡도를 가짐. 
 
+<br/>
 
-### - Heap insert
+### Heap insert
 
-|![max_heapify]()   
+|![heap insert](https://swha0105.github.io/assets/intro_algorithm/image/lec4_insert.PNG)   
 |:--:| 
 | [출처](https://ratsgo.github.io/data%20structure&algorithm/2017/09/27/heapsort/) |
 
 S = [16,5,11,3] 에서 `18` 이 추가 되는 상황 
 1. 새로운 element가 추가 될때는 가장 끝에 추가 된다 (Max heap 기준)
 2. 새로운 element `18`이 parent node인 5와 비교하여 swap
-3. 2번이 만족되지 않을때 까지 반복. -->
+3. 2번이 만족되지 않을때 까지 반복.
 
 - worst case일때는 트리의 높이만큼 비교연산을 해야됨, 
 - Time complexity: O(log n)의 시간복잡도를 가짐. 
 
 
-<!-- Time Complexity :  O(log(n))   
-트리의 높이는 log(n). 즉, 새로운 element를 insert하는데 Time Complexity의 worst case는 트리의 높이인 O(log(n))
+<br/>
 
-
-### - Heapify all element: O(n)
+### Heapify all element: O(n)
  
-위와같은 방법으로 모든 element들을 heapify를 하게되면 Time complexity는 O(n log(n))가 된다.
+Max_heapify 모든 element들을 heapify를 하게되면 Time complexity는 O(n log(n))가 된다.
 
-하지만 Time complexity를 O(n)으로 만족하는 알고리즘이 있는데 다음과 같다.
+하지만 Time complexity를 **O(n)** 으로 만족하는 알고리즘이 있는데 다음과 같다.
 
+- heap의 레벨을 h (= log(n)) 이라 했을때, h-1 부터 (아래 그림에서 빨간 노드)부터 비교하면된다.
+- h-1노드의 개수는 $$\frac{n}{4}$$ 이고 h 레벨과 비교하면 되기때문에 한번만 반복한다.
+- h-2노드의 개수는 $$\frac{n}{8}$$ 이고 h-1, h 레벨과 비교해야 되기때문에 2번 반복한다.
+... 반복.
 
+위와같은 연산을 수행하였을때 시간복잡도는 O(n)이 된다.
 
-- 수학증명
+힙이 **완전이진트리**라고 가정하였을때 연산량은 다음과 같다. (비교하는 연산을 한번이라 가정한다.)
+    
 
-- Heapify all element: O(n)
+$$ 2 * 1 \frac{n}{2^2} + 2 * 2 \frac{n}{2^3} + 2 * 3 \frac{n}{2^4} ... $$ 
+$$ = 2 * \frac{n}{2^2} ( 1 + 2 \frac{1}{2}  + 3\frac{1}{4} ...) $$   
+$$ = 2 * 2 * \frac{n}{4}$$  ( n이 무한대 일때, 수렴 값)  
+$$ = n $$   
+  
+
+~~Big-O notation에 따라 무시되는 텀이 있을줄 알았는데 딱 맞아 떨어진다~~
+
+|![heap insert](https://swha0105.github.io/assets/intro_algorithm/image/lec4_buildheap.PNG)   
+|:--:| 
+| [출처](https://ratsgo.github.io/data%20structure&algorithm/2017/09/27/heapsort/) |
+
 
 <br/>
 
+---
+
 # Heap sort
-- Heap은 정렬에 강점을 가지는 데이터 구조이다. (Binary search tree은 탐색에 강점)
+- Heap 구조를 정렬해본다. (Heap은 정렬에 강점, Binary search tree은 탐색에 강점)
 
 
 ### heap sorting algorithm
@@ -155,7 +136,7 @@ S = [16,5,11,3] 에서 `18` 이 추가 되는 상황
 5. A[n]이 제외된 A[1:n-1]를 가지고 max heap을 다시 만든다. 이떄 A[1]에 대해서만 연산 해주면 된다. O(log(n))
 6. 2번으로 돌아간다.
 
-위와같은 과정을 모든 node (element)에 대해 수행해야되기 때문에 전체 시간복잡도는 O(n log(n))이 된다.
+위와같은 과정을 모든 node (element)에 대해 수행해야되기 때문에 전체 **시간복잡도는 O(n log(n))** 이 된다.
 
 ### pseudo code
 ``` python
@@ -185,5 +166,29 @@ def heap_sort(unsorted):
 
 
 --- 
-https://ict-nroo.tistory.com/55
-https://ratsgo.github.io/data%20structure&algorithm/2017/09/27/heapsort/
+
+#### ref 
+
+1. https://ict-nroo.tistory.com/55
+2. https://ratsgo.github.io/data%20structure&algorithm/2017/09/27/heapsort/
+
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
