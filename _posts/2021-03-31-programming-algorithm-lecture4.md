@@ -29,14 +29,13 @@ comments: true
 
 <br/>
 
-### Heap Feature
+### Heap 
 - Heap은 Priority queue (우선순위 큐)를 구현해놓은것이다.
 - Heap은 nearly complete binary tree이다.
 
-
-Complete binary tree 와 Full binary tree 비교  
+>Complete binary tree 와 Full binary tree 비교  [그림 출처](https://ict-nroo.tistory.com/55)
 ![heap sturcture](https://swha0105.github.io/assets/intro_algorithm/image/lec4_trees.PNG)
-[그림 출처](https://ict-nroo.tistory.com/55)
+
 
 ### Heap structure and type
 
@@ -69,7 +68,7 @@ Complete binary tree 와 Full binary tree 비교
 2. left node와 비교하여 swap. (right node가 더 작지만 알고리즘상 고려 x)
 3. heap 의 성질이 만족될때까지 위 과정을 반복
 
-- worst case일때는 트리의 높이만큼 비교연산을 해야됨, 
+- worst case일때는 트리의 높이 (h = log n) 만큼 비교연산을 해야됨, 
 - Time complexity: O(log n)의 시간복잡도를 가짐. 
 
 <br/>
@@ -85,7 +84,7 @@ S = [16,5,11,3] 에서 `18` 이 추가 되는 상황
 2. 새로운 element `18`이 parent node인 5와 비교하여 swap
 3. 2번이 만족되지 않을때 까지 반복.
 
-- worst case일때는 트리의 높이만큼 비교연산을 해야됨, 
+- worst case일때는 트리의 높이 (h = log n) 만큼 비교연산을 해야됨, 
 - Time complexity: O(log n)의 시간복잡도를 가짐. 
 
 
@@ -93,9 +92,9 @@ S = [16,5,11,3] 에서 `18` 이 추가 되는 상황
 
 ### Heapify all element: O(n)
  
-Max_heapify 모든 element들을 heapify를 하게되면 Time complexity는 O(n log(n))가 된다.
+Max_heapify를 이용하여 모든 element들을 heapify를 하게되면 시간 복잡도는 **O(n log(n))**가 된다.
 
-하지만 Time complexity를 **O(n)** 으로 만족하는 알고리즘이 있는데 다음과 같다.
+하지만 모든 element들을 한번에 heapify 할 때, **O(n)** 으로 만족하는 알고리즘이 있는데 다음과 같다.
 
 - heap의 레벨을 h (= log(n)) 이라 했을때, h-1 부터 (아래 그림에서 빨간 노드)부터 비교하면된다.
 - h-1노드의 개수는 $$\frac{n}{4}$$ 이고 h 레벨과 비교하면 되기때문에 한번만 반복한다.
