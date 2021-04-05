@@ -4,6 +4,7 @@ title: About Me
 menu: true
 order: 1
 ---
+
 물리학을 전공하였고 데이터에 관심있는 개발자 입니다.
 
 머신러닝의 수학에 대해 관심이 있고 새로운 기술에 대해 호기심이 많습니다.  
@@ -17,6 +18,4 @@ order: 1
 
 <br/>
 <br/>
-
-hsw636@gmail.com  |  [CV (PDF version)](https://drive.google.com/file/d/1AMpm5U59rx3pfMSfxqCedPpuJMqvb6iX/view?usp=sharing)  |  [LinkedIn](https://www.linkedin.com/in/seungwoo-ha-838aa919b/)  | [Github](https://github.com/swha0105)  
 
