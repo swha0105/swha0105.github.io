@@ -255,5 +255,5 @@ d = {1:1, 2:2}
 준비도 굉장히 많이 한게 느껴지고 유치할수도 있는 비유를 하면서 학생들을 어떻게든 이해시키려는 모습이 조금 감동이였다..  이번 강의부터 ~~목소리가 예쁜~~ Dr. Ana 대신 Prof. Eric Grimson이 가르치는데 말이 너무 빨라 첨에는 알아듣기 힘들었지만 듣다보니 수업을 체계적으로 잘한다는 느낌을 받았다.  그리고 이 강의를 끝까지 듣고 다음 advanced 코스까지 들으면 나의 코드에도 **근본**이 생길꺼같다는 희망을 느끼고있다.
 
 
-![개그](https://swha0105.github.io/assets/intro_cs/image/lec_6_humor.png)
+![개그](https://swha0105.github.io/assets/intro_cs/image/lec_6_humor.JPG)
 
