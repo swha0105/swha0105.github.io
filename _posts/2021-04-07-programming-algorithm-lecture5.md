@@ -45,6 +45,10 @@ comments: true
 ---
 
 # Binary search Tree
+
+- Binary search와 Linked list을 결합한 자료구조
+- Binary search의 효율적인 탐색과 data insert/delete를 효율적으로 하기 위한 자료구조
+
 Binary Search Tree (BST) 예시
 ![BST](https://swha0105.github.io/assets/intro_algorithm/image/lec5_bst.png)  
 - node x에 대해 key(x), left(x), right(x), parent(x) 가 존재한다.
