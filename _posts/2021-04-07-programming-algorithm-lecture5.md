@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[Intro Algorithms] Scheduling, Binary Search Trees"
+title:  "[Intro Algorithms] Scheduling, Binary Search Trees, tree traversal"
 subtitle:   "Introduction to Algorithms"
 categories: programming
 tags: cs
@@ -103,6 +103,51 @@ Time Complexity: O(h)  **(log n < h < n)**
 ### BST 의 한계점
 Balanced Tree가 아니기 때문에 트리의 높이인 h값이 n값과 같을 수 있다.  
 이러한 한계점을 극복하기 위해 다음 렉쳐에서 `AVL Tree`를 배운다고 한다.
+
+
+<br/>
+
+---
+
+# Tree traversal
+이 내용은 강의에 포함되어있지 않지만 중요한 내용이라 이 [블로그](https://www.google.com/search?q=traversal+order&rlz=1C1SQJL_koKR840KR840&oq=traversal+order&aqs=chrome..69i57.140j0j7&sourceid=chrome&ie=UTF-8)를 참조 하여서 정리한다.
+
+- Traversal(순회)는 트리의 모든 노드들을 visit하는 것을 의미.
+- Preorder(전위), Inorder(중위), postorder(후위)가 있다. 
+
+
+|![Tree_ordering](https://swha0105.github.io/assets/intro_algorithm/image/lec_5_order.png)  
+|:--:| 
+| Tree 예제 [출처](https://m.blog.naver.com/PostView.nhn?blogId=4717010&logNo=60209908735&proxyReferer=https:%2F%2Fwww.google.com%2F) |  
+
+1. Preorder
+   1. 노드 x가 NULL이 아니라면 **노드 x에 접근** (NULL일 경우 Base case, Return None)
+   2. 노드 x의 왼쪽 subtree root note (left child)을 기준으로 다시 1번을 call
+   3. 노드 x의 오른쪽 subtree root note (right) child)을 기준으로 다시 1번을 call
+
+위와같이 recursive하게 호출이 되며 예제 그림에서 호출되는 순서는 다음과 같다.  
+**A->B->D->H->I->E->C->F->G** 
+
+2. Inorder 
+   1. 노드 x가 NULL이 아니라면 (NULL일 경우 Base case, Return None)
+   2. 노드 x의 왼쪽 subtree root note (left child)을 기준으로 다시 1번을 call
+   3. **노드 x를 접근**
+   4. 노드 x의 오른쪽 subtree root note (right) child)을 기준으로 다시 1번을 call
+
+예제 그림에서 호출되는 순서는 다음과 같다.   
+**H->D->I->B->E->A->F->C->G** 
+
+3. Postorder 
+   1. 노드 x가 NULL이 아니라면 (NULL일 경우 알고리즘 종료)
+   2. 노드 x의 왼쪽 subtree root note (left child)을 기준으로 다시 1번을 call
+   3. 노드 x의 오른쪽 subtree root note (right) child)을 기준으로 다시 1번을 call
+   4. 노드 x를 방문
+
+
+예제 그림에서 호출되는 순서는 다음과 같다.   
+**H->I->D->E->B->F->G->C->A** 
+
+
 
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
