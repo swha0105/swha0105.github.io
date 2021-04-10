@@ -147,7 +147,9 @@ Balanced Tree가 아니기 때문에 트리의 높이인 h값이 n값과 같을 
 예제 그림에서 호출되는 순서는 다음과 같다.   
 **H->I->D->E->B->F->G->C->A** 
 
+<br/>
 
+**BST Tree는 Inorder 방식으로 traversal 한다!**
 
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
