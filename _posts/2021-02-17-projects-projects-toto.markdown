@@ -34,7 +34,7 @@ comments: true
 [타자](https://github.com/swha0105/ToTo/blob/main/Data/raw/%EA%B9%80%EC%83%81%EC%88%98_1990-03-23.xlsx) [투수](https://github.com/swha0105/ToTo/blob/main/Data/raw/%EB%B0%B0%EC%98%81%EC%88%98_1981-05-04.xlsx) [경기](https://github.com/swha0105/ToTo/blob/main/Data/raw/2016-07-26_%EB%9D%BC%EC%9D%B4%EC%98%A8%EC%A6%88%ED%8C%8C%ED%81%AC_05_04.xlsx) 데이터 샘플
 
 ### 2. 데이터 베이스 구축 및 전처리 (진행중)
-- AWS에서 postsql로 데이터 베이스 구축중. 
+- AWS에서 postgresql로 데이터 베이스 구축중. 
 
 ### 3. 모델 생성
 - random forest 예상.
