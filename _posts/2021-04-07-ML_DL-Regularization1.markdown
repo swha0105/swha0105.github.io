@@ -128,7 +128,7 @@ $$ \frac{\sigma MSE(\beta)}{\sigma \beta}  = 2X^{T}y + 2(X^{T}X + \lambda I_{p})
 
 $$ \hat{\beta^{ridge}} = (X^{T}X + \lambda I_{p})^{-1} X^{T}y $$ 
 가 된다. 이때, 최소 제곱법의 $$\beta$$는 
-$$ \hat{\beta{LS}} = (X^{T}X )^{-1} X^{T}y$$ 이다.
+$$ \hat{\beta_{LS}} = (X^{T}X )^{-1} X^{T}y$$ 이다.
 
 이 수식의 의미하는 바로는 least squares esimator와 다르게 **X에 대한 데이터 matrix에다가 $$\lambda$$ 값을 더해주겠다** 가 된다.    
 다른 말로는 unbias estimator가 아닌 bias estimator가 된다고 말할수도 있다.
