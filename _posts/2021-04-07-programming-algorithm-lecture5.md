@@ -10,6 +10,7 @@ comments: true
 # 5. Scheduling, Binary Search Treesd
 - Runway reservation system
 - Binary Search Trees
+- Tree traversal & Order
 
 <br/>
 
@@ -46,14 +47,14 @@ comments: true
 
 # Binary search Tree
 
-- Binary search와 Linked list을 결합한 자료구조
+- **Binary search와 Linked list을 결합한 자료구조**
 - Binary search의 효율적인 탐색과 data insert/delete를 효율적으로 하기 위한 자료구조
 
 Binary Search Tree (BST) 예시
 ![BST](https://swha0105.github.io/assets/intro_algorithm/image/lec5_bst.png)  
-- node x에 대해 key(x), left(x), right(x), parent(x) 가 존재한다.
-- 이때, parent(x), left(x), right(x) 는 실제 값이 아닌, Pointer를 의미 한다. (Heap 과 다른점)
-- node x을 기준으로 왼쪽아래에 존재하는 subtree에 모든 key값 y에 대해 key(y) < key(x)는 항상 만족한다.
+- node x에 대해 `left(x)`, `right(x)`, `parent(x)` 가 존재한다.
+- 이때, parent(x), left(x), right(x) 는 실제 값이 아닌, **Pointer를 의미 한다.** (Heap 과 다른점)
+- node x을 기준으로 왼쪽아래에 존재하는 **subtree에 모든 key값 y에 대해 key(y) < key(x)는 항상 만족한다.**
 
 ## Operation
 
@@ -77,13 +78,13 @@ Time Complexity: O(h)  **(log n < h < n)**
 |:--:| 
 | [출처](https://ratsgo.github.io/data%20structure&algorithm/2017/10/22/bst/) |
 
-위 그림에서 key값이 20인 노드를 삭제 한다고 가정해보자.  
+위 그림에서 key값이 16인 노드를 삭제 한다고 가정해보자.  
 이때, Tree 구조를 만족하러면 아래에 있는 특정 값이 삭제된 위치를 대체하여야한다. 어떤 값이 좋을까?  
   
-먼저, Node(key = 20) 왼쪽에 있는 노드들 중에 가장 큰 값을 `predecessor`라고 정의한다.  
+먼저, Node(key = 16) 왼쪽에 있는 노드들 중에 가장 큰 값을 `predecessor`라고 정의한다.  
 또, 오른쪽에 있는 노드들 중 가장 작은 값을 `successor` 라고 정의한다.  
 
-이 두개의 값들 중 아무 값이나 선택하여 삭제된 노드의 위치를 대체하면 된다. 아래 그림은 `successor`인 Node(key =20)이 대체한 그림이다.
+이 두개의 값들 중 아무 값이나 선택하여 삭제된 노드의 위치를 대체하면 된다. 아래 그림은 Node (key=16)을 `successor`인 Node(key =20)이 대체한 그림이다.
 
 |![BST_delete 2](https://swha0105.github.io/assets/intro_algorithm/image/lec5_bst_delete_2.png)  
 |:--:| 
@@ -93,9 +94,10 @@ Time Complexity: O(h)  **(log n < h < n)**
 
 <br/>
 
-**3. find value and find_min:**
-
-Heap과 다르게 index가 정의 되어있지 않다. 따라서 root node에서 부터 left(x) pointer를 따라 트리의 높이까지 따라 내려가야한다.  
+**3. find value and find min:**
+Heap과 다르게 index가 정의 되어있지 않고, 모든 값들이 **포인터**로 연결되어있다.    
+따라서 root node에서 부터 left(x) pointer를 따라 트리의 높이까지 따라 내려가야한다.    
+  
 Time Complexity: O(h)  **(log n < h < n)**  
 
 <br/>
@@ -112,8 +114,8 @@ Balanced Tree가 아니기 때문에 트리의 높이인 h값이 n값과 같을 
 # Tree traversal
 이 내용은 강의에 포함되어있지 않지만 중요한 내용이라 이 [블로그](https://www.google.com/search?q=traversal+order&rlz=1C1SQJL_koKR840KR840&oq=traversal+order&aqs=chrome..69i57.140j0j7&sourceid=chrome&ie=UTF-8)를 참조 하여서 정리한다.
 
-- Traversal(순회)는 트리의 모든 노드들을 visit하는 것을 의미.
-- Preorder(전위), Inorder(중위), postorder(후위)가 있다. 
+- **Traversal(순회)는 트리의 모든 노드들을 접근하는 것을 의미.**
+- `Preorder(전위)`, `Inorder(중위)`, `postorder(후위)`가 있다. 
 
 
 |![Tree_ordering](https://swha0105.github.io/assets/intro_algorithm/image/lec_5_order.png)  
