@@ -146,7 +146,8 @@ $$ y_{i} ( w^{T}x_{i} + b ) \ne 1 $$ 이다.
 돌고 돌아, 결국 우리의 목적인 `w`를 구해보자.   
 
 KKT의 조건 중, **Stationarity**의 수식을 보게되면,  
-$$ w = \sum_{i=1}{n}\lambda_{i}y_{i}x_{i} \quad (\frac{\partial L(w,b,\lambda)}{\partial w} = 0) $$ 에서, $$\lambda \gt 0 $$ 일때만 의미를 갖고 이 조건을 만족하는 데이터 포인트는 **`support vector`** 이다. 따라서 **`support vector`**만 이용하여 **`hyper plane`**을 구할 수 있다.  
+$$ w = \sum_{i=1}^{n}\lambda_{i}y_{i}x_{i} \quad (\frac{\partial L(w,b,\lambda)}{\partial w} = 0) $$ 에서, $$\lambda \gt 0 $$ 일때만 의미를 갖고 이 조건을 만족하는 데이터 포인트는 **`support vector`** 이다.   
+따라서 **`support vector`**의 $$y_{i}, x_{i}$$ 이용하여 **`hyper plane`**을 구할 수 있다. 
   
 
 <br/>
