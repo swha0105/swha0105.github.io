@@ -24,7 +24,7 @@ comments: true
 
 # Support Vector Machine 
 
-|![BF](https://swha0105.github.io/assets/ml/img/svm_hpyerplane.png)   
+|![BF](https://swha0105.github.io/assets/ml/img/svm_hyperplane.png)   
 |:--:| 
 | SVM의 Hyperplane |
  
