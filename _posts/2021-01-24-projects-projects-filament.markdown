@@ -1,77 +1,111 @@
 ---
 layout: post
-title:  "머신러닝/딥러닝을 통한 3차원 거대우주구조 데이터상의 은하 필라멘트 검출"
+title:  "[고에너지 천체물리 연구] 머신러닝/딥러닝을 통한 3차원 은하 필라멘트 검출"
 subtitle:   "Statistical study on morphologies of Leo filaments via Label spreading"
 categories: projects
 tags: projects
 comments: true
 ---
-## **Project Info**
-### 머신러닝/딥러닝을 통한 3차원 거대우주구조 데이터상의 은하 필라멘트 검출 
-- **기간:** 19.09 ~ 21.01
-- **주관 및 관련 기관:**  CHEA(Center for High Energy Astrophysics), 선도연구센터
+
+<details>    
+<summary> Project Info  </summary>
+<div markdown="1"> 
+
+<br/>
+
+<!-- ### 머신러닝/딥러닝을 통한 3차원 거대우주구조 데이터상의 은하 필라멘트 검출  -->
+- **기간:** 19.09 ~ 21.02 (1년 6개월)
+- **주관 기관:** 고에너지 천체물리 연구센터 (CHEA, Center for High Energy Astrophysics)
+- **주관 부처:** 한국연구재단 선도연구센터
 - **사용 언어** : Python, MATLAB, Scikit-learn, Tensorflow-Keras
-- **사용 기술** :
-    - Label Spreading, 3D-Unet
-    - Path Finding, DFS(Depth-First Search) 
-    - 3차원 이미지 처리 & 시각화
-    - Python 코드 gpu 병렬화
-<br/>
-<br/>
+- **기여 및 결과**:
+    1. 머신러닝 / 딥러닝을 통한 3차원 거대우주구조에서 은하 필라멘트 검출
+        - 해외 초청발표: Joint Australian and Korean Contributions to the SKA meeting (2020)
+        - 국내 발표: 4th CHEA workshop (2020)
+    2. 상대론적 유체역학 코드 병렬화
+        - SCI논문 제출 준비: The Astrophysics Journal(ApJ) (~2021.05)
 
---- 
-
-## **Intro & Problem** : 
-<!-- **거대우주구조 시뮬레이션에서 Cluster, Filament, Wall Classification** -->
-
-현재 인류가 관측 할 수 있는 가장 큰 우주를 보았을 때, 우주에 존재하는 물질 들은 균등하게 분포해있지 않고 특정한 구조를 가지며 분포 해있다. 전체 우주의 물질분포와 그 구조를 `거대우주구조` (LSS, Large Scale Structure of the Universe)라고 하며 이 거대우주구조에는 `Galaxy of Clusters`, `Galaxy of Filaments`, `Wall`, `Void` 의 구조가 존재한다.
-<!-- ([Pancake Theory](https://en.wikipedia.org/wiki/Zeldovich_pancake)) -->
-각 구조들은 다음과 같은 성질을 가진다.  
-
-
-- `Galaxy of Clusters` 는 구형으로, 다른 구조들에 비해 온도와 밀도가 월등히 높다.
-
-- **`Galaxy of Filaments`** 는 3차원상에서 **원통형**이며 온도와 밀도가 상대적으로 Wall 보다 높다
-
-- **`Wall`** 는 3차원상에서 **평면구조**이며 온도와 밀도가 상대적으로 Filament 보다 낮다
-
-- `Void` 는 매우 낮은 밀도와 온도를 가지고 있다.
-
-
-이 중 **`Galaxy of Filament`** (이하 `Filament`)는 우주 전체 물질 질량의 50%를 차지하지만 부피는 6%를 차지하는 구조로서 우주의 물질들이 굉장히 밀집되어 있어 흥미로운 물리현상들이 많이 일어나는 곳이다. [참조 논문](https://academic.oup.com/mnras/article/441/4/2923/1213214)
-
-`Filament`는 3차원 공간상에서 복잡한 원통형 구조를 띄고 있으며 이 원통을 따라 수많은 물리현상들이 (ex: cosmic ray acceleration) 일어난다. 따라서 거대우주공간에서 일어나는 흥미로운 물리현상을 알아내기 위해 Filament를 시뮬레이션 데이터상에서 구분하고 식별하는 일은 필수적이라 할 수 있다.
-하지만 이 `Filament`는 다른 구조 특히, `Wall`과 구분하기 힘든 성질을 가지고 있다.
-
-`Filament` 와 `Wall`은 `Cluster` 주변에 분포하고 전체적인 구조와 물리량(밀도, 온도, Xray)이 오차범위 안에서 비슷한 값을 가진다. 전문가들은 이 둘을 구분하기 위해 **물리량과 함께 3차원 기하학적 정보를 모두 고려하여** 종합적인 판단을 내린다. 
-
-이러한 접근을 모방하기 위해 **Deep Learning**의 **3D-Unet** 과 **Machine Learning** 의  **Label spreading** 을 사용하였다.  또한 실제 우주의 관측데이터가 부족하고 불완전함으로 우주 구조를 묘사하는 시뮬레이션 데이터를 통해 구조를 분석하고 통계량을 계산해 실제 관측데이터와 비교하는 접근을 하였다. 
-
-이를 통해 우리는 특히 `Filament`의 **`Curvature`** 를 계산을 하였다. 실제 관측데이터에서는 Curvature가 큰 Highly curved Filament가 많이 나오지만 시뮬레이션 데이터 상 아직까지 보고 된 바가 없음으로 ML을 통한 Filament Identification이 모든 데이터에 성공적으로 적용할 수 있다면 무수히 많은 Filament들의 통계값을 통해 Highly curved Filament의 존재 유무와 존재 확률을 통계적으로 접근 할 수 있기 때문에 Identification 후 Curvature 계산에 집중하였다. 
-
-모든 코드들은 **Python** 으로 구성했으며 3차원 데이터의 후처리 및 시각화는 **MATLAB** 의 3D Volumetric Image Processing 모듈을 사용하였다.
-
+![filament project](https://swha0105.github.io/assets/projects/filament/filament_project.png)
 
 <br/>
 
-![Gaussian example](https://swha0105.github.io/assets/projects/filament/LSS_example.JPG)
+</div>
+</details> 
 
-Ref: Sloan sky survey(left), [Paper link](https://arxiv.org/pdf/1803.11156.pdf)(right)
+
+<details>    
+<summary> Motivation & Problem  </summary>
+<div markdown="1"> 
+
+## Motivation
+
+|![LSS example](https://swha0105.github.io/assets/projects/filament/LSS_example.JPG)
+|:--:| 
+| LSS example,  1. Sloan sky survey(left),  2. [그림 출처](https://arxiv.org/pdf/1803.11156.pdf)(right) |
+
+현재 인류가 관측 할 수 있는 가장 큰 우주를 보았을 때, 우주에 존재하는 물질 들은 균등하게 분포해있지 않고 특정한 구조를 가지며 분포 해있다.  
+전체 우주의 물질분포와 그 구조를 **거대우주구조 (LSS, Large Scale Structure of the Universe)**라고 하며 이 거대우주구조에는 `Galaxy of Clusters`, `Galaxy of Filaments`, `Wall`, `Void` 의 구조가 존재한다.
+
+- Galaxy of Clusters: 구형으로, 다른 구조들에 비해 온도와 밀도가 월등히 높다.
+
+- **`Galaxy of Filaments`**: 3차원상에서 **원통형**이며 온도와 밀도가 상대적으로 Wall 보다 높다
+
+- **`Wall`** :3차원상에서 **평면구조**이며 온도와 밀도가 상대적으로 Filament 보다 낮다
+
+- Void: 매우 낮은 밀도와 온도를 가지고 있다.
+
+이 중 **`Galaxy of Filament`** (이하 `Filament`)는 우주 전체 물질 질량의 50%를 차지하지만 부피는 6%를 차지하는 구조로서 우주의 물질들이 굉장히 밀집되어 있어 흥미로운 물리현상들이 많이 일어나는 곳이다. [참조 논문](https://academic.oup.com/mnras/article/441/4/2923/1213214)   
+
+따라서, `Filament`를 Identification 하는 문제는 천체물리학계에서 많은 시도가 있고 난제로 속한다. 
+
+![Filament in LSS](https://swha0105.github.io/assets/projects/filament/filament_mass.png)
 
 <br/>
-<br/>
 
-***
-## **Data:**
-본 [논문](https://ui.adsabs.harvard.edu/abs/1993ApJ...414....1R/abstract) 에 언급된 코드를 (Fortran) 이용해 계산된 데이터를 이용하였다.  
-Size: 32GB x 8   
+## Problem:
+
+하지만 이 **Filament**는 **Wall**과 구분하기 힘든 성질이 있는데 이유는 다음과 같다.
+
+1. 밀도, 온도와 같은 Filament와 Wall를 나누는 **물리적 기준의 부재**
+2. 기하학적 정보 수치화의 어려움
+3. 주변 배경(Cluster) 마다 기준이 다름.  
+
+Filament와 Wall은 Cluster 구조 주변에 존재하며, 기하학적으로 **Filament는 3차원 공간상 원기둥, Wall은 평면 구조**를 띈다.   
+하지만 Filament와 Wall은 구분할 수 있는 물리적인 기준이 없고, 따라서 이를 구분하기 위해 3차원 상 기하학적 패턴, 물리량, 시뮬레이션 환경 등 **모든 것을 고려해 종합적인 판단을 내린다.**  
+    
+여기서 가장 문제가 되는 점은 **Filament와 Wall이 존재하는 배경에 따라 물리적 기준과 기하학적 기준이 변한다는 점이다.**
+
+<br/>  
+
+이 문제를 풀기 위해 우리가 힌트를 얻은 지점은 다음과 같다.
+
+1. 절대적인 기준을 찾는 방향 보다는 주변 배경(Cluster) 맞게 기준을 각각 생성한다
+2. Cluster와 Void는 물리적으로 구분이 가능하다.
+3. Filament는 Cluster와, Wall은 Void에 상대적으로 조금 더 연관성이 있다. 
+4. 기하학적 정보를 수치화 하여 물리적 정보와 함께 쓴다.
+
+이러한 접근을 위해 **Machine Learning** 의  **Label spreading** 을 사용하였다.  
+특히, Cluster와 Void는 물리적으로 구분이 가능하기에 이를 `Label`로 사용할 수 있음을 알고 Semi-supervised learning 접근을 하였다.  
+
+이를 통해 우리는 특히 `Filament`의 **`Curvature`** 를 계산을 하였다. 실제 관측데이터에서는 Curvature가 큰 Highly curved Filament가 많이 나오지만 시뮬레이션 데이터 상 아직까지 보고 된 바가 없음으로 ML을 통한 Filament Identification이 모든 데이터에 성공적으로 적용할 수 있다면 무수히 많은 Filament들의 통계값을 통해 Highly curved Filament의 존재 유무와 존재 확률을 통계적으로 접근 할 수 있기 때문에 Identification 후 Curvature 계산에 집중하였다.   
+
+데이터는 본 [논문](https://ui.adsabs.harvard.edu/abs/1993ApJ...414....1R/abstract) 에 언급된 코드를 (Fortran) 이용해 계산된 데이터를 이용하였다.    
+Size: 32GB x 8    
 Format: Binary (3차원)
 
-<br/>
+
 <br/>
 
-***
-## **Previous Research & Limitation:**
+</div>
+</details> 
+
+
+
+<details>    
+<summary> Previous Research & Limitation  </summary>
+<div markdown="1"> 
+
+## Previous Research
 
 기존의 연구들은,  물리학적 정보를 사용하지 않고 기하학적 정보들만으로 `Filament` 와 `Wall` 을 구분하는 시도를 하였다. 
 
@@ -88,18 +122,33 @@ Format: Binary (3차원)
 <br/>
 <br/>
 
-기존 연구방법에서는 위의 방법을 이용하여 기하학적 정보를 사용하였다. 하지만 기하학적 정보와 데이터에 존재하는 물리적 정보 (온도,밀도,xray)를 동시에 사용할 수 없고 기하학적 정보 처리 뒤 후 처리로 처리해야하는 번거로움이 있었다. 또한 이 방법의 가장 큰 한계는 Filament와 Wall에 대한 정량적인 Criteria가 없어 전문가가 데이터 마다 기준을 세우고 분류를 해야하는 번거로움이 존재하였다. 
 
-**전문가의 개입 없이, 데이터에 의존성없이 정량적인 Criteria를 만들어 데이터에 대한 Bias를 없애기 ML/DL 접근을 시도 하였다**
+## Limitation
 
+기존 연구에서 기하학적 정보를 수치화를 하여 Filament를 식별을 하였다.  
+이 방법의 문제점은 크게 2가지가 있는데.
+
+1. 물리량과 기하학적 정보의 단위가 달라 각각의 정보만 사용하고 유기적으로 분석하지 못하였다.
+2. 주변 배경(Cluster)에 따라 변하는 Filament와 Wall의 정보를 전혀 담지 못하였다.
+
+물리량과 기하학적 정보를 동시에 사용하지 못하여, 신호가 약하거나 애매한 Filament인 경우 식별을 하지 못하였다.  
+또한 주변 배경과 관계없이 절대적인 기준을 찾는 시도는 다른 시뮬레이션 데이터 셋으로 확장 불가능하였다.  
+
+
+따라서, 우리의 목표는 **전문가의 개입 없이, 데이터에 의존성없이, 주변 배경과 상대적인 Criteria 각각 생성하여 데이터에 대한 Bias와 상관없이 Filament를 식별하는 것이다.**
 
 <br/>
-<br/>
 
-***
+</div>
+</details> 
 
-## **Approach** : 
-  
+
+<details>    
+<summary> Approach  </summary>
+<div markdown="1"> 
+ 
+
+ 
 ### 1. **Gaussian Pyramid를 통한 데이터 압축**  -> [code](https://github.com/swha0105/Filament_Project/blob/main/pyramid.py) 
 > `Filament` 와 `Wall`은 `Cluster`주변에 존재하기 때문에 데이터를 `Cluster` 주변 40~45Mpc/h 의 크기로 Crop하였다.  Crop을 한 데이터들도 크기가 250~300Mb 하기 때문에 ML/DL에 사용하기 적합하지 않았다. 따라서 Gaussian Pyramid 알고리즘을 2번 적용해 데이터를 압축하였다. 이 과정에서 기하학적 정보가 손실 되지 않았는지 체크하였고 아래 그림과 같이 확인 하였다
 <br/><br/>
@@ -120,7 +169,7 @@ Format: Binary (3차원)
 
  
 ### 3. **Label Spreading을 통한 Filament 식별** -> [code](https://github.com/swha0105/Filament_Project/blob/main/label_spreading_v2.py) 
-### [Label spreading에 대한 포스팅](https://swha0105.github.io/_posts/2021-01-24-projects-projects-filament.markdown)  
+### [Label spreading에 대한 포스팅](https://swha0105.github.io/_posts/2021-01-21-ML_DL-Label_Spreading.markdown)  
 >**Label spreading**은 개수가 적지만 확실한 Label를 통해 Unlabeled 데이터에 Label을 지정 알고리즘으로 **Semi-supervised Learning** 중 하나 이다.    
 거대우주구조 4가지 구조중 `Cluster`와 `Void`는 물리량으로 정확히 정의가 된다.   
 또한, `Filament`는 `Cluster`와, `Wall`은 `Void`와 물리량 및 기하학적으로 비슷한 특성을 가진다.  이를 이용해 `Cluster`와 `Void`를 X-ray 및 온도를 이용하여 정확히 정의 한 뒤 이를 **Label**로 가정한다. Label의 **기하학적 정보와 물리량들**을 이용해 Unlabeled 데이터 안에 존재하는`Filament`와 `Wall`에 대한 **Classification**을 시도 한다.<br/><br/>
@@ -139,13 +188,14 @@ Format: Binary (3차원)
 <br/>
 Skeletonized된 데이터를 이용하여 Python의 모듈 `Networkx`을 이용해 **Graph** 화 하여 **DFS** 개념을 활용해 Cluster 중심에서 부터 Filament가 끝나는 지점까지 길찾기를 하여 필라멘트 개별화를 하였다.
 
+</div>
+</details> 
 
-<br/>
-<br/>
 
-***
+<details>    
+<summary> Result & Summary </summary>
+<div markdown="1"> 
 
-## **Result**
 
 ### 총 40개정도의 cluster에서 segmentation된 105개의 Filament에 대한 물리량들을 구해보았다.  
 
@@ -175,11 +225,6 @@ Filament가 제대로 식별이 됐다고 판단이 되었으므로 우리의 �
 15~20 Mpc/h 의 길이를 가지는 Filament들이 Highly curvature를 가지는 것으로 보였다. 하지만 앞서 언급 했듯이 통계적으로 분석하기 위해 좀 더 많은 데이터가 필요할것으로 보인다.
 
 <br/>
-<br/>
-
----
-
-## **Summary**
 
 위와 같은 일련의 과정으로 Machine Learning을 도입하여 Large Scale Structure of the universe에서의 Galaxy of Filament를 segmentation 및 Identification하는 작업을 하였다.
 
@@ -187,10 +232,8 @@ Filament가 제대로 식별이 됐다고 판단이 되었으므로 우리의 �
 
 Code works은 끝났으니, 데이터가 생성되는대로 좀 더 테스트를 할 예정이다.
 
-<br/>
-<br/>
 
----
+
 
 ### reference
 [1] [https://aip.scitation.org/doi/pdf/10.1063/1.3382336](https://aip.scitation.org/doi/pdf/10.1063/1.3382336)
@@ -205,4 +248,6 @@ Code works은 끝났으니, 데이터가 생성되는대로 좀 더 테스트를
 
 [6] [https://arxiv.org/abs/1401.7866](https://arxiv.org/abs/1401.7866)
 
--
+</div>
+</details> 
+
