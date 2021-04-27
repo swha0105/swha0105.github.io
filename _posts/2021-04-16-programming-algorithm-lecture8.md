@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "[Intro Algorithms] Hasing with Chaining"
+title:  "[Intro Algorithms] Hashing with Chaining"
 subtitle:   "Introduction to Algorithms"
 categories: programming
 tags: cs
 comments: true
 ---
 
-# 7. Hasing with Chaining
+# 8. Hashing with Chaining
 - Dictionaries 
 - Hash & Chaining
 - Simple Uniform Hashing & Hash Function
