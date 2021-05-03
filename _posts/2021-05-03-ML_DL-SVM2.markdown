@@ -95,14 +95,14 @@ $$ \gamma_{i} = 0 \quad \xi_{i} > 0 \quad -\gamma_{i} \xi_{i} = \alpha_{i}(y_{i}
 
 ### Kernel mapping
 예를 들어, $$ X = (x_{1},x_{2}), Y = (y_{1},y_{2})$$ 의 데이터에 다음과 같은 `kernel function`을 이용해 `mapping`을 시킨다고 해보자.  
-Kernel function: $$\phi(X)) = x_{1}^2,x_{2}^{2}, \sqrt{x_{1}x_{2}} $$  
+Kernel function: $$\phi(X) = (x_{1}^2,x_{2}^{2}, \sqrt{x_{1}x_{2}}) $$  
 
-차원이 늘어난 데이터 셋을 다시 SVM에 넣어보면 다음과 같다.  
+차원이 늘어난 데이터 셋을 다시 SVM의 lagrangian formulation에 넣어보면 다음과 같다.  
 
 $$ \underset{\alpha}{max} (\sum_{i=1}^{n} \alpha_{i} - \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} \alpha_{i}\alpha_{j}y_{i}y_{j} \phi(X_{i})^{T} \phi(X_{j}) ) $$
 
 `Kernel mapping`을 하게 되면 위와 같은 직관적인 식이 되지만, 계산량이 엄청 늘어난다.  
-Input 데이터를 kernel function을 통해 `mapping`하고, `내적`을 해야하는데 Input 데이터의 보통의 크기를 생각하면 어마어마한 연산량이 필요로 하다.  
+Input 데이터를 kernel function을 통해 `mapping`하고, `내적`을 해야하는데 Input 데이터의 보통의 크기를 생각하면 **어마어마한 연산량이 필요로 하다.**
 
 ### kernel trick
 kernel function이 Input 데이터에 대해 `Linear Transformation`로 표현이 가능하다고 가정하자. ($$ \phi(X) = Ax $$ )  
