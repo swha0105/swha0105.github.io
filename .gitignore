@@ -45,3 +45,7 @@ node_modules
 .sass-cache
 .jekyll-metadata
 *.gem
+
+
+vendor/*
+.bundle/*
