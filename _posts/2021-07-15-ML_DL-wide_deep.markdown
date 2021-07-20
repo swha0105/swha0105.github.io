@@ -14,7 +14,8 @@ comments: true
 
 추천시스템에서 딥러닝의 첫번째 주요 혁신 중 하나라고 소개된 논문이다.  
 지금까지 알아본 결과, 이 논문을 기점으로 추천 딥러닝 후속 논문이 나오고 이 논문을 citation을 하고 있다.  
-추천 딥러닝을 조사하기 위해 첫번째로 이 논문을 선정하였다. (Ref. 1)
+이 논문에서 사용된 시스템은 구글플레이 앱스토어에 앱 추천에 사용되고 있으며 추천하는데 있어 앱에 따라 각각 다른 feature들을 고려하여 linear and non-linear하게 분석하여 추천한다.  
+추천 딥러닝을 조사하기 위해 첫번째로 이 논문을 선정하였다. 
 
 ---
 
@@ -23,12 +24,12 @@ comments: true
 
 # Abstract 
 
-**1. Linear model + Nonlinear feature transformation (Wide)**
-  - **`Wide`** & sparse data set에 적용한 `Cross-product feature transformation`(Nonlinear feature transformation)은 Feature간의 interaction을 `Memorization` 하는데 효과적이였다.
+**1. Linear model + Nonlinear feature transformation (`Wide`)**
+  - **`Wide`** & sparse data set에 적용하여 Nonlinear feature를 찾기 위한 `Cross-product feature transformation`(아래에 기술된 wide & deep learning - wide component에 설명)은 feature간의 interaction을 `Memorization` 하는데 효과적이였다.
   - 하지만, `Cross-product feature transformation`을 통해 feature간 모든 interaction을 generalization 하는데는 feature engineering (manual)이 필요하다.
 
-**2. Deep Neural Network (Deep)**
-  - **`Deep `** Neural network는 `low-dimensional dense embeddings`을 통해 unseen feature combinations을 구할 수 있다.
+**2. Deep Neural Network (`Deep`)**
+  - **`Deep`** Neural network는 `low-dimensional dense embeddings`을 통해 unseen feature combinations을 구할 수 있다.
   - 하지만, data가 sparse & high-rank일 경우 over-generalization 현상이 발생 (모든 feature interaction을 0으로 예측.)
 
 따라서 이 논문에서는 **Wide(`Memorization`, `Linear`)** & **Deep(`Generalization`, `Nonlinear`)**의 각각의 장점을 뽑아 추천 시스템 구축하여 구글 플레이 스토어 앱 추천 등, 많은 상용화된 어플에 적용함  
@@ -58,10 +59,12 @@ comments: true
 
 ##### 1. Cross-product transformation (For linear model)
 
-- Feature n1과 Feature n2의 연관성을 Manual하게 설정한다.  (ex, installed_app_1 = netfilx, installed_app_2 = youtube)
+- Feature n1과 Feature n2의 연관성을 Manual하게 설정한다.   
+(ex, installed_app_1 = netfilx, installed_app_2 = youtube,   
+if installed_app_1 & installed_app_2 then return 1 )
 - Feature가 의미하는바를 넓은 범위로 설정하면 어느정도 generalization도 구현이 되지만 manual feature engineering이 요구되는 점에서 한계가 명확하다.  
 (ex, installed_app = videos)
-- 또한, 관측되지 않았던 query-item feature pair는 고려하지 못한다. 
+- 또한, **관측되지 않았던 query-item feature pair는 고려하지 못한다.**
 
 ##### 2. Embedding-based model(For FM, DNN)
 
@@ -110,7 +113,7 @@ comments: true
 Binary feature들끼리 상호작용을 캡쳐하고, Non-linear term을 추가하는 효과.
 
 > x: feature (length d)  
-> $$\phi_{k}$$: manual하게 설정한 k번째 feature들의 조합 (ref 2 ~~논문에 설명이 안되어있다~~)  
+> $$\phi_{k}$$: manual하게 설정한 k번째 feature들의 조합 (~~논문에 설명이 안되어있다~~)  
 > $$c_{ki}$$: i-th feature가 $$\phi_{k}$$와 연관이 있을때 1, otherwise 0 (manual 하게 설정)
 
 
@@ -145,7 +148,7 @@ Joint training도 복수의 모델이 존재하는데, 학습과정에서 parame
 - Optimizer로 각각 Deep part - **AdaGrad**,  Wide part - **L1 regularization** 을 사용하는 **`Follow-The-Regularized-Leader` (FTRL)** 알고리즘 구현
 
 
-Follow-The-Regularized-Leader:  
+**Follow-The-Regularized-Leader(FTRL):**
 
 $$P(Y=1 \lvert X) = \sigma(w^{T}_{wide}(x,\phi(x)) + W^{T}_{deep} a^{l_{f}} + b)$$
 
