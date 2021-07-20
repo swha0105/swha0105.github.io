@@ -1,0 +1,255 @@
+---
+layout: post
+title:  "[ML/DL Paper] An MDP-Based Recommender System"
+subtitle:   "Recommendation"
+categories: ml_dl
+tags: ml
+comments: true
+---
+
+|![Title](https://swha0105.github.io/assets/ml/img/mdp_title.png)  
+|:--:| 
+| [논문 링크](https://www.jmlr.org/papers/volume6/shani05a/shani05a.pdf)|  
+
+이 논문은 (Markov Decision Process, MDP)를 기반으로 하는 추천시스템에 대해 설명되어있다.  
+MDP는 
+
+2005년 논문이다 보니 읽다보면 out-of-date된 개념과 설명이 존재하지만 강화학습을 기반으로하는 추천시스템을 처음 실제사용한것에 있어 의미가 있다고 생각한다.  
+하지만 이후 후속연구가 많이 진행되지않고 collaborative filtering에 밀린 느낌이 있어 뭔가 상용화하는데 문제가 있는듯 하다.  
+
+데이터를 MDP system에 주로사용되는 4-tuple로 묶어 모델링하는 아이디어는 유용하다고 생각든다. 
+
+
+# Abstract
+
+- 기존의 추천시스템은 recommendation process를 static하게 가정하고 예측함.
+- 기존의 접근들과 다르게 MDP는 recommendation process를 `sequential optimization problem`으로 가정하고 개별의 추천 항목에 대해 `Long-term effect`과 `expected value`를 고려할 수 있다.
+
+- MDP system 구축을 위해서는 빠르게 계산할 수 있으며, 메모리를 많이 사용하지 않는 `initial model`을 적용해야한다.
+
+- 처음으로 real commercial site에서 테스트 해본 모델이다. (2005년 기준)
+
+---
+
+<br/>
+
+
+
+
+# Introduction
+
+- MDP에서 의미하는 Recommendation은 단순히 과거 이력을 통해 예측하는 `Seqential prediction`이 아닌
+recommendation을 통한 수익 창출과 같은 시스템에 적합한 최적화 기준을 고려한 `Sequential decision`을 의미한다. 
+
+- MDP model의 `Optimal policy`( Background-MDPs 에 설명) 는 유저가 받아들일 `likelihood of a recommendation`을 고려한다.  
+(이는, 추천을 하였을때 구매한 확률이 추천하지 않았을때에 비해 높아지는것들을 고려하겠다는 의미이다. )  
+
+- 기존 MDP model은 Initial parameter를 random으로 주었기 때문에 converge하는데 시간이 오래걸렸고 이는 상용화하는데 큰 문제가 되었다.
+
+- 따라서, Initial parameter를 과거의 (추천시스템을 적용하기전) 데이터를 이용해 `predictive model`를 구축하여 사용한다. 이때 predictive model은 어떤형태라도 상관없다. 이 논문에서는 `N-gram`, `MC`(markov chain)을 기반으로한 모델로 구축하였다.
+
+- 기존 recommender system의 평가는 historical data (추천 시스템이 적용되기 전 데이터)를 이용해 얼마나 잘 예측하는지 평가함. (Predictive accuracy)
+
+- 이 논문에서는 A/B 테스트를 시행함 (논문에서 A/B 테스트라는 워딩이 나오지 않지만 이와 똑같은 설명하는 문단 존재.)
+
+---
+
+<br/>
+
+# Background
+
+**1. Recommender System**
+
+- **Content-based Recommendation:** Item의 content (description, category, title, author ...) 에만 의존하는 추천 시스템
+
+- **Knowledge-based Recoomendation:** Content-based에서 나온 feature들을 통해 similarity를 계산, Item끼리의 유사도를 이용한 추천 시스템
+
+- **Collaborative filtering:** 사용자와 비슷한 user들의 historical data을 이용한 추천시스템. 이때 item의 content 정보는 사용하지 않는다. user data를 directly 사용하는 `Memory-based`와 user data를 압축 및 변형시켜 사용하는 `Model-based`가 존재한다. 이 논문에서 소개하는 MDP-based recommend system은 `Model-based` 이다.
+
+<br/>
+
+**2. N-gram model**
+
+- N-gram모델은 Language modeling에서 나온 개념으로 최근 n-1개의 words를 사용해 다음에 올 N번째 word를 예측하는 모델이다.
+
+- `Skipping`, `Clustering`, `Smoothing`의 개념을 이용해 성능을 향상하였다  
+자세한 내용은 The Predictive model - Some improvement에 설명
+
+<br/>
+
+**3. MDPs**
+
+- MDP는 4-tuple로 정의된다. **<S,A,Rwd,tr>**  
+각 항목에 대한 설명은 여기서 설정한 MDP model에만 해당되는것이다.
+
+>**S:** set of states (state: s)
+- 유저 dependency가 없이, item을 구매한 이력을 database로 사용자가 설정한 k개 만큼 order를 고려하여 추출.
+
+>**A:** set of actions (action: a)
+   - 추천시스템에서 추천하는 행위, 추천할 수 있는 list에서 하나를 선택하는것이 `policy`의 역할  
+
+>**Rwd:** state와 action pair에 정의되는 real-value reward function   
+   - 이미 정해진 값으로, 데이터베이스에 있다고 가정.
+
+>**tr:** state-transition function  
+   - 특정 state s에서 action을 하였을때 (추천) state s'으로 넘어갈 확률. 
+
+<br/>
+
+- MDP는 `optimal policy`를 찾아 reward stream을 최대로 하는것이 목표이다.
+
+**Policy ($$ \pi$$):** state에서 action으로 mapping되는 값으로, state s에서 특정 action을 수행하도록 설정되는 값. `Optimal policy`란 reward stream을 최대로 하는 policy들의 set을 의미한다. 
+   
+$$ \pi_{i+1}(s) = \underset{a \in A}{argmax} (Rwd(s,a) + \gamma \sum_{s_{j} \in S} tr(s,a,s_{j})V_{i}(s_j) )$$
+
+> i: iteration 횟수  
+> $$\gamma$$: discount factor ( 0 < $$\gamma$$ < 1 ).  
+   - 현재 state s에서 비교적 과거에서 온 value function과 transition function은 discounting 하여 고려함.
+
+**Value function ($$ V_{i}(s)$$):** state s에 assign되며, policy $$\pi$$를 이용해 s에서 부터 가능한 모든 state에 대해 sequential discounted reward를 더한 값
+
+$$ V_{i}^{\pi} = Rwd(s,\pi_{i}(s))  + \gamma \sum_{s_j \in S} tr(s,\pi_{i}(s),s_{j})V_{i}(S_{j})$$ 
+
+Policy와 value function을 input으로 **`Policy-iteration`** 알고리즘을 사용 할 수 있고 이를 통해 `Optimal policy`를 찾게 된다.  
+(Policy-itertaion은 이 논문에 설명되어있지 않다. Howard, 1960을 참조하였다고 설명되어있다.)
+
+
+<br/>
+
+---
+
+# The Predictive Model
+
+- 첫번째 스텝은, User가 다음에 무엇을 구매할지 예측하는 `predictive model`를 구축하는 것이다.
+- 이 모델은 추천시스템과 그것에 대한 유저들의 반응 정보를 고려하지 않고 과거의 empirical data으로만 구축되었으며 단지 **MDP system에 initalize하는 용도로만 사용 될 것이다**. 
+
+**1. The Basic Model**
+- MDP system과 다르게, `predictive model`은 **`Markov Chain (MC)`**을 사용하였고 이는 MDP에서 추천에 대한 개념이 빠진 모델이다.  
+(본 논문에서 N-gram와 혼용해서 쓰지만 기본 원리는 비슷하기에 별 문제 없어 보인다.)
+- 따라서 MDP에서 정의한 4-tuple과는 다르게, **`State`**와 **`Transition function`**의 개념만 등장한다.  
+
+**States:** MDPs의 state설명과 동일. ( 1 $$\leq$$ k $$\leq$$ 5)
+
+**Transition function:**  
+
+$$ tr_{MC}( (x_{1},x_{2},x_{3}),(x_{2},x_{3},x_{4}) ) = \frac{count(x_{1},x_{2},x_{3},x_{4})}{count(x_{1},x_{2},x_{3})}$$
+
+- x1,x2,x3를 구매하였을때, x4를 구매할 확률. (user dependency 없음.)
+- 이 모델은 data sparsity에 취약하다. 따라서 아래와 같은 improvement 적용
+
+<br/>
+
+**2. Some Improvements**
+
+**Skipping**
+  - state끼리 sequence의 크기가 다르지만, sequence의 내용이 비슷한 경우 transition function은 서로에게 영향을 준다.
+  - 예를 들어, 데이터에 state s = (x1,x2,x3)가 많다고 가정한다면 state s' = (x1,x3)도 s에 대한 높은 빈도수에 대해 고려해야 할 것이다.
+  - state s = $$(x_{i},x_{i+1},x_{i+2})$$ 에서 state s' = $$(x_{i+1},x_{i+2},x_{j}) \; ( \; i+1 \lt j \leq n \quad \forall \; j) $$ 에 대한 transition function을 계산한 뒤, fractional count = $$\frac{1}{2^{j-(i+3)}}$$ 을 더해준다. 
+  - 그 후, normalize하여 transition function을 다시 계산한다. 이를 통해 state끼리의 연관성을 강화한다. 
+
+$$ tr_{MC}(s,s') = \frac{count(s,s')}{\sum_{s'}count(s,s')}$$  
+
+**Clustering**
+- 비슷한 sequence를 담고있는 state들은 서로 transition function에 영향을 준다
+- tr(s -> s')의 likelihood는 tr(t -> s') (s ~= t)로 계산 가능.
+
+
+
+$$sim(s_{i},s_{j}): \sum_{m=1}^{k} \delta(s_{i}^{m},s_{j}^{m}) (m+1)$$  
+   > m: m-th item in state $$s_{i}$$
+   > - sim 함수를 통해 state s와 state s'에 대해 같은 item들이 나오는 횟수 count.
+   
+$$simcount(s,s') = \sum_{s_{i}} sim(s,s_{i}) tr_{MC}^{old}(s_{i},s')$$  
+   > - sim함수와 기존의 transition function을 통해 `similarity count` 계산
+
+$$tr_{MC}(s,s') = \frac{1}{2} tr_{MC}^{old}(s,s') + \frac{1}{2} \frac{simcount(s,s')}{\sum_{s''}simcount(s,s'')}$$
+   > - state s와 모든 state $$s_{i}$$에 대해 sim을 계산, $$s_{i}$$와 s'에대한 transition function을 계산
+
+$$tr_{MC}(s,s') = \frac{1}{2}tr_{MC}^{old}(s,s') + \frac{1}{2}\frac{simcount(s,s')}{\sum_{s''}simcount(s,s'')}$$
+> - clustering을 고려한 새로운 transition probability (state s -> s')
+
+<br/>
+
+---
+
+# Evaulation of Predictive Model
+
+- MDP는 Initialize를 위해 MC model 혹은 N-gram model 를 기반으로 한 predictive model을 사용한다.
+
+
+**1. Data Sets**
+- 이스라엘의 온라인 북스토어 mitos의 user 구매이력, user의 browsing path (web logs)
+- Data cleansing: (100번 이하의 구매/조회이력인 item)  & (한개 이하의 구매이력인 user)
+- 116 (65)개의 item과 10820 (6678)개의 user 구매이력 (browsing path) data 
+- 90:10로 traning, test data split
+
+**2. Evaluation Metrics**
+
+**Recommendation Score (RC)**
+- m개의 recommended item중에 observed item이 존재하는 여부를 계산하는 metric (m는 변수)
+- RC의 score는 prediction의 성공률. 
+
+**Exponential Decay Score (ED)**
+- observed item이 recommendation list의 어떤 position에 있는지 고려.
+
+
+**Comparison models**
+
+- Predictive model의 성능 평가를 위해 Microsoft에서 개발한 COMMERCE SERVER 2000 PREDICTOR와 비교하였다.
+
+|![Fig 1](https://swha0105.github.io/assets/ml/img/mdp_fig1.png)    
+|:--:| 
+| Exponential decay score left: 유저 구매 data, Right: browsing data |
+
+|![Fig 2](https://swha0105.github.io/assets/ml/img/mdp_fig2.png)    
+|:--:| 
+| RC score left: 유저 구매 data, Right: browsing data |
+
+> predictor는 비교모델인 COMMERCE SERVER 2000 PREDICTOR  
+> MC: Markov chain   
+> UMC: order를 고려하지않은 Markov chain  
+> predictor-NS는 order를 고려하지않은 predictor  
+> SK는 Skipping 적용, SM은 clustering 적용  
+> 숫자 12345는 mixture model의 component  
+
+
+- skipping, clustering, mixture modeling은 다른것이 모두 같은 조건일때 항상 좋은 결과를 보였다.
+- sequence를 고려한 모델이 항상 좋은 결과를 보였다.
+- 비교모델인 predictor에 비해 전반적으로 조금 더 향상된 결과를 보였다. 
+
+
+**Variations of the MC model**
+
+|![Fig 3](https://swha0105.github.io/assets/ml/img/mdp_fig2.png)    
+|:--:| 
+| Exponential decay score left: 유저 구매 data, Right: browsing data |
+
+- MC 모델끼리 비교에서는 모두 clustering이 효과적임을 보였다.
+- 이와 반대로 skipping은 구매이력 데이터에만 효과 있고 browsing path데이터에는 효과가 없엇다.
+- site가 state안 sequential data를 띄어넘는 `jump ahead`를 허락하지 않아서 추측한다.
+- 하지만 recommendation이 적용되고 난 후, skipping은 효과적이라 예상된다.
+
+<br/>
+
+---
+
+# An MDP-based Recommender Model
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
