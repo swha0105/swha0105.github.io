@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "[ML/DL Paper] Bayesian Co-clustering"
+subtitle:   "Recommendation"
+categories: ml_dl
+tags: ml
+comments: true
+---
+
+|![Title](https://swha0105.github.io/assets/ml/img/BCC_title.png)  
+|:--:| 
+| [논문 링크](https://arindam.cs.illinois.edu/papers/08/bcc.pdf) |  
+
+<br/>
+
+---
+
+# 논문에 안나오는 배경지식
+
+
+# Abstact
+
+- 기존의 co-clustering은 paritional이며, 각 row와 column이 cluster하나에 속할 수 밖에 없었다.
+-
+
+
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>

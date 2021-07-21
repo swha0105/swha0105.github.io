@@ -250,7 +250,7 @@ state s = $$(x_{1},x_{2},x_{3})$$에서 action을 통해 x'이 추천되었다�
 
 <br/>
 
-**2. Initialize $$Tr_{MDP}$$**
+**2. Initialize $$tr_{MDP}$$**
 - MDP 추천시스템의 상용화를 위해 빠른속도로 converge하는 추천시스템을 구축하는건 중요한 문제이다
 - 따라서, 전통적인 방법과 다르게, **Initial value를 prediction model을 통해 비교적 정확하게 주어 converge하는 속도를 줄일 것이다.**
 
@@ -261,6 +261,42 @@ $$\alpha_{s,r} \quad (\alpha_{s,r} > 1) $$ state s에서 r을 추천하였을때
 2. 추천을 하지 않은 item을 user가 살 확률은 추천이 전혀 없었을때에 해당 item을 살 확률보다 낮다.
 $$\beta_{s,r} \quad (\beta_{s,r} < 1) $$ state s에서 r을 추천하였을때 해당하는 비례 상수
 
+이를 이용해 $$tr_{mdp}$$를 Initialize하면 다음과 같다.
+
+$$tr_{mdp}^{1}(s,r,s*r) = \alpha tr_{predict}(s,s*r)$$  
+- user가 system이 추천한 r을 구매할 경우.  
+  
+$$tr_{mdp}^{1}(s,r',s*r) = \beta tr_{predict}(s,s*r), r' \neq r$$   
+- user가 system이 추천한 r이 아닌 다른 item을 구매할 경우.  
+  
+$$tr_{mdp}^{1}(s,r,s) = 1 - tr_{mdp}^{1}(s,r,s*r) - \sum_{r' \neq r} tr_{mdp}(s,r,s*r')$$  
+- user가 system이 r를 추천한 뒤, 아무런 item도 구매하지 않았을 경우. 
+
+tr에 윗첨자 1은 하나의 recommendation을 의미한다.
+
+<br/>
+
+**3. Generating Multiple Recommendations**
+- 지금까지 추천이 하나인 경우를 살펴보았고 추천이 여러개일 경우 다음과 같은 가정을 한다
+
+$$ (r \in R \wedge r \in R') \vee (r \notin R \wedge r \notin R') $$ 
+=> $$tr_{MDP}(s,R,s*r) = tr_{MDP}(s,R',s*r)$$
+
+- 추천 아이템 r에 대해 추천 집합 R,R'에 동시에 속하거나 속하지 않을 경우만을 가정한다
+- 각각의 추천(r) 들은 독립적이다. 
+
+위의 가정은 사실상 틀렸다고 언급된다. (R과 R'의 크기가 다를때, state s R과 R'을 추천받아 r로 넘어가는 transition function이 같을 수 없음. )
+
+하지만 이 가정은 action이 단일 recommendation이 아닌 ordered combinations of recommendation일 때, action space의 크기를 어느정도 제한하는 효과가 있다.  
+따라서, 위의 가정을 따르면 Multiple recommendation의 transition function도 각각 독립적으로 계산이 가능하다.
+  
+$$tr_{MDP}(s,r \in R, s*r) = tr_{MDP}^{1}(s,r,s*r)$$  
+$$tr_{MDP}(s,r \notin R, s*r) = tr_{MDP}^{1}(s,r',s*r) \quad \forall r' \neq r$$
+
+<br/>
+
+
+# 작성중
 
 
 
