@@ -15,16 +15,209 @@ comments: true
 
 ---
 
-# 논문에 안나오는 배경지식
+# 선행지식
+이 논문을 이해하러면 `Co-clustering`에 대한 이해가 필수지만 자세한 설명을 찾기 힘들어 [본 강의](https://www.youtube.com/watch?v=mnDC6hWWbwY)를 참조 하였다. 개인적으로 느끼기에 co-clustering에 대해 가장 잘 설명한듯 하다.
 
 
-# Abstact
+|![CC sample](https://swha0105.github.io/assets/ml/img/cc_fig1.png)  
+|:--:| 
+| Example data |  
 
-- 기존의 co-clustering은 paritional이며, 각 row와 column이 cluster하나에 속할 수 밖에 없었다.
--
+- 동물과 그 특징을 나타내는 dataset
+- 비슷한 특징들을 나타내는 동물들을 잘 묶어내는게 goal
+
+## PCA
+
+|![PCA example](https://swha0105.github.io/assets/ml/img/cc_fig2.png)  
+|:--:| 
+| PCA example |  
+
+- feature들이 많을때 흔히 가장 많이 사용하는 PCA기법.
+- PCA axis 1, component 1은 birds와 아닌것들의 구분.
+- PCA axis 2, component 2는 사실상 구분이 불가능.
+
+### PCA의 문제점
+- Not interest in how every sample affected by every variable (vice versa)
+(예를 들어, 개한테 털이 얼마나 달렷는지 관심없음)
+
+- 따라서 PCA와는 다르게 Co-clustering은 group of data는 group of feature(variable)로 표현 하도록 설정 
+
+<br/>
+
+## Co-clustering
+
+|![Co-clustering example](https://swha0105.github.io/assets/ml/img/cc_fig3.png)  
+|:--:| 
+| Clustering example, top right: Traditional clustering, bottom right: Co-clustering |  
+
+- Row index는 사람이름, Column index는 제출한 논문 저널을 의미.
+- 이때, 논문저널 제출 패턴이 비슷한 사람끼리 묶어본다. 
+
+- traditional clustering은 row끼리 가장 비슷한 묶는다. (Rasmus Bro - PAT person)
+- co-clustering은 row와 column모두 고려하여 가장 비슷한 데이터끼리 묶는다.   
+(EEM은 Rasmus Bro, Fluorescence person. Rasmus Bro의 NIR,PLS,PCA는 PAT person과 clustering)
+
+**Co-clustering 핵심: some of the samples are reflected by some of variables**
+
+
+<br/>
+
+---
+
+
+# Abstact & Introduction
+
+
+- 많은 실제데이터들이 2가지 `entities of interest` (row & column in matrix)에 영향을 받는 `dyadic`의 형태를 띄고있다.  
+
+- dyadic data와 관련된 data mining의 목적은 각 entity를 clustering하는 것이다.
+(ex, movie and user groups in recommendations system)
+
+- 하지만 traditional clustering algorithm은 2가지 entitiy의 연관성을 캡쳐할 수 없어 이러한 문제에 제대로된 성능을 내지 못하였다.
+
+- `co-clustering`은 2가지 entity에 대해 동시에 clustering을 수행함으로서, data의 structure를 파악하고 missing value의 값을 예측하는데 강점이 있다.
+
+- `co-clustering`의 주요 제한은 **`partional`**이다. (row/column이 단 하나의 row/column cluster에 속함) 이러한 제한은 데이터가 multiple cluster에 속하는 실제데이터를 표현하는데 한계가 있다. (user might be an anction movie fan and also a cartoon movie fan)
+
+- 따라서, 이 문제를 해결하기 위해 본 논문에 제시하는 **`Bayesian co-clustering(BCC)`**은 각 row/column은 row/column cluster에서 생성된 mixed membership을 가지고 있다고 가정한다.
+
+- BCC는 row/column co-cluster를 생성하는 generative model로서 any exponential family distribution을 사용할 수 있다. 본 논문에서는 `Dirichlet distribution`을 사용한다
+
+- BCC는 non missing entries를 기반으로 inference를 시행하기에 sparse matrices를 처리하는데 특화되어있음.
+
+- Model은 각 row/column에 대해 동시에 dimensional reduction을 하는 `Co-embedding`을 수행한다
+
+<br/>
+
+---
+
+# Generative Mixture Models
+- Background for Generative model in BCC
+
+**1. Finite Mixture Model**
+
+$$ p(X \lvert \pi, \Theta) = \sum_{z=1}^{k}p(z \lvert \pi)p(X \lvert \theta_{z})$$
+
+> $$\pi$$: K component distribution의 prior  
+> $$\Theta: (\theta_{z},z_{1}^{k})$$   
+> $$z_{1}^{k}: z \quad where \; z \in (1,2,....k)$$  
+> $$p(x \lvert \theta_{z})$$: exponential family distribution
+
+- latent cluster structure를 찾기 위한 가장 많이 연구된 모델
+- prior $$\pi$$가 all data point에서 고정되어있다고 가정.
+
+
+**2. Latent Dirichlet Allocation**
+
+$$P(X \lvert \alpha, \Theta) = \int_{\pi} Dir(\pi \lvert \alpha) (\Pi_{l=1}^{d} \sum_{z_{1}}^{k} p(z_{l} \lvert \pi)p(x_{l} \lvert \theta_{z_{l}})  ) d \pi $$
+
+- Finite Mixture Model에서 가정한 Fixed $$\pi$$를 해결하기 위해 $$\pi$$를 Dirichlet distribution($$Dir(\alpha)$$)에서 sampled 된다고 가정하고 $$\pi$$를 mixing weight라고 부른다.
+- $$P(X \lvert \alpha, \Theta)$$는 intractable이기 때문에 Variational Inferecnce와 Gibbs sampling이 도입
+- token (X = (x1,x2,x3...))은 discrete임을 가정한다.
+
+**3. Bayeisan Baive Bayes.**
+
+$$P(X \lvert \alpha, \Theta, F) = \int_{\pi} Dir(\pi \lvert \alpha) (\Pi_{l=1}^{d} \sum_{z_{1}}^{k} p(z_{l} \lvert \pi)p_{\psi}(x_{l} \lvert \theta_{z_{l}},f_{l},\Theta )  ) d \pi $$
+
+> F: feature set  
+> $$f_{l}:$$: feature for l-th non-missing entry 
+
+- Latent Dirichlet Allocation에서 가정한 discrete token을 해결하기 위한 방법
+- 자세한 설명은 기술되어있지 않다. 다른 논문을 찾아 조사가 더 필요할듯 하다
+
+**4. Co-clustering based on GMMs**
+- GMM을 기반으로 한 Co-clustering을 하여 data mining에 적용한 기존 연구들은 다음과 같은 단점을 지닌다.
+  1. Binary relationship만 다룰 수 있다
+  2. one type of entity만 다룰 수 있다. 
+  3. 효과적인 inference algorithm이 존재하지 않는다.
+
+- 여기서 제시하는 BCC는 위와 같은 단점이 존재하지 않는다고 한다. 
+
+<br/>
+
+---
+
+# Bayesian Co-Clustering
+
+|![BCC model](https://swha0105.github.io/assets/ml/img/BCC_fig1.png)  
+|:--:| 
+| Bayesian Co-Clustering Model |  
 
 
 
+**Notation & Assumption**
+- Data Matrix: X (n1 * n2 )
+- row cluster k1에 대한 latent variable:  $$z1 = (i,{i}_{1}^{k_{1}}$$) 
+- column cluster k2에 대한 latent variable:  $$z2 = (j,{j}_{1}^{k_{2}}$$)
+> ($$ i,{i}_{1}^{k_{1}} $$) 은 $$i$$값이 $$1,2,3, .. k_{1}$$을 가질수 있다는 의미 
+~~왜 이런 notation을 사용하는지는 의문이다..~~
+
+- rows/columns은 $$Dir(\alpha_{1})$$/$$Dir(\alpha_{2})$$ 분포를 따른다.
+- Dirichlet 분포(Dir) 에서 각 row/column (u/v)에 대해 해당되는 **mixing weight ($$\pi_{1u}$$  $$\pi_{2v}$$)**가 만들어진다.
+  - Dirchlet분포에서 각 row/column에 해당되는 분포 생성
+- row/column (u/v)에 해당되는 **row/column clusters**는 discrete distributiuon ($$Disc(\pi_{1u}) / Disc(\pi_{2v})$$)에서 sampled된다.
+  - mixing weight에서 row/column cluster 생성
+- **row/column cluster (i/j)는 Co-cluster (i,j)에 해당된다.**  
+  Co-cluster는 exponential family distribution $$p_{psi}(x \lvert \theta_{ij})$$  $$\theta_{ij}$$에 해당된다.
+  - row/column cluster 분포에서 co-cluster 생성
+
+
+**Generative Process**
+
+
+1. $$Dir(\alpha_{1})/Dir(\alpha_{2})$$에서 Matrix에 있는 모든 row/column 에 대해 해당되는 mixing weight $$\pi_{1u}/\pi_{2v}$$을 샘플링한다.
+2. Mixing weight를 input으로 받는 Discrete distribution에서 $$(Disc(\pi_{1u})/Disc(\pi_{2v}))$$
+에서 row/column cluster의 latent variable $$(z_{1}/z_{2})$$를 샘플링한다.
+3. 추출된 $$(z_{1},z_{2})$$을 이용하여 data x를 생성한다 ( $$p(x \lvert \theta_{z1,z2})$$ )
+
+<!-- ※ $$z_{1},z_{2}$$에 대한 설명은 논문에 명시되어있지 않다. 본인이 논문 내용을 추론하여 작성한것으로 정확한내용과 다를 수 있다.  -->
+
+제시된 model을 이용하여 **하나의 entry (matrix element x)**에 대한 **marginal probability**를 계산하면 다음과 같다.
+
+$$ p(x \lvert \alpha_{1},\alpha_{2},\Theta) = \int_{\pi_{1}}\int_{\pi_{2}} p(\pi_{1} \lvert \alpha_{1})p(\pi_{2} \lvert \alpha_{2}) \sum_{z1} \sum_{z2} p(z_{1} \lvert \pi_{1}) p(z_{2} \lvert \pi_{2}) p(x \lvert \theta_{z_{1}z_{2}}) d \pi_{1} d \pi_{2}$$
+
+이 식을 따르면, row/column에 해당되는 mixing weight는 ($$\pi_{1} / \pi_{2}$$) 한번씩만 샘플링되기 때문에, 각 row/column에 안에 속해있는 entry(data) 끼리는 coupling이 일어 난다.  
+(Not statistically independent, 하나의 row/column에 속해있는 entry(data)들은 $$\pi_{1},\pi_{2}$$ 값이 공유됨)   
+따라서, **전체 matrix의 확률을 구하기 위해 하나의 entry에 대해 marginal probability구하는 접근은 불가능 하다**
+
+따라서, **전체 matrix의 joint probability**를 한번에 구하기 위해 각 point (entry)의 marginal probability의 곱과 같다고 가정하고 식을 풀면 다음과 같다. 이 가정은 mixture model에서 많이 사용하는 가정이다.
+
+
+$$ p(X, \pi_{1u}, \pi_{2v}, z_{1uv},z_{2uv},u_{1}^{n1},v_{1}^{n2} \lvert \alpha_{1},\alpha_{2},\Theta) = $$  
+ $$ ( \Pi_{u} p(\pi_{1u} \lvert \alpha_{1}) ) ( \Pi_{v} p(\pi_{2v} \lvert \alpha_{2}) )
+( \Pi_{u,v} p(z_{1uv} \lvert \pi_{1u}) p(z_{2uv} \lvert \pi_{2v}) p(x_{uv} \lvert \theta_{z_{1uv},z_{2uv}} )^{\delta_{uv}}    )$$
+
+> $$\delta_{uv}$$: if $$x_{uv}$$ is missing then 0 otherise 1  (non-missing entry만 고려한다)  
+> $$z_{1uv}$$: latent row cluster $$(z_{1uv} \in {1,2,... k_{1}})$$ for observation $$x_{uv}$$  
+> $$z_{2uv}$$: latent column cluster $$(z_{2uv} \in {1,2,... k_{2}})$$ for observation $$x_{uv}$$  
+
+- observation $$x_{uv}$$ (entry, data point)은 $$\pi_{1u}, u_{1}^{n_{1}}$$과 $$\pi_{2v}, v_{1}^{n_{2}}$$가 주어졌을때 **`Conditionally Indepenent`** 하다. 이 조건을 고려하고 **joint distribution**을 다시 쓰게 되면 아래와 같다.
+
+$$ p(X, \pi_{1u}, \pi_{2v}, z_{1uv},z_{2uv},u_{1}^{n1},v_{1}^{n2} \lvert \alpha_{1},\alpha_{2},\Theta) = $$  
+ $$ ( \Pi_{u} p(\pi_{1u} \lvert \alpha_{1}) ) ( \Pi_{v} p(\pi_{2v} \lvert \alpha_{2}) )
+( \Pi_{u,v} p(z_{1uv} \lvert \pi_{1u}) p(z_{2uv} \lvert \pi_{2v}) p(x_{uv} \lvert \theta_{z_{1uv},z_{2uv}} )^{\delta_{uv}}    )$$
+
+> marginal probability: $$ p(x_{uv} \lvert \theta_{z_{1uv},z_{2uv}} ) = \sum_{z_{1uv}} \sum_{z_{2uv}} p(z_{1uv} \lvert \pi_{1u}) p(z_{2uv} \lvert \pi_{2v}) p(x_{uv} \lvert \theta_{z_{1uv},z_{2uv}})$$
+
+
+- 위의 식을 $$\pi_{1u},\pi_{2v}$$에 대해 marginlizing하여 Matrix X에 대해 확률을 다시 쓰게 되면 다음과 같다.
+
+$$ p(X \lvert \alpha_{1}, \alpha_{2}, \Theta) = $$  
+$$ \int \int (\Pi_{u} p(\pi_{1u} \lvert \alpha_{1}) ) (\Pi_{v} p(\pi_{2v} \lvert \alpha_{2}) )
+\Pi_{u,v} \sum_{z_{1uv}} \sum_{z_{2uv}} $$  
+$$p(z_{1uv} \lvert \pi_{1u}) p(z_{2uv} \lvert \pi_{2v}) p(x_{uv} \lvert \theta_{z_{1uv},z_{2uv}})^{\delta_{uv}} d \pi_{11} d \pi_{12} ... d \pi_{1n_{1}} d \pi_{21} d \pi_{22} ... d \pi_{2n_{2}} $$
+
+<br/>
+
+---
+
+
+# Inference and Learning
+
+# 작성중
+
+
+https://www.igi-global.com/dictionary/partitional-clustering/21964
 
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
