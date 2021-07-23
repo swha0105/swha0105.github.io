@@ -57,8 +57,9 @@ $$\hat{\phi} = argmin_{\phi} KL(q(z \lvert \phi) \lvert\lvert p(z \lvert \phi))$
 $$ \log(p(x)) = \log \int p(x,z) dz $$ (marginal probability)
 $$ = \log \int p(x,z) \frac{q(z \lvert \phi)}{q(z \lvert \phi)} dz = \log \int q(z \lvert \phi) \frac{p(x,z)}{q(z \lvert \phi)} dz \quad ( E(f(x))_{x \sim  p} = \int p(x)f(x) dx )$$  
 $$ = \log( E_{Z \sim  q}(\frac{p(x,Z)}{q(Z \lvert \phi)})) \; \geq E_{Z \sim  q}(\log \frac{p(x,Z)}{q(Z \lvert \phi)})$$  (by Jensen's Inequality)  
-$$ = E_{Z \sim q}(\log p(x,Z)) - E_{Z \sim  q}(\log q(Z,\phi))$$  (ELBO)  
-$$ \log(p(x)) \geq = E_{Z \sim q}(\log p(x,Z)) - E_{Z \sim  q}(\log q(Z,\phi))$$
+$$ = E_{Z \sim q}(\log p(x,Z)) - E_{Z \sim  q}(\log q(Z \lvert \phi))$$  **(Defintion of ELBO)**  
+  
+<!-- $$ \log(p(x)) \geq  E_{Z \sim q}(\log p(x,Z)) - E_{Z \sim  q}(\log q(Z,\phi))$$ (ELBO) -->
 
 - **`Evidence Lower BOund` (ELBO)**의 정의를 활용해 KL divergence를 다시 쓰게 되면 다음과 같다.
 
@@ -70,6 +71,7 @@ $$ = \log p(x) - ELBO$$
 
 - 따라서, $$p(z \lvert x)$$ 를 구하기 위해 비슷한 $$q(z \lvert \phi)$$ 를 추론하는것은 KL을 최소화 하는것이고 이는 ELBO를 최대화 하는 $$\phi$$를 찾는것과 동일하다.
 
+- **Posterior probability**를 모르고 **observed data** (Joint model, $$ \log p(x,Z)$$) 을 알고 있다고 가정할 때 구할 수 있는 방법.
 
 
 
