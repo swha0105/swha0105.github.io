@@ -65,7 +65,7 @@ comments: true
 ---
 
 
-# Abstact & Introduction
+# 1. Abstact & Introduction
 
 
 - 많은 실제데이터들이 2가지 `entities of interest` (row & column in matrix)에 영향을 받는 `dyadic`의 형태를 띄고있다.  
@@ -91,10 +91,10 @@ comments: true
 
 ---
 
-# Generative Mixture Models
+# 2. Generative Mixture Models
 - Background for Generative model in BCC
 
-**1. Finite Mixture Model**
+## **2.1 Finite Mixture Model**
 
 $$ p(X \lvert \pi, \Theta) = \sum_{z=1}^{k}p(z \lvert \pi)p(X \lvert \theta_{z})$$
 
@@ -107,7 +107,7 @@ $$ p(X \lvert \pi, \Theta) = \sum_{z=1}^{k}p(z \lvert \pi)p(X \lvert \theta_{z})
 - prior $$\pi$$가 all data point에서 고정되어있다고 가정.
 
 
-**2. Latent Dirichlet Allocation**
+## **2.2 Latent Dirichlet Allocation**
 
 $$P(X \lvert \alpha, \Theta) = \int_{\pi} Dir(\pi \lvert \alpha) (\Pi_{l=1}^{d} \sum_{z_{1}}^{k} p(z_{l} \lvert \pi)p(x_{l} \lvert \theta_{z_{l}})  ) d \pi $$
 
@@ -115,7 +115,7 @@ $$P(X \lvert \alpha, \Theta) = \int_{\pi} Dir(\pi \lvert \alpha) (\Pi_{l=1}^{d} 
 - $$P(X \lvert \alpha, \Theta)$$는 intractable이기 때문에 Variational Inferecnce와 Gibbs sampling이 도입
 - token (X = (x1,x2,x3...))은 discrete임을 가정한다.
 
-**3. Bayeisan Baive Bayes.**
+## **2.3 Bayeisan Baive Bayes.**
 
 $$P(X \lvert \alpha, \Theta, F) = \int_{\pi} Dir(\pi \lvert \alpha) (\Pi_{l=1}^{d} \sum_{z_{1}}^{k} p(z_{l} \lvert \pi)p_{\psi}(x_{l} \lvert \theta_{z_{l}},f_{l},\Theta )  ) d \pi $$
 
@@ -125,7 +125,7 @@ $$P(X \lvert \alpha, \Theta, F) = \int_{\pi} Dir(\pi \lvert \alpha) (\Pi_{l=1}^{
 - Latent Dirichlet Allocation에서 가정한 discrete token을 해결하기 위한 방법
 - 자세한 설명은 기술되어있지 않다. 다른 논문을 찾아 조사가 더 필요할듯 하다
 
-**4. Co-clustering based on GMMs**
+## **2.4 Co-clustering based on GMMs**
 - GMM을 기반으로 한 Co-clustering을 하여 data mining에 적용한 기존 연구들은 다음과 같은 단점을 지닌다.
   1. Binary relationship만 다룰 수 있다
   2. one type of entity만 다룰 수 있다. 
@@ -137,15 +137,13 @@ $$P(X \lvert \alpha, \Theta, F) = \int_{\pi} Dir(\pi \lvert \alpha) (\Pi_{l=1}^{
 
 ---
 
-# Bayesian Co-Clustering
+# 3. Bayesian Co-Clustering
 
 |![BCC model](https://swha0105.github.io/assets/ml/img/BCC_fig1.png)  
 |:--:| 
 | Bayesian Co-Clustering Model |  
 
-
-
-**Notation & Assumption**
+## **3.1 Notation & Assumption**
 - Data Matrix: X (n1 * n2 )
 - row cluster k1에 대한 latent variable:  $$z1 = (i,{i}_{1}^{k_{1}}$$) 
 - column cluster k2에 대한 latent variable:  $$z2 = (j,{j}_{1}^{k_{2}}$$)
@@ -162,8 +160,7 @@ $$P(X \lvert \alpha, \Theta, F) = \int_{\pi} Dir(\pi \lvert \alpha) (\Pi_{l=1}^{
   - row/column cluster 분포에서 co-cluster 생성
 
 
-**Generative Process**
-
+## **3.2 Generative Process**
 
 1. $$Dir(\alpha_{1})/Dir(\alpha_{2})$$에서 Matrix에 있는 모든 row/column 에 대해 해당되는 mixing weight $$\pi_{1u}/\pi_{2v}$$을 샘플링한다.
 2. Mixing weight를 input으로 받는 Discrete distribution에서 $$(Disc(\pi_{1u})/Disc(\pi_{2v}))$$
@@ -212,7 +209,7 @@ $$p(z_{1uv} \lvert \pi_{1u}) p(z_{2uv} \lvert \pi_{2v}) p(x_{uv} \lvert \theta_{
 ---
 
 
-# Inference and Learning
+# 4. Inference and Learning
 
 - BCC model의 learning task는 parameter인 $$\alpha_{1}, \alpha_{2}, \Theta$$을 likelihood of observing matrix X을 최대화 하는 값을 추론 하는 것이다.
 
@@ -222,7 +219,7 @@ $$p(z_{1uv} \lvert \pi_{1u}) p(z_{2uv} \lvert \pi_{2v}) p(x_{uv} \lvert \theta_{
 - lower bound를 찾기 위해, entire family of parameterized lower bounds와 이에 대한 set of free variational parameters를 고려할 것이다.
 
 
-**Variational Approximation**
+## **4.1 Variational Approximation**
 - [Variational Approximation 정리한 글](https://swha0105.github.io/ml_dl/2021/07/13/ML_DL-varience_inference/)
 - $$ p(X \lvert \alpha_{1}, \alpha_{2}, \Theta) $$의 lower bound를 찾기 위해 **latent variable distribution을 ($$p(z_{1},z_{2},\pi_{1},\pi_{2} \lvert \alpha_{1}, \alpha_{2}, \Theta)$$)** 근사하는 아래와 같은 함수(q) 를 도입한다. 
 
@@ -248,7 +245,8 @@ $$q(z_{1},z_{2},\pi_{1},\pi_{2} \lvert \gamma_{1}, \gamma_{2}, \phi_{1},\phi_{2}
 
 - 전체 Matrix probability 에 대한 식은 다음과 같다.
 
-$$ \log p(X \lvert \alpha_{1}, \alpha_{2}, \Theta) \geq E_{q} (\log p(X,z_{1},z_{2},\pi_{1},\pi_{2} \lvert \alpha_{1}, \alpha_{2}, \Theta)) - E_{q} (\log q(X,z_{1},z_{2},\pi_{1},\pi_{2} \lvert \gamma_{1}, \gamma_{2}, \phi_{1},\phi_{2})) $$
+$$ \log p(X \lvert \alpha_{1}, \alpha_{2}, \Theta) \geq E_{q} (\log p(X,z_{1},z_{2},\pi_{1},\pi_{2} \lvert \alpha_{1}, \alpha_{2}, \Theta))$$   
+$$- E_{q} (\log q(X,z_{1},z_{2},\pi_{1},\pi_{2} \lvert \gamma_{1}, \gamma_{2}, \phi_{1},\phi_{2})) $$
 
 - 이 식의 `Lower bound`다음과 같지만 이것을 유도하거나 정리하는건 복잡하고 의미 없는거같아 논문에서도 언급만 하고 넘어 간듯하다. 
 
@@ -258,25 +256,108 @@ $$ + E_{q}( \log p(X \lvert z_{1}, z_{2},\Theta)) - E_{q}( \log p(\pi_{1} \lvert
 
 
 
-**1. Inference**
+### **4.1.1 Inference**
 
 - Inference step에서는 $$ \log p(X \lvert \alpha_{1},\alpha_{2},\Theta)$$의 **lower bound (L)를 $$(\alpha_{1},\alpha_{2},\Theta)$$를 설정하여 Maximize한다.**
 
 - Lower bound의 closed form solution이 없기 때문에 Lower bound의 maximum을 구하기 위해 $$ \frac{\partial L}{\partial \phi} = 0, \; \frac{\partial L}{\partial \gamma} = 0$$ 인 $$\phi, \gamma$$을 구한다.
 
-$$ \phi_{1ui} \propto \exp(\Psi_{1ui}) + \frac{\sum_{v,j}} \delta_{uv} \phi_{2vj} \log p(x_{uv} \lvert \theta_{ij}){m_{u}}$$
+$$ \phi_{1ui} \propto \exp(\Psi_{1ui}) + \frac{\sum_{v,j}} \delta_{uv} \phi_{2vj} \log p(x_{uv} \lvert \theta_{ij}){m_{u}}$$  
+$$\gamma_{ui} = \alpha_{1i} + m_{u}\phi_{1ui}$$
 
 > $$\phi_{1ui}$$: row u에 대한 $$\phi_{1}$$의 i번째 component  
 > $$\phi_{2vj}$$: column v에 대한 $$\phi_{2}$$의 j번째 component  
-  - i,j는 co-cluster의 index  
 > $$\Psi$$: digamma function
+> i,j: co-cluster의 index  
+
 
 - $$\phi_{1ui}$$는 row u 가 cluster i 에 대해 속할 수 있을 정도  
 (degree of row u belonging to cluster i)
 
-# simulated annealing 작성중
+- $$\phi$$와 $$\gamma$$를 추론하기 위해 [Simulated Annealing](https://youtu.be/qK46ET1xk2A?t=1785)을 사용하였다. 논문에 자세한 설명이 나오지 않아 링크를 참조하였다.
 
-https://www.igi-global.com/dictionary/partitional-clustering/21964
+
+### **4.1.2 Parameter Estimation**
+
+- Inference에서 $$\alpha_{1},\alpha_{2},\Theta$$을 이용하여 최적의 **($$\gamma_{1}^{*}, \gamma_{2}^{*}, \phi_{1}^{*}, \phi_{2}^{*}$$)** 을 구하였다. $$L(\gamma_{1},\gamma_{2},\phi_{1},\phi_{2}; \alpha_{1}, \alpha_{2},\Theta) $$ 
+
+- 최적의 $$\alpha$$을 구하기 위해 LDA, BNB에서 사용한 `Newton method`를 사용한다. 
+
+$$ \alpha_{1}^{'} = \alpha_{1} + \eta H(\alpha_{1})^{-1} g(\alpha_{1})$$
+
+- $$\alpha$$가 feasible region ($$\alpha$$ >0)에서 벗어나는걸 방지하기위해 $$\eta$$값을 조절하는 `adaptive line search`를 적용.
+
+- $$\Theta = (\mu_{ij}, \sigma_{ij}^{2},[i]_{1}^{k1},[j]_{1}^{k2})$$는 모든 exponential family distribution의 solution이 될 수 있지만 여기서는 univariate Gaussians이라 가정한다.
+
+$$u_{ij} = \frac{ \sum_{u=1}^{n_{1}} \sum_{v=1}^{n_{2}} \delta_{uv}x_{uv}\phi_{1ui}\phi_{2vj} }{\sum_{u=1}^{n_{1}} \sum_{v=1}^{n_{2}} \delta_{uv}\phi_{1ui}\phi_{2vj}}$$
+
+
+### **4.2 EM algorithm**
+
+- **지금까지 `intractable posterior probability` ($$\log p(X \lvert \alpha_{1},\alpha_{2},\Theta)$$)을 추론하기 위해 `Variational Approximation` ($$q(z_{1},z_{2},\pi_{1},\pi_{2} \lvert \gamma_{1},\gamma_{2},\phi_{1},\phi_{2})$$을 구성한 뒤 posterior와 차이를 최소화 하는 `Lower bound`($$L(\gamma_{1},\gamma_{2},\phi_{1},\phi_{2};\alpha_{1},\alpha_{2},\Theta)$$)을 구성했다. 이 후, `Inference`와 simulated annealing을 통해 Lower bound를 최대화 하는 variational parameters ($$\gamma_{1},\gamma_{2},\phi_{1},\phi_{2}$$)을 계산하고 `Parameter Estimation`와 newton method 통해 최적의 Dirichlet parameters ($$\alpha_{1},\alpha_{2}$$)을 계산했다.**
+
+**1. E-step:** given ($$\alpha_{1}^{t-1},\alpha_{2}^{t-1},\Theta^{t-1}$$)  
+- $$\gamma_{1}^{t},\gamma_{2}^{t},\phi_{1}^{t},\phi_{2}^{t} = argmax_{\gamma_{1},\gamma_{2},\phi_{1},\phi_{2}} L(\gamma_{1},\gamma_{2},\phi_{1},\phi_{2};\alpha_{1}^{t-1},\alpha_{2}^{t-1},\Theta^{t-1})$$
+
+- 이 과정을 통해 $$\log p(X \lvert \alpha_{1},\alpha_{2},\Theta)$$의 Lower bound function (L)을 구할 수 있다.
+
+**2. M-step:** 
+
+- $$(\alpha_{1}^{t},\alpha_{2}^{t},\Theta^{t}) = argmax_{\alpha_{1},\alpha_{2},\Theta} L(\gamma_{1}^{t},\gamma_{2}^{t},\phi_{1}^{t},\phi_{2}^{t};\alpha_{1},\alpha_{2},\Theta)$$
+
+- 이 과정을 통해 현재 (t)의 lower bound의 최적의 dirichlet parameter를 구할 수 있다. 
+
+
+<br/>
+
+----
+
+# 5. Experiments
+
+- Simulated data와 Real data(스킵)에 대해 테스트 하였다.
+
+**5.1 Simulated data**
+
+- 20x20의 Co-cluster(subcluster, 4 row, 5 column)으로 구성된 3개의 Data matrix (80x100)을 이용한다. 각 data matrix에 대해 generative model은 Gaussian, Bernoulli, Possion이다.
+
+- co-cluster의 data는 generative model with pre-defined parameter 에서 생성되고 각 co-cluster의 paramter는 각기 다르다.
+
+- 생성된 data들은 row, column단위로 randomly permute된다. permute된 데이터를 이용해 permute되기 전 데이터에 대한 정보를 추론한다(label).
+
+- 각각의 Co-cluster의 대해 5%의 label을 주어 **semi-supervised learning**을 한다.
+
+- Cluster accuracy(CA)(= $$\frac{1}{n} \sum_{i=1}^{k} n c_{i} $$)를 계산한다
+> n: number of rows/columns  
+> k: number of row/column clusters  
+> $$c_{i}$$: i번재 co-cluster에 대하여, 가장 많은 수의 row/column의 parameter들이 same true cluster의 parameter와 일치하는지 알려주는 변수. ~~논문에 설명이 부족하여 추론한 내용, 틀릴 수 있음~~
+
+
+|![parameter estimation](https://swha0105.github.io/assets/ml/img/BCC_fig3.png)  
+|:--:| 
+| parameter estimation for Gaussian, left: True, Right: Esitmated |  
+
+
+|![Cluster accuracy](https://swha0105.github.io/assets/ml/img/BCC_table.png)  
+|:--:| 
+| cluster accuracy |  
+
+
+- Parameter estimation에 대해, 각 co-cluster에 대해 highest log-likelihood를 표현하는 parameter를 pick했다.
+- **BCC는 generative model을 다르게하여 다양한 data type에 적용할 수 있다.**
+
+<br/>
+
+---
+
+# 6. Conclusion
+
+- BNN은 Co-clustering을 generative mixture modeling problem의 시각으로 풀어냈다.
+- sparse matriex에 강하며 generative model로 any exponential family을 사용할 수 있다.
+- row/column에 대해 co-cluster을 하나만 배정하는 partitional co-clustering과는 다르게 rows and column에 대해 mixed membership을 생성한다.
+- 제시한 variational approximation은 stochastic approximation에 비해 significantly faster
+
+
+--
 
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
