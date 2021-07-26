@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Lecture] Random forest"
+title:  "[ML Lecture] Random forest"
 subtitle:   "supervised Learning"
 categories: ml_dl
-tags: ml
+tags: ml_lecture
 comments: true
 ---
 

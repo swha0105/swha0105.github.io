@@ -2,7 +2,7 @@
 layout: list
 title: Code Practice
 slug: code_practice
-menu: true
+menu: false
 submenu: false
 order: 6
 description: >

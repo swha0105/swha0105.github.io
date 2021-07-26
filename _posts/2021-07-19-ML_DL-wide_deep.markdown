@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Paper] Wide & Deep Learning for Recommender Systems"
+title:  "[ML Paper] Wide & Deep Learning for Recommender Systems"
 subtitle:   "Recommendation"
 categories: ml_dl
-tags: ml
+tags: ml_paper
 comments: true
 ---
 

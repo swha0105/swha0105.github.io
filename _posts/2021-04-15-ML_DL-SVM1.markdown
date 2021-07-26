@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Lecture] Support Vector Machine 1 "
+title:  "[ML Lecture] Support Vector Machine 1 "
 subtitle:   "Machine learning"
 categories: ml_dl
-tags: ml
+tags: ml_lecture
 comments: true
 ---
 

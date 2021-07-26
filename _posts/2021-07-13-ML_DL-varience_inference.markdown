@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Posts] Varience Inference"
+title:  "[ML Posts] Varience Inference"
 subtitle:   "Post"
 categories: ml_dl
-tags: ml
+tags: ml_post
 comments: true
 ---
 

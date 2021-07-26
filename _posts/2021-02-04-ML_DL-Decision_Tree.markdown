@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Lecture] Decision Tree"
+title:  "[ML Lecture] Decision Tree"
 subtitle:   "supervised Learning"
 categories: ml_dl
-tags: ml
+tags: ml_lecture
 comments: true
 ---
 

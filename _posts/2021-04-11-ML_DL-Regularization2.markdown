@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Lecture] Regularization 2, LASSO, Elastic Net"
+title:  "[ML Lecture] Regularization 2, LASSO, Elastic Net"
 subtitle:   "Machine learning"
 categories: ml_dl
-tags: ml
+tags: ml_lecture
 comments: true
 ---
 

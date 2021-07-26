@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Paper] Label Spreading"
+title:  "[ML Paper] Label Spreading"
 subtitle:   "Semi-supervised Learning"
 categories: ml_dl
-tags: ml
+tags: ml_paper
 comments: true
 ---
 

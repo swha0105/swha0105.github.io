@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Paper] Bayesian Co-clustering"
+title:  "[ML Paper] Bayesian Co-clustering"
 subtitle:   "Recommendation"
 categories: ml_dl
-tags: ml
+tags: ml_paper
 comments: true
 ---
 

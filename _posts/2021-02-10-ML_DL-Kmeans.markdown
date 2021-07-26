@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Lecture] Kmeans"
+title:  "[ML Lecture] Kmeans"
 subtitle:   "unsupervised learning"
 categories: ml_dl
-tags: ml
+tags: ml_lecture
 comments: true
 ---
 

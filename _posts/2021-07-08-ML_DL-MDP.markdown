@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "[ML/DL Paper] An MDP-Based Recommender System"
+title:  "[ML Paper] An MDP-Based Recommender System"
 subtitle:   "Recommendation"
 categories: ml_dl
-tags: ml
+tags: ml_paper
 comments: true
 ---
 
