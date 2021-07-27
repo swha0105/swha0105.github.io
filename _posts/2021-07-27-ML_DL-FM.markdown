@@ -1,0 +1,103 @@
+---
+layout: post
+title:  "[ML Paper] Factorization Machine"
+subtitle:   "Recommendation"
+categories: ml_dl
+tags: ml_paper
+comments: true
+---
+
+|![Title](https://swha0105.github.io/assets/ml/img/FM_title.png)  
+|:--:| 
+| [논문 링크](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/ml/paper/Factorization_Machines.pdf) |  
+
+본 논문은 예전에 한번 훑어본적이 있었다.  
+그때 당시 느낌으론 방법이 너무 obvious한거 같아서 기록안하고 넘어갔지만 딥러닝 조사 중 DeepFM논문을 읽기위한 선행지식으로 본 논문의 주제인 Factorization Machine(FM)이 필요했다. DeepFM읽기 전, 복습겸 해서 정리하는것도 나쁘지 않은거같아 시간써서 정리한다.
+
+
+
+<br/>
+
+---
+
+# Abstract 
+
+- **`Factorization Machine(FM)`** 은 `SVM`의 장점인 어떠한 real value feature에 prediction이 가능하고 `Factorization model` 장점인 variables에 대한 모든 interaction을 고려할 수 있다.
+
+- FM은 linear time에 계산이 가능하고 optimize를 directly 할 수 있다. (Non-linear SVM과 달리 lagrangian dual transformation 불필요)
+
+- 기존의 Factorization model모델 (SVD++,PITF,FPMC)는 input data형태의 제약을 받았고, model equation과 optimization algorithm이 각각 개별로 유도되었다. 
+
+- FM은 feature vector를 정함으로서 기존 Factorization model의 역할을 대신할 수 있으며 이러한 특성은 field knowledge가 없어도 FM을 사용할 수 있게 한다.
+
+<br/>
+
+----
+
+# 1. Introduction
+
+- SVM은 Machine learning과 data mining분야에서 많이 사용되지만 very sparse data에서 complex kernel space의 parameter (hyperplane)을 학습 할 수 없기에 그다지 성공적이지 못하였다.
+
+[SVM 포스팅 1](https://swha0105.github.io/ml_dl/2021/04/15/ML_DL-SVM1/), [SVM 포스팅 2](https://swha0105.github.io/ml_dl/2021/05/03/ML_DL-SVM2/)
+
+- factorization model은 standart prediction data을 사용할 수 없었고 (real valued feature vector), task마다 specific한 model을 구축 및 설정해주어야 했다. 
+
+- 본 논문에서 소개하는 **`FM`**의 장점은 다음과 같다
+
+  1. SVM이 하지 못한 very sparse data에서 parameter estimation이 가능하다.
+  2. linear time으로 계산이 가능하고 direct optimization과 model parameter들에 대한 세이브가 가능하다.  
+  (non-linear SVM은 dual form으로 optimization해야하며 model equation이 traning data에 따라   달라진다.)
+  3. Factorization machine이 하지 못한 any real valued feature vector을 이용할 수 있는 `general predictor`의 역할을 할 수 있다
+
+<br/>
+
+---
+
+
+# 2. Prediction Under Sparsity
+
+- Prediction 문제는 보통 다음을 만족하는 function을 구하는 것이다
+$$y: R^{n} -> T$$ 
+> x: feature vector ($$x \in R^{n}$$)  
+> T: Target domain (regression: T = R, Classification: T = [+,-] )
+
+<!-- - Ranking 문제는 보통 다음을 만족하는 scoring function을 구하는 것이고, FM에서  -->
+
+
+|![Fig 1](https://swha0105.github.io/assets/ml/img/FM_fig1.png)    
+|:--:| 
+| Fig1. example of sparse data|  
+
+Movie review system의 transaction data를 가정하자.  
+
+- user $$u \in U$$는 item $$i \in I$$에 대해 time $$t \in R$$일때, rating $$r \in [1,2,3,4,5]$$을 한다.  
+(ex:  U = (Alice (A), Bob (B), Charlie (C)), I = (Titanic (TI), Notting Hill (NH), Star Wars (SW) 
+
+- 이때, Observation data S는 다음과 같이 형성 된다. (Figure 1)
+S = ( (A,TI, 2010-1,5 ),(A,NH, 2010-2,3),(A,SW, 2010-4,1)... )
+
+- Figure에 있는 Blue는 user, Red는 active item에 대한 indicator, Yellow는 다른 movie에 대한 rate (Normalized), Green은 time, Brown은 user의 last movie rate
+
+<br/>
+
+# 작성중
+
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
