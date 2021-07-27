@@ -19,7 +19,7 @@ Variational Inference에 대해 깊게 공부할일이 있어 구글링하다가
 ## Intro
 
 - Posterior distribution이 Intractable이여서 parameter estimation이 불가능할때 사용하는 방법이다.
-- Latent variable에 대한 point estimate하는 Expectation Maximize(EM)과는 다르게, Variantional Inference estimate는 Closed form denst function을 추론한다
+- Latent variable에 대한 point estimate하는 Expectation Maximize(EM)과는 다르게, Variantional Inference estimate는 Closed form density function을 추론한다
 - Sampling을 통한 추론을 하는 Monte-Carlo Markov Chain  (MCMC)와는 다르게, analytical approximiation을 통해 posterior를 추론한다
 
 ## Goal
@@ -48,7 +48,7 @@ $$KL(q(z \lvert \phi) \lvert\lvert p(z \lvert x)) = E_{z \sim q}(log \frac{q(z \
 
 - variational inference는 위의식을 이용해 **최적의 $$\phi$$**를 찾는다. 
 
-$$\hat{\phi} = argmin_{\phi} KL(q(z \lvert \phi) \lvert\lvert p(z \lvert \phi))$$
+$$\hat{\phi} = argmin_{\phi} KL(q(z \lvert \phi) \lvert\lvert p(z \lvert x))$$
 
 - 이를 이용해 우리가 최종적으로 구하는 variational distribution은 $$q(z \lvert \hat{\phi})$$ 이다.  
 
