@@ -2,7 +2,7 @@
 layout: post
 title:  "[모두연 풀잎스쿨 14기] Chapter 9"
 subtitle:   "Monte-Carlo Simulation"
-categories: tech
+categories: dev
 tags: spark
 comments: true
 ---

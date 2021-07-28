@@ -2,7 +2,7 @@
 layout: post
 title:  "[모두연 풀잎스쿨 14기] Chapter 6"
 subtitle:   "자연어처리 with LSA (Latent Semantic Analysis)"
-categories: tech
+categories: dev
 tags: spark
 comments: true
 ---

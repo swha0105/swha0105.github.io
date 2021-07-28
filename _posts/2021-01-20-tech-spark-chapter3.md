@@ -2,7 +2,7 @@
 layout: post
 title:  "[모두연 풀잎스쿨 14기] Chapter 3"
 subtitle:   "추천 알고리즘"
-categories: tech
+categories: dev
 tags: spark
 comments: true
 ---

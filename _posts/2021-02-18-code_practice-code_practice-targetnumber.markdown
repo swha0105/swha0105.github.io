@@ -2,9 +2,9 @@
 layout: post
 title:  "[프로그래머스] 타겟넘버"
 subtitle:  "Programmers"
-categories: code_practice
-tags: code_practice
-comments: true
+categories: dev
+tags: code
+comments: false
 ---
 
 ![Problem](https://swha0105.github.io/assets/code_practice/P_targetnumber.JPG)

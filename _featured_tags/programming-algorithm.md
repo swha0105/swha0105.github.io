@@ -1,5 +1,5 @@
 ---
-layout: tag-blog
+layout: list
 title: Introduction to Algorithms
 slug: algorithms
 category: programming

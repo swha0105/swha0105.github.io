@@ -3,7 +3,7 @@ layout: post
 title:  "[Intro Algorithms] Heaps and heap sort"
 subtitle:   "Introduction to Algorithms"
 categories: programming
-tags: cs
+tags: algorithms
 comments: true
 ---
 

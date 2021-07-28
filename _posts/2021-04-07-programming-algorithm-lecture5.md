@@ -3,7 +3,7 @@ layout: post
 title:  "[Intro Algorithms] Scheduling, Binary Search Trees, tree traversal"
 subtitle:   "Introduction to Algorithms"
 categories: programming
-tags: cs
+tags: algorithms
 comments: true
 ---
 

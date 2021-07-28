@@ -2,7 +2,7 @@
 layout: post
 title:  "[모두연 풀잎스쿨 14기] Chapter 4"
 subtitle:   "Random Forest"
-categories: tech
+categories: dev
 tags: spark
 comments: true
 ---

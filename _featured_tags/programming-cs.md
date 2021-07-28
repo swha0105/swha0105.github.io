@@ -1,5 +1,5 @@
 ---
-layout: tag-blog
+layout: list
 title: Introduction to Computer Science and Programming
 slug: cs
 category: programming

@@ -2,7 +2,7 @@
 layout: post
 title:  "[모두연 풀잎스쿨 14기] Advanced Analytics with Spark"
 subtitle:   "분산 처리 클러스터와 Spark의 기본 개념 "
-categories: tech
+categories: dev
 tags: spark
 comments: true
 ---

@@ -37,7 +37,7 @@ font:                "'Merriweather-Light','Lato','-apple-system','Verdana','Pin
 
 # The string encoding what fonts to fetch from Google Fonts.
 # See: https://qwtel.com/hydejack/docs/configuration/
-google_fonts:        Lato
+google_fonts:        Do Hyeon
 
 # If you do not use a Google Fonts, uncomment the line below
 # no_google_fonts:     true

@@ -3,7 +3,7 @@ layout: post
 title:  "[Intro Algorithms] Hashing with Chaining"
 subtitle:   "Introduction to Algorithms"
 categories: programming
-tags: cs
+tags: algorithms
 comments: true
 ---
 
