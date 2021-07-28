@@ -80,7 +80,185 @@ S = ( (A,TI, 2010-1,5 ),(A,NH, 2010-2,3),(A,SW, 2010-4,1)... )
 
 <br/>
 
-# 작성중
+---
+
+# Factorization Machines (FM)
+
+
+## Factorization Machine Model
+
+**1. Model Equation**
+
+- degree가 2인 Factorization machine의 수식은 다음과같다
+$$ \hat{y}(x) = w_{0} + \sum_{i=1}^{n} w_{i} x_{i} + \sum_{i=1}^{n} \sum_{j=i+1}^{n} <v_{i},v_{j}> x_{i} x_{j}  $$ 
+
+> $$w_{0}$$: global bias ($$w_{0} \in R$$)  
+> $$w_{i}$$: weight to i-th varaible ($$w_{0} \in R^{n}$$),
+> (논문에서는 models the strength of the i-th variable이라 적혀있다. )  
+> $$w_{0}$$: global bias ($$w_{0} \in R$$)  
+
+$$ <v_{i},v_{j}> = \hat{w}_{i,j} = \sum_{j=1}^{k} v_{i,j} v_{j,j}  $$
+> k: dimensionality of factorization (hyperparameter)  
+> $$v_{i}$$: i-th variable with k factors
+
+**2. Expressiveness**
+
+- Positive-definite Matrix W에 대해 $$ W = V \dot V{T}$$ 을 만족하는 V는 존재한다. (V의 차원 K값이 충분히 크다고 가정할 때)
+
+- K값이 작을 경우 Matrix의 Interaction을 다 표현하지 못하고, K값이 클 경우 Sparse 환경에서  complex ineteraction을 추정하는데 문제가 생긴다. 
+
+- 따라서, sparse한 환경에서 K값을 적절히 제한하며 더 좋은 generalization 성능을 이끌어내야한다.
+
+  <details>
+  <summary>Positive-definite Matrix</summary>
+  <div markdown="1">   
+
+  Positive-definte Matrix A (정정 행렬)는 $$A \gt 0$$ 을 의미한다.
+
+  이때, $$A \gt 0$$란 다음과 같다.
+  $$x^{T}Ax \gt 0 \quad \forall x \neq 0$$
+
+  </div>
+  </details>  
+
+
+**3. Parameter Estimation Under Sparsity**
+
+- 일반적으로 sparse setting에서는 variables들의 interaction을 독립적으로 측정하기에 데이터가 부족하지만 Factorization machine에서는 Factorizaing을 통해 parameter interaction의 독립성을 깨면서 sparse setting에서의 variable들의 interaction을 측정한다.
+
+- 예를 들어, Alice가 Star Trek에 대해 rating이 없다고 가정하자 ($$W_{A,ST} = 0 $$). 이에 연관된 변수인 $$v_{A},v_{ST}$$는 비슷한 변수 (factor)인 BoB($$v_{B}$$)이나  Charlie($$v_{C}$$)가 Star Trek을 보고 측정한 rating을 통해 계산할 수 있다. 
+
+- 이와 같이, 하나의 interaction (rating)은 연관된 interaction들의 parameter들을 추정하는데 도움이 된다.
+
+
+**4. Computation**
+
+- FM Model equation의 Time complexity는 $$O(kn^{2})$$이다
+- Model equation의 3번째 term에 대해 Reformulate를 통해 Time complexity를 linear time으로 줄일 수 있다
+
+Reformulate
+
+$$ \sum_{i=1}^{n} \sum_{j=i+1}^{n} <v_{i},v_{j}> x_{i},x_{j}$$  
+$$ = \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} <v_{i},v_{j}> x_{i}x_{j} - \frac{1}{2} \sum_{i=1}^{n} <v_{i},v_{i}> x_{i}x_{i}$$ (Interaction을 기록한 data는 symmetry )  
+$$ = \frac{1}{2} ( \sum_{i=1}^{n} \sum_{j=1}^{n} \sum_{f=1}^{k} v_{i,f} v_{j,f} x_{i} x_{j} - \sum_{i=1}^{n} \sum_{f=1}^{k} v_{i,j} v_{i,f} x_{i} x_{i}  )$$  
+$$ = \frac{1}{2} \sum_{f=1}^{k} ( (\sum_{i=1}^{n} v_{i,f} x_{i} ) (\sum_{j=1}^{n} v_{j,f} x_{j} ) - \sum_{i=1}^{n} v_{i,f}^{2} x_{i}^{2} )  $$
+$$ = \frac{1}{2} \sum_{j=1}^{k} ( (\sum_{i=1}^{n}  v_{i,f}x_{i} )^2 - \sum_{i=1}^{n} v_{i,f}^2 x_{i}^2 )$$
+
+- data가 symmetry라는 말은 너무 trival하여 논문에서 빠져있지만 이 가정을 바탕으로 수식이 유도된다.
+
+<br/>
+
+## Factorization Machine as Predictors
+
+- FM은 3가지의 prediction task를 수행할 수 있고 모든 경우에 대해 L2 regularization과 같은 정규화 텀이 들어간다.
+
+1. Regresson
+$$ \hat{y}(x)$$를 직접 predictor로 사용할 수 있으며 optimization은 D(traning set)에 대한 minimal least square error와 같은걸로 사용한다.
+
+2. Binary Classification
+$$ \hat{y}(x)$$의 sign을 predictor로 사용하며 optimization은 hinge loss나 logit loss을 사용한다
+
+3. Ranking
+feature vector X는 $$\hat{y}(x)$$의 score로 정렬한다. optimization은 pairwise classification loss를 사용한다
+
+<br/>
+
+## Learning Factorization Machines
+
+- FM의 파라미터 $$(w_{0},w_{i},\hat{w}_{i,j} (<v_{i},v_{j}>) )$$ SGD와 같은 gradient descent method 방법을 통해 학습이 가능하다
+
+$$\frac{\partial \hat{y}(x)}{\partial w_{0}} = 1$$, $$\frac{\partial \hat{y}(x)}{\partial w_{i}} = x_{i}$$,  $$\frac{\partial \hat{y}(x)}{\partial v_{i,f}} = x_{i} \sum_{j=1}^{n} v_{j,f}x_{j} - v_{i}x_{i}^2$$
+
+- 여기서 $$sum_{j} v_{j,f} x_{j}$$는 i에 대해 독립적임으로 pre-compute가 가능하다. 따라서 모든 parameter의 gradient를 구하는 연산은 O(1)로 가능하다.
+
+- 모든 데이터 셋에 대해 paramter를 업데이트하는 연산은 O(k m(x))로 계산 가능하다
+>k: constsnt  
+>m(x): non-zero dataset 
+
+<br/>
+
+## d-way Factorization Machine & Summary
+
+- 지금까지 2-way FM에 대해 알아보았다 (2차 오더). d-way FM에 관한식은 다음과 같다.
+
+$$ \hat{y}(x) = w_{0} + \sum_{i=1}^{n}w_{i}x_{i} $$
+$$+ \sum_{l=2}^{d} \sum_{i_{l}=1}^{n} ... \sum_{i_{l} = i_{l-1}+1}^{n} (\Pi_{j=1}^{l}x_{i_{j}}) (\sum_{j=1}^{k_{l}} \Pi_{j=1}^{l} v_{i_{j},f})$$ 
+
+- 앞서 증명과 같이, d-way FM도 linear time에 계산이 가능하다.
+
+- FM은 다음과 같은 장점을 가진다.
+  1. high sparsity 환경에서도 value들끼리의 interaction을 측정할 수 있다. 특히 unobserved interaction에도 적용이 가능하다
+  2. Learning (optimization)이 linear time에 가능하다. 이를 통해 다양한 loss function에 대해 SGD를 통한 optimization이 가능하다
+
+---
+
+<br/>
+
+# FMs vs SVMs
+
+**1. Linear SVM**
+
+- $$\hat{y}(x) = w_{0} + \sum_{i=1}^{n}W_{i}x_{i} \quad W_{i} \in R^{n}$$ 
+
+- 만약, Non-missing data가 두개만 있다면 (m(x)=2, for user u item i)  
+   $$ \hat{y}(x) = w_{0} + w_{u} + w_{i}$$
+
+- Linear SVM은 sparsity 환경에서도 parameter estimation이 가능하지만 empricial prediction에 대해서 좋지 못하다.
+
+**2. Polynomial SVM**
+
+- $$\hat{y}(x) = w_{0} + \sqrt{2}\sum_{i=1}^{n} w_{i} x_{i} + \sum_{i=1}^{n}w_{i,i}^2 x_{i}^2 + \sqrt{2} \sum_{i=1}^{n} \sum_{j=i+1}^{n} w_{i,j}^{2} x_{i} x_{j}$$
+ 
+- 만약, Non-missing data가 두개만 있다면 (m(x)=2, for user u item i)  
+   $$ \hat{y}(x) = w_{0} + \sqrt{2}(w_{u} + w_{i}) + w_{u,u}^{2} + w_{i,i}^{2} + \sqrt{2}w_{u,i}^2$$
+
+- 2-way interaction을 하지 못한다 (비관측치에 대해 관측치로 부터 추론 불가)
+
+**3. Summary**
+
+-  SVM의 dense parameterization은 직접적인 observation을 필요로 하는 반면에, FM의 parameter들은 sparsity환경에서도 간접적으로 estimate가 가능하다
+
+- Non-linear SVM은 dual form으로 learning하지만 FM은 primal form
+
+- SVM의 model equation은 traning data에 따라 support vector가 바뀌기에 data dependency가 존재하지만 FM은 independent
+
+
+---
+
+<br/>
+
+# FMs vs Other Factorization Models
+
+- 이 부분은 Matrix and Tensor Factorization (MF), SVD++, PITF, FPMC에 서술되어있으나 본 모델에 대해서 충분한 지식을 알고있다고 가정한 뒤 FM과 비교한다. 하지만 아직 이 부분을 이해하기에 내공이 부족해서(...) summary만 정리한다. 
+
+- 기존의 Factorization model은 feature vector를 m개의 partion으로 나눈 뒤 binary indicator로 binarization뒤 prediction을 수행하였지만 FM은 any real valued feature를 사용할 수 있는 general prediction model이다
+
+- single task를 위한 만들어진 기존의 Factorization model과 달리 FM은 어느 field에도 쉽게 적용가능. 
+ 
+
+<br/>
+
+---
+
+# Conclusion and Future work
+
+- FM은 SVM과 다르게 sparsity에서 parameter에서 작동이 가능하다.
+
+- FM은 SVM과 다르게 model equation이 linear하고 data indepedent 하다
+
+- FM은 SVM과 다르게 optimization이 primal로 directly 가능하다
+
+- FM은 Factorization model과 다르게 any real valued vector를 다룰 수 있는 general predictor이다.
+
+- FM은 Factorization model과 다르게 여러 field에서 사용이 가능하다.
+
+
+---
+
+<br/>
+
+논문을 읽으며 조금 직관적이고 naive한 모델이라 생각했지만 이 논문을 바탕으로 수많은 후속연구들이 진행되었다. 최근에 나온 딥러닝 모델 (DeepFM)도 이 모델을 기반으로 사용했다고 한다.  
+이 모델이 naive하다고 느끼는건 2010년 이 논문이 나오는 이전의 연구들에 대해 아직 충분히 몰라서 그런건가 싶다.. 
 
 
 
