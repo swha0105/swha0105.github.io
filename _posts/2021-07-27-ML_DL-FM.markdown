@@ -103,7 +103,7 @@ $$ <v_{i},v_{j}> = \hat{w}_{i,j} = \sum_{j=1}^{k} v_{i,j} v_{j,j}  $$
 
 **2. Expressiveness**
 
-- Positive-definite Matrix W에 대해 $$ W = V \dot V{T}$$ 을 만족하는 V는 존재한다. (V의 차원 K값이 충분히 크다고 가정할 때)
+- Positive-definite Matrix W에 대해 $$ W = V \cdot V^{T}$$ 을 만족하는 V는 존재한다. (V의 차원 K값이 충분히 크다고 가정할 때)
 
 - K값이 작을 경우 Matrix의 Interaction을 다 표현하지 못하고, K값이 클 경우 Sparse 환경에서  complex ineteraction을 추정하는데 문제가 생긴다. 
 
