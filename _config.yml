@@ -51,7 +51,7 @@ disqus: True
 disqus_shortname:    swha
 
 # This text will appear in the footer of every page. Markdown enabled.
-copyright:           '&copy; 2021.01. by swha'
+copyright:           '&copy; edited by swha'
 
 # Format of the permalinks
 permalink:           pretty

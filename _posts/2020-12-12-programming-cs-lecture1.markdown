@@ -4,7 +4,7 @@ title:  "[Intro CS] What is computation"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
-comments: true
+comments: False
 ---
 
 # Topics

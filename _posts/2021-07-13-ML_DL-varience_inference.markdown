@@ -4,7 +4,7 @@ title:  "[ML Posts] Varience Inference"
 subtitle:   "Post"
 categories: ml_dl
 tags: ml_post
-comments: true
+comments: False
 ---
 
 [참조](https://swha0105.github.io/assets/ml/posts/VariationalInference.pdf)  

@@ -4,7 +4,7 @@ title:  "[Intro Algorithms] Heaps and heap sort"
 subtitle:   "Introduction to Algorithms"
 categories: programming
 tags: algorithms
-comments: true
+comments: False
 ---
 
 # 4. Heaps and heap sort

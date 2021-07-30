@@ -4,7 +4,7 @@ title:  "[Intro Algorithms] Algorithmic thinking, peak finding"
 subtitle:   "Introduction Algorithms"
 categories: programming
 tags: algorithms
-comments: true
+comments: False
 ---
 
 # 1. Algorithmic thinking, peak finding

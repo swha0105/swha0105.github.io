@@ -4,7 +4,7 @@ title:  "[Intro CS] Recursion and Dictionaries"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
-comments: true
+comments: False
 ---
 
 <script>

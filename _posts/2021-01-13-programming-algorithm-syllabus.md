@@ -4,7 +4,7 @@ title:  "[Intro Algorithms] Syllabus"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: algorithms
-comments: true
+comments: False
 ---
 
 # Syllabus

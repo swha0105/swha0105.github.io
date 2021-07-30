@@ -4,7 +4,7 @@ title:  "[ML Lecture] Support Vector Machine 2"
 subtitle:   "Machine learning"
 categories: ml_dl
 tags: ml_lecture
-comments: true
+comments: False
 ---
 
 [김성범 교수님 강의](https://www.youtube.com/watch?v=ltjhyLkHMls)를 참조하여 정리 하였다.  

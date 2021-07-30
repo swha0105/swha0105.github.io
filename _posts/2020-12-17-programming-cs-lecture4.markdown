@@ -4,7 +4,7 @@ title:  "[Intro CS] Decomposition, Abstraction, Functions"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
-comments: true
+comments: False
 ---
 # 4. Decomposition, Abstraction, Functions
 - Function feature (decomposition, abstraction)

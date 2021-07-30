@@ -4,7 +4,7 @@ title:  "[ML Paper] Wide & Deep Learning for Recommender Systems"
 subtitle:   "Recommendation"
 categories: ml_dl
 tags: ml_paper
-comments: true
+comments: False
 ---
 
 |![Title](https://swha0105.github.io/assets/ml/img/wide_title.png)  

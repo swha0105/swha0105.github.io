@@ -4,7 +4,7 @@ title:  "[ML Lecture] Decision Tree"
 subtitle:   "supervised Learning"
 categories: ml_dl
 tags: ml_lecture
-comments: true
+comments: False
 ---
 
 **들어가기전..**  

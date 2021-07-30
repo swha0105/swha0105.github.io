@@ -4,7 +4,7 @@ title:  "[Intro Algorithms] Hashing with Chaining"
 subtitle:   "Introduction to Algorithms"
 categories: programming
 tags: algorithms
-comments: true
+comments: False
 ---
 
 # 8. Hashing with Chaining

@@ -4,7 +4,7 @@ title:  "[Intro Algorithms] Models of Computation, Document Distance"
 subtitle:   "Introduction to Algorithms"
 categories: programming
 tags: algorithms
-comments: true
+comments: False
 ---
 
 # Lecture 2. Models of Computation, Document Distance

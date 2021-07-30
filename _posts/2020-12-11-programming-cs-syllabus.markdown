@@ -4,7 +4,7 @@ title:  "[Intro CS] Syllabus"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
-comments: true
+comments: False
 ---
 이 Lecture는 MIT opencourseware에서 공개하는 강의이고 컴퓨터 공학과 알고리즘의 아주 기본을 가르치는 코스인듯 하다.
 

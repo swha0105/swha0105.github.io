@@ -4,7 +4,7 @@ title:  "[모두연 풀잎스쿨 14기] Chapter 9"
 subtitle:   "Monte-Carlo Simulation"
 categories: dev
 tags: spark
-comments: true
+comments: False
 ---
 
 **본 포스팅은 모두의연구소(home.modulabs.co.kr) 풀잎스쿨에서 진행된 `Advanced Analytics with Spark` 과정 내용을 공유 및 정리한 자료입니다.**    

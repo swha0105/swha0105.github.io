@@ -4,7 +4,7 @@ title:  "[Intro Algorithms] Searching and Sorting Algorithms"
 subtitle:   "Introduction to Algorithms"
 categories: programming
 tags: algorithms
-comments: true
+comments: False
 ---
 
 # 3. Searching and Sorting Algorithms

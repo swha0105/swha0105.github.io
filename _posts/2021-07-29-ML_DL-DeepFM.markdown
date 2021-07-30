@@ -4,7 +4,7 @@ title:  "[ML Paper] DeepFM"
 subtitle:   "Recommendation"
 categories: ml_dl
 tags: ml_paper
-comments: true
+comments: False
 ---
 
 |![Title](https://swha0105.github.io/assets/ml/img/DeepFM_title.png)  

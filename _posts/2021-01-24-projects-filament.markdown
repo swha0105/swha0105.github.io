@@ -4,7 +4,7 @@ title:  "[고에너지 천체물리 연구] 머신러닝/딥러닝을 통한 3�
 subtitle:   "Statistical study on morphologies of Leo filaments via Label spreading"
 categories: projects
 tags: projects
-comments: true
+comments: False
 ---
 
 <details>    

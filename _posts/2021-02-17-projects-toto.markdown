@@ -4,7 +4,7 @@ title:  "[개인프로젝트] 머신러닝을 활용한 야구 승부 예측"
 subtitle:  "Legal TOTO"
 categories: projects
 # tags: projects
-comments: true
+comments: False
 ---
 
 ## 들어가기 전.. 

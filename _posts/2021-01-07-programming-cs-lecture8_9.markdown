@@ -4,7 +4,7 @@ title:  "[Intro CS] Object Oriented Programming & Inheritance"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
-comments: true
+comments: False
 ---
 # 8 & 9. Object Oriented Programming & Inheritance
 - Object & Object Oriented Programming (OOP)

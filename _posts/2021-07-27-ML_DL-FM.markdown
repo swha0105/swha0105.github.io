@@ -4,7 +4,7 @@ title:  "[ML Paper] Factorization Machine"
 subtitle:   "Recommendation"
 categories: ml_dl
 tags: ml_paper
-comments: true
+comments: False
 ---
 
 |![Title](https://swha0105.github.io/assets/ml/img/FM_title.png)  

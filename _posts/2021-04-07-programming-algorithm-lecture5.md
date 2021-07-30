@@ -4,7 +4,7 @@ title:  "[Intro Algorithms] Scheduling, Binary Search Trees, tree traversal"
 subtitle:   "Introduction to Algorithms"
 categories: programming
 tags: algorithms
-comments: true
+comments: False
 ---
 
 # 5. Scheduling, Binary Search Treesd

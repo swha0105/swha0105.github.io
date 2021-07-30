@@ -4,7 +4,7 @@ title:  "[Intro CS] Tuples, Lists, Aliasing, Mutability, Cloning"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
-comments: true
+comments: False
 ---
 # 5. Tuples, Lists, Aliasing, Mutability, Cloning
 - Tuple

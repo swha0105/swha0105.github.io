@@ -4,7 +4,7 @@ title:  "[Intro CS] Understanding Program Efficiency"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
-comments: true
+comments: False
 ---
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);

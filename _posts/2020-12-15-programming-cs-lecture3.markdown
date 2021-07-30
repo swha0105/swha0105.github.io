@@ -4,7 +4,7 @@ title:  "[Intro CS] Guess-and-Check, Approximation, Bisection"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
-comments: true
+comments: False
 ---
 
 <script>

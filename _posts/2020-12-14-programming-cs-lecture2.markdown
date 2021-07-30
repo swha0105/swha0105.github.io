@@ -4,7 +4,7 @@ title:  "[Intro CS] Branching and Iteration"
 subtitle:   "Introduction to Computer Science and Programming"
 categories: programming
 tags: cs
-comments: true
+comments: False
 ---
 # 2. Branching and Iteration
    - string object type

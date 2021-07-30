@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://theorydb.github.io/sitemap.xml
+<!-- Sitemap: http://theorydb.github.io/sitemap.xml -->
+Sitemap: http://swha0105.github.io/sitemap.xml

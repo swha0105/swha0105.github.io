@@ -4,7 +4,7 @@ title:  "[Intro Algorithms] Balanced Binary Search Tree"
 subtitle:   "Introduction to Algorithms"
 categories: programming
 tags: algorithms
-comments: true
+comments: False
 ---
 
 # 6. Balanced Binary Search Tree
