@@ -1,5 +1,6 @@
 .sidebar {
-  color: rgba(255,255,255,.75);
+  // color: rgba(255,255,255,.75);
+  color: rgba(0,0,0,.75);
   text-align: left;
 
   &::before {
@@ -21,6 +22,7 @@
   /* Sidebar links */
   a {
     color: #fff;
+    // color: #4f86aa;
     border-bottom-color: rgba(255, 255, 255, 0.2);
 
     // &:hover, &:focus {
@@ -137,7 +139,7 @@
 /* About section */
 .sidebar-about > h1 {
   color: #fff;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .sidebar-nav > ul {
