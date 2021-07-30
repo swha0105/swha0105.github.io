@@ -14,6 +14,8 @@ comments: true
 <br/>
 
 참조하는 [포스팅](https://towardsdatascience.com/modern-recommender-systems-a0c727609aa8)에서 DeepFM에 대해 정보를 얻었다. FM의 neural net version이라하고 Wide & Deep moidel의 발전된 버전이라고 한다. 딥러닝을 이용한 추천시스템 문제에 첫 번째 주요 돌파구였다고 한다. 
+  
+본 논문은 [Wide & Deep model](https://swha0105.github.io/ml_dl/2021/07/19/ML_DL-wide_deep/) 와 [FM](https://swha0105.github.io/ml_dl/2021/07/27/ML_DL-FM/) 이 두 모델에 대해 기반지식이 있다고 가정하고 설명한다. 
 
 <br/>
 
@@ -22,7 +24,7 @@ comments: true
 # Abstract
 
 - 복잡한 feature interaction을 학습하는건 CTR recommender system의 핵심이다.
-- 그럼에도 불구하고, 기존의 있는 방법들은 low(or high)-order interaction의 strong bias를 가지고 있거나 전문적인 feature extraction이 필요로 했다.
+- 그럼에도 불구하고, 기존의 있는 방법들은 low(or high)-order interaction에 대해 strong bias를 가지고 있거나 전문적인 feature engineering 필요로 했다.
 - **본 논문의 주제인 `DeepFM`은 [FM](https://swha0105.github.io/ml_dl/2021/07/27/ML_DL-FM/)의 장점과 `Deep learning`의 장점을 결합하였다.**
 - 필드 전문가에 의한 feature engineering이 필요한 기존의 모델 [Wide & Deep model](https://swha0105.github.io/ml_dl/2021/07/19/ML_DL-wide_deep/)과는 달리 DeepFM은 raw feature 처리외에 필요하지 않다.
 
@@ -35,8 +37,6 @@ comments: true
 - **Recommender system의 목적은 `CTR (Click-through rate)`을 최대화 하는것**이다
 
 - CTR prediction 문제는 user click behavior에 숨겨져 있는 `implicit feature interaction`을 학습하는것이 중요하다. (시간, 성별, 나이, ...)
-
-- 이전 연구인 Wide & Deep model의 결과는 low와 high feature간의 interaction은 하나씩만 고려하였을때 보다 좋은 성능을 보인다는 것이다.
 
 - CTR을 위한 recommender system 모델링의 가장 어려운점은 feature interaction에 관한것이다. 어떤 feature interaction은 필드 전문가에 의해 설계되지만 그렇지 않은 feature interaction (`priori`) 는 machine learning에 의해서만 캡쳐된다.
 
