@@ -40,7 +40,7 @@ comments: False
 
 [SVM 포스팅 1](https://swha0105.github.io/ml_dl/2021/04/15/ML_DL-SVM1/), [SVM 포스팅 2](https://swha0105.github.io/ml_dl/2021/05/03/ML_DL-SVM2/)
 
-- factorization model은 standart prediction data을 사용할 수 없었고 (real valued feature vector), task마다 specific한 model을 구축 및 설정해주어야 했다. 
+- factorization model은 standard prediction data을 사용할 수 없었고 (real valued feature vector), task마다 specific한 model을 구축 및 설정해주어야 했다. 
 
 - 본 논문에서 소개하는 **`FM`**의 장점은 다음과 같다
 
@@ -169,7 +169,7 @@ feature vector X는 $$\hat{y}(x)$$의 score로 정렬한다. optimization은 pai
 
 $$\frac{\partial \hat{y}(x)}{\partial w_{0}} = 1$$, $$\frac{\partial \hat{y}(x)}{\partial w_{i}} = x_{i}$$,  $$\frac{\partial \hat{y}(x)}{\partial v_{i,f}} = x_{i} \sum_{j=1}^{n} v_{j,f}x_{j} - v_{i}x_{i}^2$$
 
-- 여기서 $$sum_{j} v_{j,f} x_{j}$$는 i에 대해 독립적임으로 pre-compute가 가능하다. 따라서 모든 parameter의 gradient를 구하는 연산은 O(1)로 가능하다.
+- 여기서 $$\sum_{j} v_{j,f} x_{j}$$는 i에 대해 독립적임으로 pre-compute가 가능하다. 따라서 모든 parameter의 gradient를 구하는 연산은 O(1)로 가능하다.
 
 - 모든 데이터 셋에 대해 paramter를 업데이트하는 연산은 O(k m(x))로 계산 가능하다
 >k: constsnt  
