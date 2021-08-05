@@ -113,7 +113,7 @@ $$ y_{ui} \lvert a_{ui} = 0 \sim \delta_{0} \quad (P(y_{ui} = 0 \lvert a_{ui} = 
 > $$\beta_{u}$$: item i의 attribute  
 > $$a_{ui}$$: user u가 item i에 expose 되었는지 나타내는 값  ($$a_{ui} \in A$$)   
 > $$y_{ui}$$: user u가 item i에 click 하였는지 나타내는 값  ($$y_{ui} \in Y$$)  
-> $$\mu_{ui}$$: prior probability of exposure 
+> $$\mu_{ui}$$: prior probability of exposure  
 > $$\lambda$$: hyperparamter
 
 - click expose값은 bernoulli distribution을 따른다.
