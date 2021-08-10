@@ -7,7 +7,7 @@ tags: ml_paper
 comments: False
 ---
 
-|![Title](https://swha0105.github.io/assets/ml/img/expose_MF.png)  
+|![Title](https://swha0105.github.io/assets/ml/img/expose_MF_title.png)  
 |:--:| 
 | [논문 링크](https://github.com/swha0105/swha0105.github.io/blob/gh-pages/assets/ml/paper/Modeling User Exposure in Recommendation.pdf) |  
 
@@ -99,7 +99,10 @@ $$ y_{ui} \sim N(\theta_{u}^{T} \beta_{i}, c_{y_{ui}}^{-1})$$
 
 |![ExpoMF schematic](https://swha0105.github.io/assets/ml/img/exposeMF_fig1.png)  
 |:--:| 
-|  |  
+| left: ExpoMF  Right: ExpoMF with exposure covariates  |  
+
+- User-item prefence data가 있다고 가정한다. (Click matrix)
+- `matrix factorization`을 통해 Click matrix를 K-dimesion을 갖는 user preference($$u_{i,1:K}$$)와 Item attribute($$\beta_{u,1:K}$$)으로 나눈다 (i,u 인덱스는 오타인거 같지만 그대로 작성한다.)
 
 $$ \theta_{u} \sim N(0,\lambda_{\theta}^{-1},I_{K})$$  
 $$ \beta_{i} \sim N(0,\lambda_{\beta}^{-1},I_{K})$$  
@@ -114,12 +117,85 @@ $$ y_{ui} \lvert a_{ui} = 0 \sim \delta_{0} \quad (P(y_{ui} = 0 \lvert a_{ui} = 
 > $$a_{ui}$$: user u가 item i에 expose 되었는지 나타내는 값  ($$a_{ui} \in A$$)   
 > $$y_{ui}$$: user u가 item i에 click 하였는지 나타내는 값  ($$y_{ui} \in Y$$)  
 > $$\mu_{ui}$$: prior probability of exposure 
-> $$\lambda$$: hyperparamter
+> $$\lambda$$: hyperparamter  
+> $$x_{i}$$: exposure covariate  
+> $$\phi_{u}$$: exposure model parameter
 
 - click expose값은 bernoulli distribution을 따른다.
+- $$y_{ui} \gt 0 $$ 이면 $$a_{ui} = 1$$ 이지만 $$y_{ui} = 0 $$ 이면 $$a_{ui}$$ 값은 latent이다.  
+   - Y matrix는 보통 sparse하기에, 대부분의 a값은 latent하다.
 
-# 작성중 
-We observe the complete click matrix 부터..
+$$ \log p(a_{ui},y_{ui} \lvert \mu_{ui},\theta_{u},\beta_{i},\lambda_{y}^{-1}) = $$  
+$$ \log Bernolli(a_{ui} \lvert \mu_{ui}) + a_{ui} \log N(y_{ui} \lvert \theta_{u}^{T}\beta_{i},\lambda_{y}^{-1}) + (1-a_{ui}) \log I(y_{ui} = 0) $$
+
+> I: indicator function ($$y_{ui} = 0$$ 이 참이면 1을, 아니면 0을 return)  
+> 만약 $$y_{ui} \neq 0$$이면, $$\log I(y_{ui})$$ 값은 $$-\inf$$가 될텐데 어찌된 영문인지 논문엔 위와 같이 정의했다.
+
+
+- 만약, 유저가 특정 item에 대해 클릭하지 않음이 관측 되었다면 ($$y_{ui}=0$$)
+   - 특정 user에게 특정 item에 대한 선호도가 높게 예측이 될 때 ($$\theta_{u}^{T}\beta_{i}$$가 높을때) 클릭하지 않을 likelihood는 낮다. ($$ \log N(0 \lvert \theta_{u}^{T} \beta_{i}, \lambda_{y}^{-1})$$) 이를 통해 해당 item이 노출되었을 확률을 줄여준다 ($$a_{ui}$$ 텀에 대한 factor 낮춰줌)
+      - **$$ \log N(0 \lvert \theta_{u}^{T} \beta_{i}, \lambda_{y}^{-1})$$ 은 전체 click matrix Y에 대해 $$y_{ui}$$ = 0 인 데이터들만 고려하였을 때, 나타나는 parameter($$\theta_{u}^{T} \beta_{i}, \lambda_{y}^{-1}$$)의 분포 값을 parameter로 받는 gaussian distribution을 의미한다**
+   - 낮은 $$a_{ui}$$값 $$\theta_{u} \beta_{i}$$의 evidence 값을 낮춰준다. 
+  
+
+- Exposure Matrix가 single value로 고정된다면, ExpoMF는 [Gaussian Probabilistic matrix factorization](http://www.cs.utoronto.ca/~amnih/papers/pmf.pdf) 가 된다. 
+
+- Exposure Matrix가 $$c_{0}, c_{1}$$(confidence) 을 통해만 얻어진다면 WMF와 같다.
+
+- $$\mu_{ui}$$와 $$\theta_{u}, \beta_{i}$$의 **`conditional independence`** 관계는 inference procedure (EM, variational inference, gibbs sampling)할 때 중요한 조건이 된다.
+
+## Hierarchical Modeling of Exposure
+
+- 노출 (exposure)에 대한 사전 확률 (prior probability of exposure, $$\mu_{ui}$$)을 결정하는 방법은 2가지가 있다
+   - user,item factor와 clicks에 관한 모든 변수를 global value로 잡는 방법 (figure 2, left)
+   - 특정 u,i에 대해 **`exposure covariate` $$x_{i}$$** 를 통해 $$\mu_{ui}$$ 설정 (Hierarchical modeling figure 1, right)
+
+- Figure 1의 오른쪽 그림에서 보이듯이, Prior probability of Exposure ($$\mu_{ui}$$)를 `Exposure covariate` $$x_{i}$$를 통해 생성한다. 이때, `Exposure covariate` $$x_{ui}$$는 external information을 의미한다. (location, text topic ...) 
+
+
+- Exposure covariate를 모델에 넣는 방법은 두가지가 존재한다.
+  1. Per-item $$\mu_{i}$$
+    - item popularity로만 $$\mu_{i}$$를 업데이트 하고 싶다면 $$\mu_{i} \sim Betadistribution(\alpha_{1},\alpha_{2})$$를 따른다. 이 모델은 hyperparameter $$\alpha$$에만 의지하는 모델이기에 external information를 사용하지 않는 모델이다.
+  2. External information as Exposure covariates  
+    $$\mu_{ui} = sigmoid(\phi_{u}^{T} x_{i})$$  
+    - 만약, text topic을 exposure covariate로 쓴다고 가정하자. 
+      > Exposure covariate($$x_{i}$$)는 NLP (word embedding, LDA)에서 나온 i번째 document의 representation.  
+      > Exposure covariate($$x_{i}$$)의 크기는 L, Matrix factorization의 dimension(K)와 같을 필요없음  
+      > Exposure covariate($$x_{i}$$)의 값은 모두 positive이며 normalized 되어있다.  
+      > Model paramter($$\phi_{u})$$는 Logisitic regression의 coefficient로 해석 된다.   
+      > Model paramter($$\phi_{u})$$는 또한, user u가 관심있어 하는 topic을 표현하는 변수로 해석된다. (user의 관심분야를 제한)  
+    
+  - 예를 들어, l-th의 topic의 neural network 관련이고 $$x_{il}$$이 높다고 하자, 그렇다면 i번째 user는 l번째 topic에 대해 관심이 높을 것이다. $$\phi_{ul}$$이 높다. 
+
+
+<br/>
+
+---
+
+# Inference 
+
+- posterior의 parameter를 추정하는 방법으로 **`EM`** 알고리즘을 사용한다. 
+  - **Input:** Click matrix Y, exposure covariates $$x_{1:I}$$
+  - **Random intialize:** $$\theta_{1:U}$$ (user factors), $$\beta_{1:I}$$ (item factors), $$\mu_{1:I}$$ (exposure priors), $$\phi_{1:U}$$ (exposure parameter)
+
+  1. click하지 않은 item $$y_{ui} \gt 0 $$에 대해 exposure 기댓값을 계산한다. (E-step)
+    - $$E(a_{ui} \lvert \theta_{u},\beta_{i},\mu_{ui},(y_{ui} = 0)) = \frac{\mu_{ui} \cdot N(0 \lvert \theta_{u}^{T}\beta_{i},\lambda_{y}^{-1})}{\mu_{ui} \cdot N(0 \lvert \theta_{u}^{T} \beta_{i}, \lambda_{y}^{-1}) + (1 - \mu_{ui})}$$
+    
+      > click한 item($$y_{ui} = 0$$에 대해서는 exposure 가 결정된다.$$a_{ui}=1$$
+
+  2. $$\theta_{1:U}, \beta_{1:I}$$를 업데이트 한다. (M-step) 
+    - $$\theta_{u} \leftarrow (\lambda_{y} \sum_{i} p_{ui} \beta_{i} \beta_{i}^{T} + \lambda_{\theta}I_{K})^{-1} (\sum_{i} \lambda_{y} p_{ui} y_{ui} \beta_{i})$$
+    - $$\beta_{i} \leftarrow (\lambda_{y} \sum_{i} p_{ui} \theta_{u} \theta_{u}^{T} + \lambda_{\beta}I_{K})^{-1} (\sum_{i} \lambda_{y} p_{ui} y_{ui} \theta_{u})$$
+
+    > $$p_{ui} = E(a_{ui} \lvert \theta_{u}, \beta_{i}, \mu_{ui}, \y_{ui} = 0)
+
+```
+
+
+
+```
+
+
 
 
 
