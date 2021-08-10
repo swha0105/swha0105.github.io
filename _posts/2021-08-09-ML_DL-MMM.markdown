@@ -31,7 +31,36 @@ comments: False
 - 역사적으로 많은 MMM들이 개발되었지만 현재, Blei et al(2003) (LDA 논문)와 Erosheva(2002, 2004) 방법이 통용적으로 사용되고 있다. 
 
 ## The Generative Process
--  작성중
+### 정의
+- Population은 K 개의 `profile`로 구성된다 (k = 1,2,3 ... K)
+- `Individual`은 (i = 1,2,3 ... N)은 profile분포에서 각각 다른 degree로 속한다
+- 각각의 individual은 profiles에 얼마나 속하는지 (degree) 나타내는 `Membership vector` ($$\theta_{i} = (\theta_{i1},\theta_{i2} ... \theta_{iK})$$)를 가지고 있다
+- Observed variable ($$X_{j}, j =1,2, ... J$$)은 각 profile에 다른 probability distribution을 가진다
+  - $$ X_{ijr}$$: i번째 individual에있는 j번쨰 oberseved variable을 복재한것 ($$ r = 1,2,3 ... R_{ij}$$)
+- Indicator vector $$Z_{ijr}$$은 profile i가 j번째 variable을 복제한 r에 대해 따르는지 알려주는 벡터
+  - Membership vector는 individual이 profiles에 속할 degree을 나타내줌. 따라서 $$Z_{ijr} \sim Multinomial(\theta_{i})$$
+- in LDA example
+  - **Population**: Corpus of document
+  - **Profile**: Topics in document
+  - **Individual**: Document
+  - **Observed Variable**: Word
+  - **Membership vector**: i번째 document에 대한 topic분포
+  - **Indicator vector**: i번째 document의 r번째 word가 어떤 topic에서 왔는지 알려주는 벡터
+
+
+### Gererating Process
+- 각 variable (j = 1,2, ... ,J)에 대해 
+  - 각 replication (r = 1,2, ... , $$R_{ij}$$)에 대해
+      1. $$Z_{ijr} \sim Multinomial(\theta_{i})$$ 를 구한 뒤
+      2. $$X_{ujr} \sim F_{Z_{ijf},j}(x_{j})$$를 계산한다
+      > F: cumulative distribution function
+
+<br/>
+
+## General Mixed Membership Model
+
+나중에 시간날때 마저 작성..
+
 
 
 <script>
