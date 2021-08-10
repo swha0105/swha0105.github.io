@@ -120,7 +120,7 @@ Binary feature들끼리 상호작용을 캡쳐하고, Non-linear term을 추가�
 ### 2. Deep component
 `feed-forward` 기반의 neural network
 
-- high dimensional catgorical feature를 low-dimensional and dense real-valued vector (embedding vector)로 변환. 
+- **high dimensional catgorical feature**를 low-dimensional and dense real-valued vector (embedding vector)로 변환. 
 
 $$ a^{l+1} = f(W^{l} a^{l} + b^{l}) $$
 

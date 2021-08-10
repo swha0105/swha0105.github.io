@@ -1,0 +1,53 @@
+---
+layout: post
+title:  "[ML Posts] Mixed Membership Model"
+subtitle:   "Post"
+categories: ml_dl
+tags: ml_post
+comments: False
+---
+
+
+### 들어가기전
+내가 보는 Modeling 논문에서 거의 모든 논문이 Mixed Membership Model(MMM)을 사전지식으로 요구한다.  이것도 Mixtured Model의 확장판이라고만 알고있지 자세히 알지 못한다.  
+꼭 알아야되는 지식으로 판단되고, 텍스트북에 안나와있지만 이 [자료]()를 참고하여 정리한다
+
+# Introduction
+
+- Population에서 있는 Individual은 multiple subpopulation에 속할 수 있다는 아이디어로 부터 시작한다
+  - 뉴스기사는 여러 category에 속할 수 있다.
+  - 환자는 여러 질병에 동시에 걸릴 수 있다
+  - 학생들은 수학문제를 푸는데 있어 여러 접근방법을 사용할 수 있다
+
+- 이 아이디어를 probability model 발전한건 Woodbury et al (1978) 부터 였고 이후, Pritchard et al (2000), Blei et al (2003), Erosheva(2002, 2004) 을 통해 General Mixed Membership framework가 정립되었다.
+
+- 특히, Erosheva(2002, 2004)에서는 MMM이 finite mixture model의 표현과 일치한다는것을 증명하였다. 
+
+
+<br/>
+
+# Mixed Membership Model
+
+- 역사적으로 많은 MMM들이 개발되었지만 현재, Blei et al(2003) (LDA 논문)와 Erosheva(2002, 2004) 방법이 통용적으로 사용되고 있다. 
+
+## The Generative Process
+-  작성중
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
