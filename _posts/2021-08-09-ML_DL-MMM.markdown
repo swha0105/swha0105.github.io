@@ -77,7 +77,7 @@ $$ F(x \lvert \theta_{i}) = \Pi_{j=1}^{J} \sum_{k=1}^{K} \theta_{ik} F_{kj}(x_{j
 
 $$ F(x \lvert \theta_{i}) = \Pi_{j=1}^{J} \Pi_{r=1}^{R_{ij}} \sum_{k=1}^{K} \theta_{ik} F_{kj}(x_{j})$$
 
-- subject level에서 나온 수식을 (Observed varaible -> Individual level)로 확장 
+- subject level에서 나온 수식을 (Observed variable -> Individual level)로 확장 
 - $$F_{kj}$$는 population level에서 정해졌기 때문에, component ($$\theta$$, membership vector)의 구성은 같다. 다만 component의 값 ($$\theta_{i}$$)값은 각각 다르다
 - component를 random이라 가정하고 integration한 수식은 아래와 같다.
 
@@ -86,7 +86,7 @@ $$ F(x) = \int \Pi_{j}^{J} \Pi_{r=1}^{R_{ij}} \sum_{k=1}^{K} \theta_{ik}F_{kj}(x
 4. Latent variable level assumption
 에 대한 것은 이 챕터에서 생략되어있다. estimation 챕터에 자세히 설명한다고 한다.
 
-
+### 시간되면 뒤에 챕터도 정리할 계획...
 
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
