@@ -48,18 +48,43 @@ comments: False
   - **Indicator vector**: i번째 document의 r번째 word가 어떤 topic에서 왔는지 알려주는 벡터
 
 
-### Gererating Process
 - 각 variable (j = 1,2, ... ,J)에 대해 
   - 각 replication (r = 1,2, ... , $$R_{ij}$$)에 대해
       1. $$Z_{ijr} \sim Multinomial(\theta_{i})$$ 를 구한 뒤
       2. $$X_{ujr} \sim F_{Z_{ijf},j}(x_{j})$$를 계산한다
-      > F: cumulative distribution function
+      > F: cumulative distribution function of $$X_{j}$$ given $$Z_{ijf}$$ 
 
 <br/>
 
 ## General Mixed Membership Model
 
-나중에 시간날때 마저 작성..
+- General Mixed Membership Model(MMM) 은 generative process에서 나온 가정들을 general model로 설명한다. `population level`, `subject level`, `sampling scheme`, `latent variable level`로 구성되고 각각의 assumption이 존재한다.
+
+**1. Population level assumption**
+- population에 K개의 다른 `profile`이 존재한다
+- profile은 obseved variables에 대한 각기 다른 probability distribution ($$F_{kj}$$)가 존재한다. 
+
+**2. Subject level assumption**
+
+$$ F(x_{j} \lvert \theta_{i}) = \sum_{k=1}^{K} P(Z_{ijrk} = 1 \lvert \theta_{i}) F(x_{j} \lvert Z_{ijrk} = 1) = \sum_{k=1}^{K} \theta_{ik} F_{kj} (x_{j})$$
+
+- 위 수식은 Membership vector ($$\theta$$)가 주어졌을때, $$x_{j}$$의 확률을 의미한다.
+- $$x_{j, j \in (1,2, .. J)}$$는 $$\theta_{i}$$가 주어졌을때 서로 독립이다 (`Conditionally Independence`) 위의 가정을 바탕으로 수식을 다시 쓰게 되면 아래와 같다.
+
+$$ F(x \lvert \theta_{i}) = \Pi_{j=1}^{J} \sum_{k=1}^{K} \theta_{ik} F_{kj}(x_{j})$$
+
+**3. Sampling scheme level assumption**
+
+$$ F(x \lvert \theta_{i}) = \Pi_{j=1}^{J} \Pi_{r=1}^{R_{ij}} \sum_{k=1}^{K} \theta_{ik} F_{kj}(x_{j})$$
+
+- subject level에서 나온 수식을 (Observed varaible -> Individual level)로 확장 
+- $$F_{kj}$$는 population level에서 정해졌기 때문에, component ($$\theta$$, membership vector)의 구성은 같다. 다만 component의 값 ($$\theta_{i}$$)값은 각각 다르다
+- component를 random이라 가정하고 integration한 수식은 아래와 같다.
+
+$$ F(x) = \int \Pi_{j}^{J} \Pi_{r=1}^{R_{ij}} \sum_{k=1}^{K} \theta_{ik}F_{kj}(x_{j}) d D(\theta)$$
+
+4. Latent variable level assumption
+에 대한 것은 이 챕터에서 생략되어있다. estimation 챕터에 자세히 설명한다고 한다.
 
 
 
