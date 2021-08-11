@@ -7,27 +7,28 @@ tags: ml_paper
 comments: False
 ---
 
-<script>
-MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-</script>
+|![Title](https://swha0105.github.io/assets/ml/img/CF_title.png)  
+|:--:| 
+| [논문 링크](https://github.com/swha0105/reco_papers/blob/master/papers/Collaborative_Filtering_for_Implicit_Feedback_Datasets.pdf)|  
+
+이 논문은 예전에 모두연에서 스파크 스터디하면서 잠시 찍먹했던 논문이다.  
+회사에서 지금 하고있는 일이 이와 관련성이 높아 복습할겸 다시 정리한다.  
 
 
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']]
-  },
-  svg: {
-    fontCache: 'global'
-  }
-};
-</script>
-<script type="text/javascript" id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
-</script>
+<br/>
+
+---
 
 
-**들어가기전..**
+
+
+
+
+
+
+
+
+**예전 설명**
 
 <br/>
 
@@ -201,3 +202,22 @@ $$Y^{T}(C^{u}-1)Y$$ 값에 대해서는 $$C^{u}-1$$은 user가 선호하는 즉,
 1. [논문 링크](https://swha0105.github.io/assets/ml/paper/Collaborative_Filtering_for_Implicit_Feedback_Datasets.pdf)       
 2. 논문만으로는 전부를 이해하지 못해 이 [블로그](https://yamalab.tistory.com/89)를 참조하였다.
 
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
