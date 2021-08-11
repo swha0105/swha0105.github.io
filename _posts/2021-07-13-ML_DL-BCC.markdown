@@ -37,7 +37,7 @@ comments: False
 
 - `co-clustering`은 2가지 entity에 대해 동시에 clustering을 수행함으로서, data의 structure를 파악하고 missing value의 값을 예측하는데 강점이 있다.
 
-- `co-clustering`의 주요 제한은 **`partional`**이다. (row/column이 단 하나의 row/column cluster에 속함) 이러한 제한은 데이터가 multiple cluster에 속하는 실제데이터를 표현하는데 한계가 있다. (user might be an action movie fan and also a cartoon movie fan)
+- `co-clustering`의 주요 제한은 **`partional`**이다. (row/column이 단 하나의 row/column cluster에 속함, 결정론적) 이러한 제한은 데이터가 multiple cluster에 속하는 실제데이터를 표현하는데 한계가 있다. (user might be an action movie fan and also a cartoon movie fan)
 
 - 따라서, 이 문제를 해결하기 위해 본 논문에 제시하는 **`Bayesian co-clustering(BCC)`**은 다음과 같은 성질을 가진다
   - rows, columns의 사전분포에 대해 Dirichlet distribution을 가진다.
@@ -291,6 +291,7 @@ $$u_{ij} = \frac{ \sum_{u=1}^{n_{1}} \sum_{v=1}^{n_{2}} \delta_{uv}x_{uv}\phi_{1
 
 
 - Parameter estimation에 대해, 각 co-cluster에 대해 highest log-likelihood를 표현하는 parameter를 pick했다.
+
 - **BCC는 generative model을 다르게하여 다양한 data type에 적용할 수 있다.**
 
 <br/>
@@ -419,7 +420,7 @@ $$u_{ij} = \frac{ \sum_{u=1}^{n_{1}} \sum_{v=1}^{n_{2}} \delta_{uv}x_{uv}\phi_{1
 
 - BNN은 Co-clustering을 generative mixture modeling problem의 시각으로 풀어냈다.
 - sparse matriex에 강하며 generative model로 any exponential family을 사용할 수 있다.
-- rows/columns에 대해 co-cluster을 하나만 배정하는 partitional co-clustering과는 다르게 rows and column에 대해 mixed membership을 생성한다.
+- rows/columns에 대해 co-cluster을 하나만 배정하여 결정하는 partitional co-clustering과는 다르게 rows and column에 대해 mixed membership을 생성한다.
 - 제시한 variational approximation은 stochastic approximation에 비해 significantly faster한 강점을 가지고 있다.
 
 
