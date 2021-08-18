@@ -1,0 +1,293 @@
+---
+layout: post
+title:  "[ML Posts] Deep Learning Recommendation Model for Personalization and Recommendation Systems (DLRM)"
+subtitle:   "Recommendation"
+categories: ml_dl
+tags: ml_paper
+comments: False
+---
+
+|![Title](https://swha0105.github.io/assets/ml/img/DLRM_title.png)  
+|:--:| 
+| [논문 링크](https://github.com/swha0105/reco_papers/tree/master/papers/DLRM.pdf) |  
+
+
+본 논문은 2019년에 facebook에서 만든 **`DLRM`** 모델을 설명하는 논문이다. [DeepFM](https://swha0105.github.io/ml_dl/2021/07/29/ML_DL-DeepFM/)기반으로 실용적인 측면(parallel training, GPU computing)이 많이 강조되어있다. 
+
+<br/>
+
+---
+
+# Abstract
+
+- 딥러닝의 발달 덕분에 categorical feature를 잘 다룰 수 있게 되었고 **`Personalization`** and **`Recommendation`**에 중요한 역할을 하게 되었다 
+
+- 이 논문에서는 PyTorch와 Caffe2 framework로 **`DLRM`**을 개발하였다. 또한 `embedding table`에 대한 모델 병렬화 방법을 사용하여 메모리 제약을 줄였고 `fully-connected layer`에서 데이터 병렬화를 통해 scaling을 수행하였다.
+
+- Big Basin AI platform에서 DLRM과 다른 모델들과의 benchmark test를 수행하였다
+
+<br/>
+
+---
+
+# 1. Introduction
+
+- Personalization과 Recommendation에 대한 딥러닝 모델은 **2가지 관점**을 통해 큰 발전을 이루어냈다.
+
+  **1.** View of Recommendation system
+    - Content filtering: 전문가에 의해 product가 categories로 분류되고, 유저들은 선호하는 categories를 선택한다.
+
+    - Collaborative filtering: user의 과거 행동들을 기반으로 추천
+
+    - Neighborhood method: user와 product를 grouping하여 추천. 
+
+    - Latent factor method: user와 product를 implicit factor로(FM) characterized
+
+
+  **2.** Predictive analytics
+    - 주어진 데이터를 활용해 classify or predict를 하는 통계적 모델의 관점 
+    
+    - simple model(linear, logistic regression)에서 deep network model이 포함된다. 
+    
+    - 이 모델들은 catergorical data를 처리할 때 embedding을 요구한다. 
+
+- `DLRM`은 위 2개의 관점을 통합하여 사용한다. 
+- **`DLRM`은 sparse feature(categorical)을 embedding하고, dense feature를 MLP(multilayer perceptron)을 통해 처리한다.**
+
+
+<br/>
+
+--- 
+
+# 2 Model Design and Architectrue
+
+## 2.1 Component of DLRM
+
+- DLRM의 high-level component에 대한 자세한 내용은 이전 연구에서 이미 검토되었다. 따라서 이 논문에서는 자세한 검토 대신 4가지의 기술에만 초첨을 맞춰 설명하였다
+
+### 2.1.1 Embeddings
+
+- catergorical data를 다루기 위한 embedding. 이 방법을 통해 DLRM embeddings을 생성한다.
+
+- One-hot vector example
+  $$w_{i}^{T} = e_{i}^{T}W$$
+
+  > $$w_{i}$$: one-hot vector (i-th index = 1)  
+  > W: embedding table ($$ W \in R^{m \times d}$$)
+
+- Multi-hot vector example ([multi-hot encoding](https://stats.stackexchange.com/questions/467633/what-exactly-is-multi-hot-encoding-and-how-is-it-different-from-one-hot))
+
+  $$S = A^{T}W$$
+
+  > A = $$(a_{1},a_{2}, ..., a_{t})$$  
+  > $$a_{T} = (0, ... , a_{i_{1}},... a_{i_{k}}, ... 0 )$$ ($$a_{i} \neq 0 $$)
+   
+### 2.1.2 Matrix Factorization
+
+$$ min \sum_{(i,j) \in S} r_{ij} - w_{i}^{T}v_{j}$$
+
+> $$w_{i}$$: i-th product ($$w_{i} \in R^{d}$$)  
+> $$v_{j}$$: j-th user ($$v_{j} \in R^{d}$$)  
+> $$r_{ij}$$: rating of i-th product by j-th user   
+
+- product, user matrix ($$W^{T} = (w_{1},...,w_{m}$$),$$V^{T} = (v_{1},...,v_{n}$$)의 dot product는 Rating Matrix의 근사치로 볼 수 있다. ($$R \sim WV^{T}$$) 
+
+- w,v은 각각 user/product에대한 latent facter space를 표현하고 따라서, W,V은 embedding table로 볼 수 있다.
+
+- 실제 관측 rating과 user-product를 통한 근사치의 차이를 최소화 하는 개념은 `factorization machine`과 **`DLRM`**의 핵심이다. (Embedding vector를 prediction에 사용하는 개념.)
+
+### 2.1.3 Factorization Machine
+
+- 자세한 내용은 [포스팅](https://swha0105.github.io/ml_dl/2021/07/27/ML_DL-FM/)에 작성되어있다.
+
+$$\hat{y} = b + w^{T}x + x^{T} upper(VV^{T})x$$
+
+> $$V \in R^{n \times d}  
+
+- second order interaction matrix를 factorize하여 latent factor(embedding vector)를 사용 한다. 이는 sparse data에 효과적이다.
+- 이 방법은 명확한 embedding vector들 끼리의 interaction만 capture하기에 computation time을 linear하게 사용할 수 있다
+
+### 2.1.4 Multilayer Perceptrons
+
+~~생략~~
+
+
+
+<br/>
+
+##  2.2 DLRM Architecture
+
+|![architecture in paper](https://swha0105.github.io/assets/ml/img/DLRM_fig1.png)  
+|:--:| 
+| figure 1. DLRM architecture|  
+
+
+|![architecture](https://swha0105.github.io/assets/ml/img/DLRM_ref.png)  
+|:--:| 
+| figure 2. DLRM architecture explanation in [Nvidia](https://github.com/NVIDIA/DeepLearningExamples/blob/master/PyTorch/Recommendation/DLRM/notebooks/DLRM_architecture.png)|  
+
+
+- User, Product 데이터들은 `continuous`와 `categorical` feature로 나누어진다.
+  
+- 각각의 Categorical feature은 Matrix Factorization과 같은 방법으로 embedding된다. 이때 embedding vector는 원래 feature vector와 같은 크기를 가진다.
+
+- Continuous feature는 **Bottom MLP**(혹은 Dense MLP)에서 dense representation으로 변환된다. 이때도 representation은 원래 feature vector와 같은 크기를 가진다.
+
+- 모든쌍의 embedding vector(Categorical feature)와 proceed dense feature(Continous feature)에 대해 dot product를 취함으로써, **Bottom MLP**에서 전달하는 second-order interaction을 explicitly하게 계산한다. 
+  
+- 위 계산에서 나온 dot product의 결과물을 embedding 하기 전 dense feature와 concatenate하여 **Top MLP**(혹은 output MLP)에 input으로 넣는다. Top MLP에서 나온 결과물을 확률을 구하기 전 activation function(sigmoid)에 input으로 들어간다.
+
+
+<br/>
+
+## 2.3 Comparison with Prior Models
+
+- 기존의 모델들([Wide and Deep](https://swha0105.github.io/ml_dl/2021/07/19/ML_DL-wide_deep/), Deep and Cross, [DeepFM](https://swha0105.github.io/ml_dl/2021/07/29/ML_DL-DeepFM/), xDeepFM)은 higher-order interaction을 캡쳐하기 위해 구성되었고 이는 각 model의 특수한 구조과(보통 linear term계산 하는 구조) MLP의 합을 sigmoid 함수의 input으로 사용해서 확률을 계산한다
+
+- DLRM은 FM의 embedding interaction하는 방법을 따라하여, 마지막 MLP단계에서 pair of embedding의 dot product에서 생성되는 cross-term만을 고려하기 때문에 dimensionality를 줄일 수 있다.
+
+
+- DLRM과 다른모델의 가장 큰 차이점은 network가 embedding feature vector와 그것들의 cross-term을 다루는데 있다. 예를 들어, Deep and Cross 모델은 feature vector의 각 element을 하나의 단위로 보기 때문에 다른 feature vector간 생성되는 cross-term 뿐만 아닌 같은 feature vector안에 있는 element끼리 cross-term을 생성한다.  
+
+  - 이에 반해, DLRM은 single category을 표현하는 하나의 feature vector가 단위로 사용되기 때문에 같은 feature vector에서 생성되는 cross-term이 생성되지 않는다. (다른 feature vector간 생성되는 cross-term만 존재)
+
+  
+
+<br/>
+
+---
+
+# 3. Parallelism
+
+~~대학원 졸업하고 병렬화를 다시 볼줄이야~~
+[Data parallelism vs Model parallelism](https://leimao.github.io/blog/Data-Parallelism-vs-Model-Paralelism/)
+
+
+- DLRM은 다른 Deep learning model(CNN, RNN, GAN)에 비해 parameter가 order of magnitude만큼 많다.
+- DLRM은 categorical feature(embedding)과 continous feature(MLP)로 이루어져있다. 
+
+- Embedding은 model parameter의 대부분을 차지하기 때문에 각 device에 embedding parameter를 복사하여 데이터를 나누어 계산하는 data parallelism이 불가능하다.
+  - 따라서, model의 embedding parameter을 나누어 계산하는 `Model parallelism`을 사용한다
+  
+    <details>    
+    <summary> Model parallelism 명칭에 대해 </summary>
+    <div markdown="1">   
+
+    본문 링크에도 적혀있듯이, Model parallelism의 명칭에는 문제가 있다.  
+    Model parallelism은 model이 device 3개에 대해 나누어 load되어 있을때, device 1이 계산한 parameter들을 device 2에 넘겨주고 이후 device 3에 넘겨주는 방식이다.  
+    
+    device 1이 계산중일때는 device 2,3은 아무 계산하지않고 기다린다.
+    이는 model이 하나의 device에 대해 memory이슈로 load되지 않을 때 사용하는 방법으로 흔히 아는 병렬화와는 개념과 작동방식이 다르다. 링크에도 적혀있듯이 `Model Serialization`이 좀 더 적합한듯 하다
+
+    ~~이거때문에 한참 고민했네~~
+
+    </div>
+    </details>
+
+
+- MLP는 parameter수는 적지만 많은 양의 computing이 필요로 한다.
+   - data-parallelism으로 병렬화 하고 update때 마다 각 device끼리 communication한다.
+
+|![parallel](https://swha0105.github.io/assets/ml/img/DLRM_fig2.png)  
+|:--:| 
+| figure 3. Butterfly shuffle for the all-to-all (personalized) communication |  
+
+- figure 3에 대한 자세한 설명은 다음과 같다. 논문에 정말 간단히 설명되어있어 오해하기 좋기에 여러 [자료](https://ai.facebook.com/blog/dlrm-an-advanced-open-source-deep-learning-recommendation-model/)을 찾아 자세히 설명해본다. 
+  1. 먼저, embedding matrix는 model-parallel로 계산되어있다고 가정한다. 각 device에 embedding matrix는 나누어저 들어가있다. 따라서 의미있는 결과를 내기 위해 모든 device의 결과를 취합하여야한다. ~~figure 2에 적힌 model-parallel 위치는 오해하기 딱 좋다. 무시하자~~
+  2. 각 색깔은 mini-batch를 의미한다. 파란색 1,2,3은 mini-batch하나에 대해 1,2,3으로 나눈것이다
+  3. 앞서 말했듯이, embedding matrix가 나누어져 있기에 각 mini-batch가 의미있는 결과를 내기 위해 device로 취합하여야한다. 이러한 통신은 모든 코어들이 관여하기에 **`All-To-All communication`**이라하고 all-to-all communication을 이러한 형태로 하는것을  **`Butterfly shuffle`**이라 한다.
+
+~~내가 대학원생때 했던거랑 매우 비슷하다~~
+
+<br/>
+
+---
+
+# 4. Data
+
+- `random`, `synthetic`, `public` 총 3가지의 데이터를 사용하여 모델의 성능을 측정하였다.
+
+- random과 syntetic 데이터는 설명되어있지만 크게 중요하지 않은거같고 밑에 experiment 결과에도 생략되어있기에 넘어간다. 
+
+- public data는 open-sourced data이고, CTR prediction에 사용되는 click logs 데이터인 `Criteo AI labs ad Kaggle`와 `Terabyte`데이터를 사용하였다. 
+  - `Criteo AI labs ad Kaggle`은 7일동안 샘플한 45백만개의 데이터가 있다. 1~6일의 데이터는 train, 7일째의 데이터는 validation으로 사용하였다.
+  - `Criteo AI labs ad Terabyte`는 24일동안 샘플한 데이터로 구성되어있고, 1~23일의 데이터는 train, 24일째의 데이터는 validation으로 사용하였다.
+
+- 각 데이터는 13개의 continuous, 26개의 categorical feature로 구성되어있다. 
+  - continous feature는 $$\log(1+x)$$로 pre-processced되어 있다.
+  - categorical feature는 해당되는 embedding index로 mapping되어 있다.
+
+<br/>
+
+--- 
+
+# 5. Experiments
+
+- DLRM은 PyTorch와 Caffe2 framework로 구현되어있다.
+- dual socket Intel Xeon 6138 CPU (2.00GHZ)와 8개의 Nvidia Tesla V100 16GB GPU를 통해 실험하였다.
+
+## 5.1 Model Accuracy on Public Data Sets
+
+- Kaggle data set에 대해 DCN(Deep and Cross Network)와 DLRM을 extensive tuning 없이 비교하였다.
+
+- MLP 모델은, dense feature를 다루는 3개의 hidden layer는 512,256,64개의 노드들을 가지고 있고 top MLP는 512, 256개의 노드를 가지는 2개의 hidden layer로 구성되어있다.
+
+- DCN 모델은, 6개의 cross layer와 512,256개의 노드를 가지는 deep network로 구성되어있다. 
+
+- embedding dimension은 16개이고 DLRM,DCN 모두 대략 540M개의 parameter를 가지고 있다.
+
+- SGD, Adagrad optimizer로 테스트하였고 regularization은 적용되지 않았다.
+
+|![optimizer comparison](https://swha0105.github.io/assets/ml/img/DLRM_fig3.png)  
+|:--:| 
+| figure 4. Comparison of training (solid) and validation (dashed) accuracies of DLRM and DCN |  
+
+## 5.2 Model Performance on a Single Socket/Device
+
+
+
+- 8개의 categorical feature와 512개의 continous feature를 가지고 실험하였다
+- 각각의 categorical feature는 embedding table(1M vectors, vector diemsnion: 64) 를 통해 처리되었다
+- continuous feature는 512 dimension를 가진 vector로 합쳐졌다.
+- bottom MLP는 2개의 layer, top MLP는 4개의 layer를 가진다
+- 2048K개의 데이터셋에서 1K의 데이터를 무작위로 뽑아 mini-batch구성.
+
+|![single socket](https://swha0105.github.io/assets/ml/img/DLRM_fig4.png)  
+|:--:| 
+| figure 5. Profiling of a sample DLRM on a single socket/device |  
+
+- Caffe2에서 CPU는 256s, GPU는 62s이 소요되었다.
+- 대부분이 시간이 embedding lookups(sparseLengthSum)과 fully connetecd layer(MLP, CPU 한정)에 소요된다. 
+
+
+<br/>
+
+---
+
+# 6. Conclusion
+
+- DLRM은 Categorical data를 잘 처리할 수 있는 Open-sourced model이다
+- Recommendation and Personalization은 상용화에서 많은 성공을 거뒀지만 여전히 학계에서는 약간의 관심을 계속해서 받고 있는 중이다
+
+
+
+
+
+
+<script>
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+</script>
+
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+</script>
