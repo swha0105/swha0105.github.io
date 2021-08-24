@@ -95,6 +95,16 @@ $$ y_{ui} \sim N(\theta_{u}^{T} \beta_{i}, c_{y_{ui}}^{-1})$$
 
 # 3. Exposure Matrix Factorization
 
+- 데이터
+  - Click Matrix (Y) - Observed
+  - Exposed Matrix (a) - has to be infered
+- 가정
+- 차별점
+- 모델
+- 결과
+
+
+
 ## 3.1 Model Description
 
 |![ExpoMF schematic](https://swha0105.github.io/assets/ml/img/exposeMF_fig1.png)  
@@ -121,6 +131,10 @@ $$ y_{ui} \lvert a_{ui} = 0 \sim \delta_{0} \quad (P(y_{ui} = 0 \lvert a_{ui} = 
 > $$\phi_{u}$$: exposure model parameter
 
 - User-item prefence data가 있다고 가정한다. (Click matrix)
+- Item i가 User u에게 expose 되었으면 ($$a_{ui} = 1$$) Click Matrix(Y)에 대한 matrix factorization model을 통해 user preference($$\theta_{i,1:K}$$), item attribute($$\beta_{u,1:K}$$) 생성.
+
+- User u가 Item i을 클릭하였으면 ($$y_{ui} \gt 0 $$) expose variable($$a_{ui}=1$$)은 결졍 된다
+- User u가 Item i을 클릭하지 않았으면 ($$y_{ui} = 0 $$) expose variable은 `Latent variable`로 남는다
 - click expose값은 bernoulli distribution을 따른다.
 - user가 Bernoulli분포를 따라 Item에 노출 되었을때, 해당 item에 대한 user의 preference는 matrix factorization model에서 온다. (user preference ($$\theta_{i}$$ ~ 1:K))- $$y_{ui} \gt 0 $$ 이면 $$a_{ui} = 1$$ 이지만 $$y_{ui} = 0 $$ 이면 $$a_{ui}$$ 값은 latent이다.  
    - Y matrix는 보통 sparse하기에, 대부분의 a값은 latent하다.
