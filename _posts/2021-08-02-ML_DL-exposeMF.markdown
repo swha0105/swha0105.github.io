@@ -63,9 +63,9 @@ comments: False
 
 - User-item의 선호도를 나타낸 Implicit(Explicit) 데이터는 user-item matrix로 **`Encoding`**될 수 있고 본 논문에서는 `click matrix` 또는 `consumption matrix`라 부른다
 
-- Matrix Factorization model은 click-matrix factorization을 통해 user의 해당 item 선호도를 추론 한다.
+- Matrix Factorization model은 click-matrix factorization을 통해 user의 해당 item 선호도를 추론 한다. 이는 추천시스템의 일반적인 형태이다.
 
-- Generative modeling의 시각으로는, 이는 user와 item의 latent factor를 내적한 값을 parameter로 사용하는 specific distribution(ex: possion or gaussian)을 추론하는 것이다.
+- Generative modeling의 시각으로는, user와 item의 latent factor($$\theta_{u},\beta_{i}$$)를 내적한 값을 parameter로 사용하는 specific distribution(ex: possion or gaussian)을 추론하는 것이다.
 
 
 $$ \theta_{u} \sim N(0, \lambda_{\theta}^{-1}, I_{K})$$  
@@ -111,8 +111,6 @@ $$ y_{ui} \sim N(\theta_{u}^{T} \beta_{i}, c_{y_{ui}}^{-1})$$
 |:--:| 
 | left: ExpoMF  Right: ExpoMF with exposure covariates  |  
 
-<!-- - `matrix factorization`을 통해 Click matrix를 K-dimension을 갖는 user preference($$u_{i,1:K}$$)와 Item attribute($$\beta_{u,1:K}$$)으로 나눈다 (i,u 인덱스는 오타인거 같지만 그대로 작성한다.) -->
-
 $$ \theta_{u} \sim N(0,\lambda_{\theta}^{-1},I_{K})$$  
 $$ \beta_{i} \sim N(0,\lambda_{\beta}^{-1},I_{K})$$  
 $$ a_{ui} \sim Bernoulli(\mu_{ui})$$  
@@ -135,9 +133,7 @@ $$ y_{ui} \lvert a_{ui} = 0 \sim \delta_{0} \quad (P(y_{ui} = 0 \lvert a_{ui} = 
 
 - User u가 Item i을 클릭하였으면 ($$y_{ui} \gt 0 $$) expose variable($$a_{ui}=1$$)은 결졍 된다
 - User u가 Item i을 클릭하지 않았으면 ($$y_{ui} = 0 $$) expose variable은 `Latent variable`로 남는다
-- click expose값은 bernoulli distribution을 따른다.
-- user가 Bernoulli분포를 따라 Item에 노출 되었을때, 해당 item에 대한 user의 preference는 matrix factorization model에서 온다. (user preference ($$\theta_{i}$$ ~ 1:K))- $$y_{ui} \gt 0 $$ 이면 $$a_{ui} = 1$$ 이지만 $$y_{ui} = 0 $$ 이면 $$a_{ui}$$ 값은 latent이다.  
-   - Y matrix는 보통 sparse하기에, 대부분의 a값은 latent하다.
+- Y matrix는 보통 sparse하기에, 대부분의 a값은 latent하다.
 
 <br/>
 
@@ -254,12 +250,130 @@ $$ \log Bernolli(a_{ui} \lvert \mu_{ui}) + a_{ui} \log N(y_{ui} \lvert \theta_{u
 
 <br/>
 
-## Related work
+~~4. Related works 는 패쓰~~
 
-  1. Casual inference
+---
 
-  # 작성중..
-  ~~너무 많다~~
+# 5. Empirical Study
+
+- ExpoMF는 SOTA 모델인 `WMF`모델보다 4개의 데이터셋에 대해 더 좋은 결과를 냈다
+- external information을 Covairate를 통해 넣는 모델이 그렇지 않은 모델(Per-item)보다 훨씬 좋은 성능을 냈다.
+
+## 5.1 Datasets
+
+### 1. Taste Profile Subset (TPS)
+  - user-song play counts (Million datasets)
+  - play를 implicit preference라 가정하고 binarize하였다
+  - 20개 이하의 노래를 들은 user와 50번 이하의 play를 한 song은 제외하였다 (cleansing)
+
+### 2. ArXiv
+  - 논문 저장 시스템
+  - 10번 이하의 클릭수와, 유저는 제외하였다 
+
+### 3. Mendeley
+  - user-paper bookmark 시스템. 
+  - 10개이하의 bookmark를 가지고 있는 user와 20개의 bookmark가 서로 다른 유저들에게 선택되지 않는 paper는 제외하였다.
+
+### 4. Gowalla
+  - 위치 기반 social network에서 나온 user-veunue checkin 시스템
+  - 20개 이하의 checkin 데이터는 제외하였다
+
+<br/>
+
+## 5.2 Experimental setup
+
+- 7:2:1로 traning/test/validation split을 하였다.
+- Latent space (K)값은 100으로 고정하였다.
+- user u에 대해 item을 rank하였다. ($$y_{ui}^{*}=\theta_{u}^{T} \beta_{i}$$)
+
+
+## 5.3 Performance measures
+- information retrieval measure으로 `Recall@k`를 사용했다.
+- ranking system metric으로 `MAP@K`와 `NDCG@k`를 사용했다.
+
+### Recall@k
+
+$$ = \sum_{i \in y_{u}^{test}} \frac{I(rank(u,j)) \lt k }{min(k, \lvert y_{u}^{test} \lvert)}$$
+
+> I: Indicator function  
+> K: 랭크 수 
+
+- Precision@k 값은 implicit feedback data에대한 noise가 심하여 사용할 수 없었다
+- 추천해야했을 item이 몇개 추천되어져 있느냐를 나타내는 지표.
+
+### MAP@k
+
+$$ = \sum_{n=1}^{k} \frac{Precision@n}{min(n, \lvert y_{u}^{test} \lvert)}$$
+
+- 추천결과 k개에서 관련있는것들을 count해서 나타내는 지표
+
+### DCG@k
+
+$$ = \sum_{i=1}^{k} \frac{2^{rel_{i}}-1}{\log_{2}(i+1)} $$
+
+- 추천결과를 order도 고려하여 나타내는 지표
+
+- 각 유저들에 대해선 NDCG@k로 계산된다
+  > NDCG@k = $$ \frac{DGC@k}{IDCG@k}$$  
+  > IDCG@k: Nomralization factor  
+  > $$rel_{i} = 1 $$ if $$ i \in y_{u}^{test}$$ otherwise 0 
+
+
+<br/>
+
+## 5.5 Studying Exposure MF
+
+### Exploratory analysis 
+
+|![Exploratory analysis](https://swha0105.github.io/assets/ml/img/exposeMF_fig2.png)  
+|:--:| 
+| figure2. Exploratory analysis |  
+
+- Fig 2는 user A의 $$y_{ui}$$값이 0 일때, inferred exposure latent variable $$E_{a_{ui}}$$을 의미한다. 또한, per-item $$\mu_{ui}$$을 적용한 그림이다.
+
+- User A는 Radio-head, Interpol노래만 들었다 (rock bands)
+- 따라서, Rock이 아닌 대부분의 곡들은 $$E_{a_{ui}}$$값이 inferred prior ($$\mu_{ui}$$) 값보다 높다. 이 의미는 사전확률($$\mu$$)보다 노출된 확률(a)이 더 높지만 결국 클릭하지 않았다는 (y=0) 의미로 유저의 비선호도를 나타낸다고 볼 수 있다.
+
+- 하지만, 몇개의 노출된 확률이 사전확률 보다 더 낮은 outlier가 존재하는데, ExpoMF는 이러한 형태를 보이는 데이터에 대해 선택적으로 downweight를 한다. (유저가 비 선호할 확률을 줄임). 반면 WMF는 모든 곡에 대해 downweight한다
+
+<br/>
+
+## 5.6 Incorporating Exposure Covariates
+
+- 앞서 figure 2는 prior ($$\mu_{ui}$$)를 아이템에 따라 constant하게 가정한다.
+- 여기서는 exposure covariates를 통해 latent exposure variable을 조정한다.
+
+### Content Covariates
+
+- 논문의 content를 covariate로 사용하여 모델링한다.
+- 유저(과학자)들은 자기와 연관된 주제에 노출될 likelihood가 높다고 직관적으로 생각가능하다.
+
+- 논문의 content를 `LDA`를 통해 modeling 한다
+
+$$ \mu_{ui} = \sigma(\psi_{u}^{T}x_{i} + \gamma_{u})$$
+
+> $$x_{i}$$: LDA에서 나온 topic mixture  
+> $$\gamma_{u}$$: bias term
+
+|![exposure covariate model results](https://swha0105.github.io/assets/ml/img/exposeMF_fig3.png)  
+|:--:| 
+| figure3. exposure covariate model results |  
+
+- 위의 그림은 prior를 per-item으로 설정하였을 떄, 아래의 그림은 prior를 content covariates를 통해 모델링 한 결과이다.
+- 다이아몬드 점 (Latent dirichlet allocation)은 말그대로 LDA논문을 의미한다.. (데이터 아님.)
+
+- A(Machine learning researcher)가 B(system researcher)보다 LDA에 대해 노출될 확률이 더 높다. 
+
+
+<br/>
+
+# 6. Conclusion
+
+- ExpoMF는 user-item preference를 고려할 떄, 유저가 해당 item에 대해 노출이 되었는지 고려하는 모델이다.
+- 이는 노출이 되지 않아서 클릭하지 않은 item에 대해 downweight를 하는 기존의 모델과 차별점이 있다.
+
+
+
 
 <script>
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
